@@ -1,7 +1,7 @@
 /** @format */
 
 import { useState } from "react";
-import Statistics from "./Statistics";
+import Statistics from "./components/Statistics";
 
 const App = (props) => {
   const [good, setGood] = useState(0);
