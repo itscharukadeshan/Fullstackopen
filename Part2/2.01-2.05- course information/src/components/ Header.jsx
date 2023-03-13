@@ -2,10 +2,9 @@
 
 const Header = (props) => {
   const courseCopy = props.course.map((course) => course);
-  console.log({ courseCopy });
   return (
     <>
-      <div>{courseCopy[0].name}</div>
+      <h2>{courseCopy[0].name}</h2>
     </>
   );
 };
