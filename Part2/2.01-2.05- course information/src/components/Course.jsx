@@ -1,6 +1,6 @@
 /** @format */
 
-const courses = [
+const Courses = [
   {
     name: "Half Stack application development",
     id: 1,
@@ -45,4 +45,4 @@ const courses = [
   },
 ];
 
-export default courses;
+export default Courses;
