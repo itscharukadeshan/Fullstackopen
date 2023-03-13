@@ -45,5 +45,4 @@ const courses = [
   },
 ];
 
-console.log(courses);
 export default courses;
