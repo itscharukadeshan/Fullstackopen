@@ -1,35 +1,24 @@
 /** @format */
-import React from "react";
+
 import { useState } from "react";
 
-import Note from "./components/Note";
-
 const App = () => {
-  const [notes, setNotes] = useState([]);
-  const [newNotes, setNewNotes] = useState("new notes");
-  const addNotes = (event) => {
-    event.preventDefault();
-    console.log("Button clicked", event.target);
-  };
-  const handleNoteChange = (event) => {
-    console.log(event.target.value);
-    setNewNote(event.target.value);
-  };
+  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [newName, setNewName] = useState("");
 
   return (
     <div>
-      <h1>Notes</h1>
-      <ul>
-        <ul>
-          {notes.map((note) => (
-            <Note key={note.id} note={note} />
-          ))}
-        </ul>
-      </ul>
-      <form onSubmit={addNotes}>
-        <input value={newNotes} onChange={handleNoteChange} />
-        <button type='submit'>save</button>
+      <h2>Phonebook</h2>
+      <form>
+        <div>
+          name: <input />
+        </div>
+        <div>
+          <button type='submit'>add</button>
+        </div>
       </form>
+      <h2>Numbers</h2>
+      ...
     </div>
   );
 };
