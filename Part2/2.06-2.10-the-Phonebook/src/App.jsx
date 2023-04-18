@@ -1,6 +1,8 @@
 /** @format */
 
 import { useState } from "react";
+import NameList from "./components/NameList";
+import HandleData from "./components/HandleData";
 
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
@@ -14,11 +16,13 @@ const App = () => {
           name: <input />
         </div>
         <div>
-          <button type='submit'>add</button>
+          <button type='submit' onClick={HandleData}>
+            add
+          </button>
         </div>
       </form>
       <h2>Numbers</h2>
-      ...
+      <NameList />
     </div>
   );
 };

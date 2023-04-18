@@ -1,12 +1,14 @@
 /** @format */
 
-const Header = (props) => {
-  const courseCopy = props.course.map((course) => course);
+import React from "react";
+import courses from "../data/courses";
+
+export default function Header() {
+  let headLine = courses.map((headLine) => headLine.name);
   return (
     <>
-      <h2>{courseCopy[0].name}</h2>
+      <h1>Web development curriculum</h1>
+      <h2>{headLine[0]}</h2>
     </>
   );
-};
-
-export default Header;
+}
