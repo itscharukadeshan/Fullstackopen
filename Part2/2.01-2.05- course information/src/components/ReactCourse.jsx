@@ -18,7 +18,9 @@ export default function ReactCourse() {
       {courseParts}
       <div>
         {" "}
-        <div className='pt-4'>Total of {sumOfExercises} exercises</div>
+        <div className='pt-5 font-bold text-xl'>
+          Total of {sumOfExercises} exercises
+        </div>
       </div>
     </>
   );

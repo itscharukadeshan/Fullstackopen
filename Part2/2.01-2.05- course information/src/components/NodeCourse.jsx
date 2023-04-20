@@ -18,9 +18,11 @@ export default function NodeCourse() {
 
   return (
     <>
-      <h3 className='pt-5 text-3xl'>{nodeHeadline}</h3>
+      <h3 className='pt-6 text-3xl'>{nodeHeadline}</h3>
       <>{courseParts}</>
-      <div className='pt-4'>Total of {sumOfExercises} exercises</div>
+      <div className='pt-5 font-bold text-xl'>
+        Total of {sumOfExercises} exercises
+      </div>
     </>
   );
 }
