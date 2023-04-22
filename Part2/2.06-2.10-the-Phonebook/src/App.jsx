@@ -13,6 +13,10 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [number, setNumber] = useState("");
 
+  addPerson = { name: newName, number: number, id: newName };
+  updatePerson = persons.concat(addPerson);
+  setPersons(updatePerson);
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -24,22 +28,16 @@ const App = () => {
           number: <input />
         </div>
         <div>
-          <button
-            onClick={(event) => {
-              event.preventDefault();
-            }}
-            type='submit'>
-            add
-          </button>
+          <button type='submit'>add</button>
         </div>
       </form>
       <h2>Numbers</h2>
       <div>
-        {persons.map((person) => {
+        {persons.map((person) => (
           <li key={person.name}>
             {person.name} {person.number}
-          </li>;
-        })}
+          </li>
+        ))}
       </div>
     </div>
   );
