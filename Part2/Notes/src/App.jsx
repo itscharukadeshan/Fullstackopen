@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Note from "./components/Note";
+import "/src/index.css";
 
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes);
@@ -29,21 +30,31 @@ const App = (props) => {
   };
 
   return (
-    <div>
-      <h1>Notes</h1>
+    <div className='p-7'>
+      <h1 className=' text-5xl pt-4 pb-4'>Notes</h1>
       <div>
-        <button onClick={() => setShowAll(!showAll)}>
+        <button
+          onClick={() => setShowAll(!showAll)}
+          className=' rounded-md text-sm p-2 mb-4 border-gray-500 border-2 border-solid bg-slate-100 hover:bg-slate-500 hover:text-white '>
           show {showAll ? "important" : "all"}
         </button>
       </div>
-      <ul>
+      <ul className=' text-md pt-2 pb-2 font-thin'>
         {notesToShow.map((note) => (
           <Note key={note.id} note={note} />
         ))}
       </ul>
       <form onSubmit={addNote}>
-        <input value={newNote} onChange={handleNoteChange} />
-        <button type='submit'>save</button>
+        <input
+          value={newNote}
+          onChange={handleNoteChange}
+          className='text-sm p-2 mb-4 border-gray-500 border-2 border-solid bg-slate-100 hover:bg-slate-500 hover:text-white'
+        />
+        <button
+          type='submit'
+          className=' text-sm p-2 mb-4 border-gray-500 border-2 border-solid bg-slate-100 hover:bg-slate-500 hover:text-white'>
+          save
+        </button>
       </form>
     </div>
   );
