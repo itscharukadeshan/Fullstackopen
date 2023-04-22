@@ -13,9 +13,9 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [number, setNumber] = useState("");
 
-  addPerson = { name: newName, number: number, id: newName };
-  updatePerson = persons.concat(addPerson);
-  setPersons(updatePerson);
+  //const addPerson = { name: newName, number: number, id: newName };
+  //const updatePerson = persons.concat(addPerson);
+  //setPersons(updatePerson);
 
   return (
     <div>
