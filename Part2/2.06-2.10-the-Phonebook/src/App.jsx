@@ -9,30 +9,45 @@ const App = () => {
     { name: "Dan Abramov", number: "12-43-234345", id: 3 },
     { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
   ]);
-
   const [newName, setNewName] = useState("");
-  const [number, setNumber] = useState("");
+  const [newNumber, setNewNumber] = useState("");
 
-  //const addPerson = { name: newName, number: number, id: newName };
-  //const updatePerson = persons.concat(addPerson);
-  //setPersons(updatePerson);
+  const handleNameChange = (e) => {
+    setNewName(e.target.value);
+  };
+
+  const handleNumberChange = (e) => {
+    setNewNumber(e.target.value);
+  };
+
+  const addPerson = (e) => {
+    e.preventDefault();
+    const newPerson = {
+      name: newName,
+      number: newNumber,
+      id: Math.max(...persons.map((person) => person.id)) + 1,
+    };
+    setPersons(persons.concat(newPerson));
+    setNewName("");
+    setNewNumber("");
+  };
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
+      <form onSubmit={addPerson}>
         <div>
-          name: <input />
+          name: <input value={newName} onChange={handleNameChange} />
         </div>
         <div>
-          number: <input />
+          number: <input value={newNumber} onChange={handleNumberChange} />
         </div>
         <div>
           <button type='submit'>add</button>
         </div>
       </form>
-      <h2>Numbers</h2>
       <div>
+        <h2>Numbers</h2>
         {persons.map((person) => (
           <li key={person.name}>
             {person.name} {person.number}
