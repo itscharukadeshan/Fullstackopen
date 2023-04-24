@@ -13,6 +13,7 @@ const App = () => {
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [searchTerm, setSearchTerm] = useState();
 
   const handleNameChange = (e) => {
     setNewName(e.target.value);
@@ -20,6 +21,10 @@ const App = () => {
 
   const handleNumberChange = (e) => {
     setNewNumber(e.target.value);
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
   };
 
   const existingPerson = persons.find((person) => person.name === newName);
@@ -39,15 +44,29 @@ const App = () => {
       setNewNumber("");
     };
 
+    let filteredPersons = persons.filter((person) =>
+      person.name.toLowerCase().includes(searchTerm)
+    );
+
     return (
       <div className='p-5'>
         <h2 className='text-5xl pb-4'>Phonebook</h2>
+        <div>
+          Search :
+          <input
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder=' Search for a name...'
+            className='text-lg'
+          />
+        </div>
+        <h3 className='text-4xl pt-5 pb-4'>Add new name</h3>
         <form onSubmit={addPerson}>
           <div className='text-xl'>
-            name : <input value={newName} onChange={handleNameChange} />
+            Full Name : <input value={newName} onChange={handleNameChange} />
           </div>
           <div className='text-xl'>
-            number : <input value={newNumber} onChange={handleNumberChange} />
+            Number : <input value={newNumber} onChange={handleNumberChange} />
           </div>
           <div>
             <button
@@ -58,9 +77,9 @@ const App = () => {
           </div>
         </form>
         <div>
-          <h2 className='text-5xl pb-4 pt-5'>Numbers</h2>
-          {persons.map((person) => (
-            <li className=' list-none text-lg' key={person.name}>
+          <h3 className='text-4xl pb-4 pt-5'>Numbers</h3>
+          {filteredPersons.map((person) => (
+            <li className=' list-none text-lg mt-2' key={person.name}>
               {person.name} {person.number}
             </li>
           ))}
