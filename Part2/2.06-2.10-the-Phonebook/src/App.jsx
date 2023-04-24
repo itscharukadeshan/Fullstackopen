@@ -58,7 +58,7 @@ const App = () => {
   );
 
   return (
-    <div className='pl-4'>
+    <div className='px-12 py-5 w-full bg-slate-50'>
       <h2 className='text-5xl pt-4'>Phone book</h2>
 
       <Filter searchTerm={searchTerm} handleSearchChange={handleSearchChange} />

@@ -11,11 +11,21 @@ const PersonForm = ({
 }) => {
   return (
     <form onSubmit={addPerson}>
-      <div>
-        Name: <input value={newName} onChange={handleNameChange} />
+      <div className=' flex flex-col gap-2'>
+        <label>Name: </label>
+        <input
+          className=' pl-2 border-gray-500 border-2 rounded-sm w-1/4 '
+          value={newName}
+          onChange={handleNameChange}
+        />
       </div>
-      <div>
-        Number: <input value={newNumber} onChange={handleNumberChange} />
+      <div className=' flex flex-col gap-2'>
+        <label className='mt-2'> Number:</label>
+        <input
+          className=' pb-2  border-gray-500 border-2 rounded-sm w-1/4 '
+          value={newNumber}
+          onChange={handleNumberChange}
+        />
       </div>
       <div>
         <button
