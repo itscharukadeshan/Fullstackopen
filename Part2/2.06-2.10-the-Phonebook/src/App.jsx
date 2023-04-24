@@ -49,7 +49,7 @@ const App = () => {
 
   return (
     <div className='pl-4'>
-      <h2 className='text-5xl pt-4'>Phonebook</h2>
+      <h2 className='text-5xl pt-4'>Phone book</h2>
 
       <Filter searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
 
