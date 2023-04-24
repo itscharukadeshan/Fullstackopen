@@ -53,7 +53,7 @@ const App = () => {
 
       <Filter searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
 
-      <h3 className='text-4xl pt-4'>Add a new number</h3>
+      <h3 className='text-4xl pt-4 pb-4'>Add new number</h3>
 
       <PersonForm
         newName={newName}
