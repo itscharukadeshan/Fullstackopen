@@ -25,9 +25,14 @@ const App = () => {
       important: Math.random() < 0.5,
       id: notes.length + 1,
     };
-
-    setNotes(notes.concat(noteObject));
+    axios.post("http://localhost:3001/notes", noteObject).then((response) => {
+      console.log(response);
+    });
+    setNotes(notes.concat(response.data));
     setNewNote("");
+  };
+  const toggleImportanceOf = (id) => {
+    console.log("importance of " + id + " needs to be toggled");
   };
   const notesToShow = showAll
     ? notes
@@ -50,7 +55,11 @@ const App = () => {
       </div>
       <ul className=' text-md pt-2 pb-2 font-thin'>
         {notesToShow.map((note) => (
-          <Note key={note.id} note={note} />
+          <Note
+            key={note.id}
+            note={note}
+            toggleImportance={() => toggleImportanceOf(note.id)}
+          />
         ))}
       </ul>
       <form onSubmit={addNote}>
