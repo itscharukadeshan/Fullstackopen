@@ -13,10 +13,8 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    console.log("effect");
-    axios.get("http://localhost:3001/persons").then((response) => {
-      console.log("promise fulfilled");
-      setPersons(response.data);
+    personsService.getAll().then((response) => {
+      setPersons(response);
     });
   }, []);
 
@@ -33,8 +31,6 @@ const App = () => {
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
-
-  const existingPerson = persons.find((person) => person.name === newName);
 
   const addPerson = (e) => {
     e.preventDefault();
