@@ -33,6 +33,20 @@ const App = () => {
     setSearchTerm(e.target.value);
   };
 
+  const HandleDelete = (id) => {
+    const person = persons.find((person) => person.id === id);
+    if (window.confirm(`Do you want to Delete ${person.name} ?`)) {
+      personsService
+        .remove(id)
+        .then((response) => {
+          setPersons(persons.filter((person) => person.id !== id));
+        })
+        .catch((error) => {
+          console.log("Error deleting person:", error);
+        });
+    }
+  };
+
   const addPerson = (e) => {
     e.preventDefault();
 
@@ -86,13 +100,14 @@ const App = () => {
       <h3 className='text-3xl py-4 mt-4 '>Numbers</h3>
       <ul>
         {filteredPersons.map((person) => (
-          <div className='flex flex-row  gap-2 '>
-            <li className='m-2' key={person.name}>
+          <div key={person.id} className='flex flex-row  gap-2 '>
+            <li className='m-2' key={person.id}>
               {person.name} {person.number}
             </li>
 
             <button
               type='submit'
+              onClick={() => HandleDelete(person.id)}
               className='mt-2 bg-transparent hover:bg-red-400 text-gray-700 font-semibold hover:text-white py-1 px-2 border border-gray-500 hover:border-transparent rounded'>
               Delete
             </button>
