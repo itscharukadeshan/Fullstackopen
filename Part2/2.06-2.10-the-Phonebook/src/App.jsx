@@ -12,11 +12,15 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    personsService.getAll().then((response) => {
-      setPersons(response);
-    });
+    personsService
+      .getAll()
+      .then((response) => {
+        setPersons(response);
+      })
+      .catch((error) => {
+        console.log("Error retrieving persons:", error);
+      });
   }, []);
-
   const handleNameChange = (e) => {
     setNewName(e.target.value);
   };
@@ -33,7 +37,7 @@ const App = () => {
     e.preventDefault();
 
     const existingPerson = persons.find(
-      (person) => person.name.toLowerCase() === newName.toLowerCase()
+      (person) => person.name?.toLowerCase() === newName.toLowerCase()
     );
 
     if (existingPerson) {
@@ -44,16 +48,23 @@ const App = () => {
     const newPerson = {
       name: newName,
       number: newNumber,
-      id: Math.max(...persons.map((person) => person.id)) + 1,
+      id: newName,
     };
 
-    setPersons(persons.concat(newPerson));
-    setNewName("");
-    setNewNumber("");
+    personsService
+      .create(newPerson)
+      .then((response) => {
+        setPersons(persons.concat(response));
+        setNewName("");
+        setNewNumber("");
+      })
+      .catch((error) => {
+        console.log("Error creating person:", error);
+      });
   };
 
   const filteredPersons = persons.filter((person) =>
-    person.name.toLowerCase().includes(searchTerm.toLowerCase())
+    person.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
