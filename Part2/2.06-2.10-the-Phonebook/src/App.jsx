@@ -41,7 +41,7 @@ const App = () => {
     );
 
     if (existingPerson) {
-      alert(`${newName} is already added to the phonebook`);
+      alert(`${newName} is already added to the phone book`);
       return;
     }
 
@@ -59,7 +59,7 @@ const App = () => {
         setNewNumber("");
       })
       .catch((error) => {
-        console.log("Error creating person:", error);
+        console.log("Error creating person entry:", error);
       });
   };
 
