@@ -83,13 +83,20 @@ const App = () => {
         addPerson={addPerson}
       />
 
-      <h3 className='text-3xl pt-4'>Numbers</h3>
-
+      <h3 className='text-3xl py-4 mt-4 '>Numbers</h3>
       <ul>
         {filteredPersons.map((person) => (
-          <li className='m-2' key={person.name}>
-            {person.name} {person.number}
-          </li>
+          <div className='flex flex-row  gap-2 '>
+            <li className='m-2' key={person.name}>
+              {person.name} {person.number}
+            </li>
+
+            <button
+              type='submit'
+              className='mt-2 bg-transparent hover:bg-red-400 text-gray-700 font-semibold hover:text-white py-1 px-2 border border-gray-500 hover:border-transparent rounded'>
+              Delete
+            </button>
+          </div>
         ))}
       </ul>
     </div>
