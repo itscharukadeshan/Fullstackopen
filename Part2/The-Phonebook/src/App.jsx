@@ -56,6 +56,9 @@ const App = () => {
 
     if (existingPerson) {
       alert(`${newName} is already added to the phone book`);
+      setNewName("");
+      setNewNumber("");
+
       return;
     }
 
