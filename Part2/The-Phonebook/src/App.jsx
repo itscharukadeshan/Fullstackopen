@@ -33,7 +33,7 @@ const App = () => {
     setSearchTerm(e.target.value);
   };
 
-  const HandleDelete = (id) => {
+  const handleDelete = (id) => {
     const person = persons.find((person) => person.id === id);
     if (window.confirm(`Do you want to Delete ${person.name} ?`)) {
       personsService
@@ -107,7 +107,7 @@ const App = () => {
 
             <button
               type='submit'
-              onClick={() => HandleDelete(person.id)}
+              onClick={() => handleDelete(person.id)}
               className='mt-2 bg-transparent hover:bg-red-400 text-gray-700 font-semibold hover:text-white py-1 px-2 border border-gray-500 hover:border-transparent rounded'>
               Delete
             </button>
