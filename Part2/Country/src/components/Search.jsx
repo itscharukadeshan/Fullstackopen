@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export default function Search({ handleValue, handleSearch }) {
+export default function Search({ handleValue }) {
   return (
     <div>
       <div className='text-xl font-serif font-bold w-full bg-cyan-600 p-5 text-white'>
