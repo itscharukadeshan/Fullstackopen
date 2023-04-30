@@ -83,7 +83,7 @@ const App = () => {
       .create(newPerson)
       .then((response) => {
         setPersons(persons.concat(response));
-        handleReset;
+        handleReset();
         setMessage(response.name);
         handleNotification();
       })
