@@ -49,6 +49,11 @@ const App = () => {
     }
   };
 
+  const handleNotification = () => {
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
+  };
   const addPerson = (e) => {
     e.preventDefault();
 
@@ -77,6 +82,7 @@ const App = () => {
         setNewName("");
         setNewNumber("");
         setMessage(response.name);
+        handleNotification();
       })
       .catch((error) => {
         console.log("Error creating person entry:", error);
