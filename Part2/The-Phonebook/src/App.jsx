@@ -54,6 +54,11 @@ const App = () => {
       setMessage("");
     }, 3000);
   };
+
+  const handleReset = () => {
+    setNewName("");
+    setNewNumber("");
+  };
   const addPerson = (e) => {
     e.preventDefault();
 
@@ -63,8 +68,7 @@ const App = () => {
 
     if (existingPerson) {
       alert(`${newName} is already added to the phone book`);
-      setNewName("");
-      setNewNumber("");
+      handleReset();
 
       return;
     }
@@ -79,8 +83,7 @@ const App = () => {
       .create(newPerson)
       .then((response) => {
         setPersons(persons.concat(response));
-        setNewName("");
-        setNewNumber("");
+        handleReset;
         setMessage(response.name);
         handleNotification();
       })
