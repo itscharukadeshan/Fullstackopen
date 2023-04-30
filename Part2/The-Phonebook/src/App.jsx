@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Filter from "./components/Filter";
 import personsService from "./service/persons";
 import PersonForm from "./components/PersonForm";
+import Notification from "./components/Notification";
 import "./index.css";
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     personsService
@@ -74,6 +76,7 @@ const App = () => {
         setPersons(persons.concat(response));
         setNewName("");
         setNewNumber("");
+        setMessage(response.name);
       })
       .catch((error) => {
         console.log("Error creating person entry:", error);
@@ -87,6 +90,7 @@ const App = () => {
   return (
     <div className='px-12 py-5 w-full bg-slate-50'>
       <h2 className='text-5xl pt-4'>Phone book</h2>
+      <Notification message={message} />
 
       <Filter searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
 
