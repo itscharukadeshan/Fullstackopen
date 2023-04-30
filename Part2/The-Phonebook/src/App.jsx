@@ -40,7 +40,7 @@ const App = () => {
     if (window.confirm(`Do you want to Delete ${person.name} ?`)) {
       personsService
         .remove(id)
-        .then((response) => {
+        .then(() => {
           setPersons(persons.filter((person) => person.id !== id));
         })
         .catch((error) => {
@@ -124,7 +124,7 @@ const App = () => {
             <button
               type='submit'
               onClick={() => handleDelete(person.id)}
-              className='mt-2 bg-transparent hover:bg-red-400 text-gray-700 font-semibold hover:text-white py-1 px-2 border border-gray-500 hover:border-transparent rounded'>
+              className=' mt-2 bg-transparent hover:bg-red-400 text-gray-700 font-semibold hover:text-white py-1 px-2 border border-gray-500 hover:border-transparent rounded'>
               Delete
             </button>
           </div>
