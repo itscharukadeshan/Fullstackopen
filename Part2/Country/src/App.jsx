@@ -2,6 +2,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Search from "./components/Search";
+import { getCountries } from "./service/Countries";
 export default function App() {
   const [countries, setCountries] = useState([]);
   const [search, setSearch] = useState("");
