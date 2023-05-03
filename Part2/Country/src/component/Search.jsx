@@ -13,6 +13,7 @@ function Search() {
           placeholder='Search for a country'
           onChange={(e) => console.log(e.target.value)}
         />
+        <div></div>
       </div>
     </div>
   );
