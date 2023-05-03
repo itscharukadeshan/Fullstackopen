@@ -1,12 +1,15 @@
 /** @format */
+
 import React from "react";
-import Search from "./components/Search";
-import { getAllCountries, getCountry } from "./service/Countries";
-export default function App() {
-  getCountry();
+import Search from "./component/Search.jsx";
+import countries from "./service/countries";
+
+function App() {
   return (
-    <div className='mt-5 mx-5'>
+    <div>
       <Search />
     </div>
   );
 }
+
+export default App;

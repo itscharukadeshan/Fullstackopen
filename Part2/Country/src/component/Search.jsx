@@ -1,8 +1,8 @@
 /** @format */
 
 import React from "react";
-
-export default function Search() {
+import countries from "../service/countries";
+function Search() {
   return (
     <div>
       <div className='text-xl font-serif font-bold w-full bg-cyan-600 p-5 text-white'>
@@ -17,3 +17,5 @@ export default function Search() {
     </div>
   );
 }
+
+export default Search;
