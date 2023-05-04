@@ -1,12 +1,18 @@
 /** @format */
 
 import axios from "axios";
+import { useEffect, useState } from "react";
 
-const Base_Url = "https://restcountries.eu/rest/v3/all";
+const Base_Url = "https://restcountries.com/v3.1/all";
 
-const getCountries = () => {
-  const response = axios.get(Base_Url);
-  return response.data;
+const useCountries = () => {
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    axios.get(Base_Url).then((response) => setCountries(response.data));
+  }, []);
+
+  return countries;
 };
 
-export default { getCountries };
+export default useCountries;
