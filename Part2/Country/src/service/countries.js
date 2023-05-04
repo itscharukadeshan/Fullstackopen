@@ -17,11 +17,13 @@ const useCountries = () => {
 
 const countriesNames = (value) => {
   const [name, setName] = useState([]);
+
   useEffect(() => {
     axios
       .get(`${Base_Url}name/${value}`)
       .then((response) => setName(response.data));
   }, [value]);
+
   return name;
 };
 export { useCountries, countriesNames };

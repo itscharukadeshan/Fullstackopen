@@ -5,7 +5,7 @@ import { useCountries, countriesNames } from "../service/countries";
 
 function Search() {
   const countries = useCountries();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("   ");
   const searchResult = countriesNames(value).slice(0, 10);
 
   const handleSearch = (e) => {
@@ -23,12 +23,20 @@ function Search() {
           onChange={handleSearch}
         />
       </div>
-      <div>
-        <ul>
-          {searchResult.map((country) => (
-            <li key={country.name.common}>{country.name.common}</li>
-          ))}
-        </ul>
+      <div className='ms-5'>
+        {value.length < 3 ? (
+          <p className='text-red-300'>Too many matches</p>
+        ) : (
+          <ul>
+            {searchResult.map((country) => (
+              <li
+                className='text-lg font-serif font-bold mt-2 text-black'
+                key={country.name.common}>
+                {country.name.common}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
