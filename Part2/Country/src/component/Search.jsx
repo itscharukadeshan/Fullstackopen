@@ -6,7 +6,8 @@ import { useCountries, countriesNames } from "../service/countries";
 function Search() {
   const countries = useCountries();
   const [value, setValue] = useState("");
-  const searchResult = countriesNames(value).slice(0, 10);
+  const fullSearchResult = countriesNames(value);
+  const searchResult = fullSearchResult.slice(0, 10);
 
   const handleSearch = (e) => {
     setValue(e.target.value);
@@ -25,10 +26,19 @@ function Search() {
         />
       </div>
       <div className='ms-5'>
-        {searchResult.length === 0 && value.length >= 3 ? (
-          <p className='text-red-300'>Too many matches</p>
-        ) : (
+        {
           <div className='py-4'>
+            <div>
+              {value.length >= 1 && value.length <= 2 && (
+                <div className='text-red-950 text-xl'>
+                  Too many matches to display 🤯
+                </div>
+              )}
+              {fullSearchResult.length === 0 && value.length > 2 && (
+                <div className='text-red-950 text-xl'>No matches found 🙅‍♀️</div>
+              )}
+            </div>
+
             <ul>
               {searchResult.map((country) => (
                 <li
@@ -65,7 +75,7 @@ function Search() {
               ))}
             </ul>
           </div>
-        )}
+        }
       </div>
     </div>
   );
