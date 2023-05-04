@@ -11,7 +11,6 @@ function Search() {
 
   const handleSearch = (e) => {
     setValue(e.target.value);
-    console.log(countries);
   };
 
   return (
