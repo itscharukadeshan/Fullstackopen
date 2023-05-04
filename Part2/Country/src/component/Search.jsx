@@ -5,7 +5,7 @@ import { useCountries, countriesNames } from "../service/countries";
 
 function Search() {
   const countries = useCountries();
-  const [value, setValue] = useState("   ");
+  const [value, setValue] = useState("");
   const searchResult = countriesNames(value).slice(0, 10);
 
   const handleSearch = (e) => {
@@ -24,7 +24,7 @@ function Search() {
         />
       </div>
       <div className='ms-5'>
-        {value.length < 3 ? (
+        {searchResult.length === 0 && value.length >= 3 ? (
           <p className='text-red-300'>Too many matches</p>
         ) : (
           <ul>

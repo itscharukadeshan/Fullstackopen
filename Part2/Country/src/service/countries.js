@@ -16,14 +16,18 @@ const useCountries = () => {
 };
 
 const countriesNames = (value) => {
-  const [name, setName] = useState([]);
+  const [names, setNames] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${Base_Url}name/${value}`)
-      .then((response) => setName(response.data));
+    if (value.length >= 3) {
+      axios
+        .get(`${Base_Url}name/${value}`)
+        .then((response) => setNames(response.data));
+    } else {
+      setNames([]);
+    }
   }, [value]);
 
-  return name;
+  return names;
 };
 export { useCountries, countriesNames };
