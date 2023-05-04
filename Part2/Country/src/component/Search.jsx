@@ -30,9 +30,12 @@ function Search() {
           <ul>
             {searchResult.map((country) => (
               <li
-                className='text-lg font-serif font-bold mt-2 text-black'
+                className='flex flex-row gap-2 text-lg font-serif font-bold mt-2 text-black'
                 key={country.name.common}>
-                {country.name.common}
+                {country.name.common}{" "}
+                <button className='p-1  px-2 text-sm text-cyan-700 transition-colors duration-150 border border-cyan-500 rounded-lg focus:shadow-outline hover:bg-cyan-500 hover:text-cyan-100'>
+                  See more
+                </button>
               </li>
             ))}
           </ul>
