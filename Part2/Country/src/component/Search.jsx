@@ -30,12 +30,12 @@ function Search() {
           <div className='py-4'>
             <div>
               {value.length >= 1 && value.length <= 2 && (
-                <div className='text-red-950 text-xl'>
+                <div className='text-red-600 text-xl'>
                   Too many matches to display 🤯
                 </div>
               )}
               {fullSearchResult.length === 0 && value.length > 2 && (
-                <div className='text-red-950 text-xl'>No matches found 🙅‍♀️</div>
+                <div className='text-red-600 text-xl'>No matches found 🙅‍♀️</div>
               )}
             </div>
 
