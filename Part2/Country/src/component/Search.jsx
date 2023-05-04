@@ -10,6 +10,7 @@ function Search() {
 
   const handleSearch = (e) => {
     setValue(e.target.value);
+    console.log(countries);
   };
 
   return (
@@ -30,10 +31,28 @@ function Search() {
           <ul>
             {searchResult.map((country) => (
               <li
-                className='flex flex-row gap-2 text-lg font-serif font-bold mt-2 text-black'
+                className='flex flex-col gap-2 text-2xl font-serif font-bold mt-2 text-black'
                 key={country.name.common}>
-                {country.name.common}{" "}
-                <button className='p-1  px-2 text-sm text-cyan-700 transition-colors duration-150 border border-cyan-500 rounded-lg focus:shadow-outline hover:bg-cyan-500 hover:text-cyan-100'>
+                {country.name.common}
+                <div> Capital : {country.capital}</div>
+                <div> Population : {country.population}</div>
+                <div> Area : {country.area}</div>
+                <div>
+                  <img src={country.flags.png} alt={country.flags.alt} />
+                </div>
+
+                <div>
+                  <p>Languages</p>
+                  {
+                    <ul>
+                      {Object.entries(country.languages).map(([code, name]) => (
+                        <li key={code}>{name}</li>
+                      ))}
+                    </ul>
+                  }
+                </div>
+
+                <button className='p-1  px-2 text-sm w-24 text-cyan-700 transition-colors duration-150 border border-cyan-500 rounded-lg focus:shadow-outline hover:bg-cyan-500 hover:text-cyan-100'>
                   See more
                 </button>
               </li>
