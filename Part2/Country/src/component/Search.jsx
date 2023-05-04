@@ -1,13 +1,15 @@
 /** @format */
 
-import React from "react";
-import useCountries from "../service/countries";
+import React, { useEffect, useState } from "react";
+import { useCountries, countriesNames } from "../service/countries";
 
 function Search() {
   const countries = useCountries();
+  const [value, setValue] = useState("");
+  const searchResult = countriesNames(value).slice(0, 10);
 
   const handleSearch = (e) => {
-    const value = e.target.value;
+    setValue(e.target.value);
   };
 
   return (
@@ -20,6 +22,13 @@ function Search() {
           placeholder='Search for a country'
           onChange={handleSearch}
         />
+      </div>
+      <div>
+        <ul>
+          {searchResult.map((country) => (
+            <li key={country.name.common}>{country.name.common}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );
