@@ -20,4 +20,4 @@ const countriesNames = (value) => {
 
   return names;
 };
-export { useCountries, countriesNames };
+export { countriesNames };
