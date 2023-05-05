@@ -1,10 +1,9 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { useCountries, countriesNames } from "../service/countries";
+import { countriesNames } from "../service/countries";
 
 function Search() {
-  const countries = useCountries();
   const [value, setValue] = useState("");
   const fullSearchResult = countriesNames(value);
   const searchResult = fullSearchResult.slice(0, 10);
