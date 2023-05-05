@@ -4,7 +4,7 @@ import React from "react";
 
 function WhetherCard() {
   return (
-    <div>
+    <div className='bg-black w-20 h-10'>
       <></>
     </div>
   );
