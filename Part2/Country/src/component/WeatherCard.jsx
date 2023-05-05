@@ -2,7 +2,7 @@
 
 import React from "react";
 
-function WhetherCard() {
+function WeatherCard() {
   return (
     <div className='bg-black w-20 h-10'>
       <></>
@@ -10,4 +10,4 @@ function WhetherCard() {
   );
 }
 
-export default WhetherCard;
+export default WeatherCard;
