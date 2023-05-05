@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { countriesNames } from "../service/countries";
-import WhetherCard from "../service/whether";
+import WeatherCard from "../service/whether";
 
 function Search() {
   const [value, setValue] = useState("");
@@ -48,7 +48,6 @@ function Search() {
                     <div> Capital : {country.capital}</div>
                     <div> Population : {country.population}</div>
                     <div> Area : {country.area}</div>
-                    <WhetherCard />
                   </div>
                   <div className='text-lg'>
                     <p className=' text-xl mb-2 mt-4'>Languages</p>
