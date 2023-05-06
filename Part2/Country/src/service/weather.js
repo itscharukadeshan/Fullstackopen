@@ -1,6 +1,5 @@
 /** @format */
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 const Base_Url = "https://api.openweathermap.org/data/2.5/weather?";
 const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
