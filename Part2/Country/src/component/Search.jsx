@@ -17,11 +17,17 @@ function Search() {
 
   const handleButtonClick = (index) => {
     setOpenResultByIndex(index === openResultByIndex ? -1 : index);
+    if (index !== -1) {
+      const selectedCountry = document.getElementById(`country-${index}`);
+      if (selectedCountry) {
+        selectedCountry.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
   };
 
   return (
     <div className='drop-shadow-xl'>
-      <div className='text-xl font-serif font-bold w-full bg-cyan-600 p-5 text-white'>
+      <div className='text-xl font-mono font-bold w-full bg-cyan-600 p-5 text-white'>
         Find countries{""}
         <input
           className=' ml-4 bg-slate-400 rounded-lg border-solid border-2 border-cyan-800'
@@ -47,14 +53,14 @@ function Search() {
             <ul>
               {searchResult.map((country, index) => (
                 <li
-                  className='flex flex-col gap-2 py-4 text-4xl font-serif font-bold  text-black'
+                  id={`country-${index}`}
+                  className='flex flex-col gap-2 py-4 text-4xl font-mono font-bold  text-black'
                   key={country.name.common}>
                   <div className=' flex flex-row align-baseline gap-4'>
-                    {country.name.common} {"  "}
-                    {country.flag}
+                    {country.name.common} {country.flag}
                     <button
                       onClick={() => handleButtonClick(index)}
-                      className='middle none center rounded-lg py-3 px-6 font-sans text-xs font-bold uppercase bg-gray-200 text-cyan-500 transition-all hover:bg-cyan-700/10 active:bg-cyan-500/30 active:text-black disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                      className='middle none center rounded-lg py-3 px-6 font-sans text-xs font-bold uppercase bg-gray-200 border-solid border-2 border-cyan-500 text-cyan-500 transition-all hover:bg-cyan-700/10 active:bg-cyan-500/30 active:text-black disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
     data-ripple-dark="true'>
                       See more
                     </button>
@@ -62,7 +68,7 @@ function Search() {
                   {openResultByIndex === index && (
                     <>
                       <div className='text-lg my-4'>
-                        <div> Capital : {country.capital}</div>
+                        <div>Official name :{country.name.official} </div>
                         <div> Population : {country.population}</div>
                         <div> Area : {country.area}</div>
                       </div>
@@ -84,7 +90,8 @@ function Search() {
                         <img src={country.flags.png} alt={country.flags.alt} />
                       </div>
                       <div className='text-sm font-mono pt-5 pb-4'>
-                        Weather of {country.capital}
+                        Weather of {country.capital} capital of{" "}
+                        {country.name.common}
                       </div>
                       <WeatherCard capitalInfo={country.capitalInfo} />
                     </>
