@@ -38,7 +38,8 @@ function WeatherCard({ capitalInfo }) {
             <div>
               Temperature : {Math.round(weatherData.main.temp_max)} &#8451;
             </div>
-            <div>Humidity : {Math.round(weatherData.main.humidity)}</div>
+            <div>Humidity : {`${Math.round(weatherData.main.humidity)} %`}</div>
+            <div> Wind speed : {Math.round(weatherData.wind.speed)} m/s</div>
           </div>
         </div>
       )}
