@@ -6,11 +6,16 @@ import WeatherCard from "../component/WeatherCard";
 
 function Search() {
   const [value, setValue] = useState("");
+  const [openResultByIndex, setOpenResultByIndex] = useState(-1);
   const fullSearchResult = countriesNames(value);
   const searchResult = fullSearchResult.slice(0, 10);
 
   const handleSearch = (e) => {
     setValue(e.target.value);
+  };
+
+  const handleButtonClick = (index) => {
+    setOpenResultByIndex(index === openResultByIndex ? -1 : index);
   };
 
   return (
@@ -39,37 +44,49 @@ function Search() {
             </div>
 
             <ul>
-              {searchResult.map((country) => (
+              {searchResult.map((country, index) => (
                 <li
-                  className='flex flex-col gap-2 py-8 text-4xl font-serif font-bold mt-2 text-black'
+                  className='flex flex-col gap-2 py-4 text-4xl font-serif font-bold  text-black'
                   key={country.name.common}>
-                  {country.name.common}
-                  <div className='text-lg my-4'>
-                    <div> Capital : {country.capital}</div>
-                    <div> Population : {country.population}</div>
-                    <div> Area : {country.area}</div>
+                  <div className=' flex flex-row align-baseline gap-4'>
+                    {country.name.common}
+                    <button
+                      onClick={() => handleButtonClick(index)}
+                      className='middle none center rounded-lg py-3 px-6 font-sans text-xs font-bold uppercase bg-gray-200 text-cyan-500 transition-all hover:bg-cyan-700/10 active:bg-cyan-500/30 active:text-black disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+    data-ripple-dark="true'>
+                      See more
+                    </button>
                   </div>
-                  <div className='text-lg'>
-                    <p className=' text-xl mb-2 mt-4'>Languages</p>
-                    {
-                      <ul>
-                        {Object.entries(country.languages).map(
-                          ([code, name]) => (
-                            <li className='ml-8 list-disc' key={code}>
-                              {name}
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    }
-                  </div>
-                  <div className='my-4'>
-                    <img src={country.flags.png} alt={country.flags.alt} />
-                  </div>
-                  <div className='text-sm font-mono pt-5 pb-4'>
-                    Weather of {country.capital}
-                  </div>
-                  <WeatherCard capitalInfo={country.capitalInfo} />
+                  {openResultByIndex === index && (
+                    <>
+                      <div className='text-lg my-4'>
+                        <div> Capital : {country.capital}</div>
+                        <div> Population : {country.population}</div>
+                        <div> Area : {country.area}</div>
+                      </div>
+                      <div className='text-lg'>
+                        <p className=' text-xl mb-2 mt-4'>Languages</p>
+                        {
+                          <ul>
+                            {Object.entries(country.languages).map(
+                              ([code, name]) => (
+                                <li className='ml-8 list-disc' key={code}>
+                                  {name}
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        }
+                      </div>
+                      <div className='my-4'>
+                        <img src={country.flags.png} alt={country.flags.alt} />
+                      </div>
+                      <div className='text-sm font-mono pt-5 pb-4'>
+                        Weather of {country.capital}
+                      </div>
+                      <WeatherCard capitalInfo={country.capitalInfo} />
+                    </>
+                  )}
                 </li>
               ))}
             </ul>
