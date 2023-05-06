@@ -14,7 +14,7 @@ function Search() {
   };
 
   return (
-    <div>
+    <div className='drop-shadow-xl'>
       <div className='text-xl font-serif font-bold w-full bg-cyan-600 p-5 text-white'>
         Find countries{""}
         <input

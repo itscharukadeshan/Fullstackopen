@@ -22,16 +22,18 @@ function WeatherCard({ capitalInfo }) {
   return (
     <div>
       {weatherData && (
-        <div className=' p-4 px-10 rounded-lg bg-orange-400 flex flex-col w-fit  text-black'>
-          <img
-            className='h-full w-16'
-            src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
-            alt={`image of ${weatherData.weather[0].main}`}
-          />
-          <div className='text-3xl py-2 font-mono'>
+        <div className=' p-4 px-10 rounded-lg drop-shadow-xl bg-cyan-600 flex flex-col w-fit  text-white'>
+          <div className='drop-shadow-lg'>
+            <img
+              className='h-full w-16'
+              src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+              alt={`image of ${weatherData.weather[0].main}`}
+            />
+          </div>
+          <div className='text-3xl py-2 font-mono drop-shadow-lg'>
             {weatherData.weather[0].description}
           </div>
-          <div className='text-xl my-2 font-mono'>
+          <div className='text-xl my-2 font-mono drop-shadow-lg'>
             <div>
               Feels like : {Math.round(weatherData.main.feels_like)}&#8451;
             </div>
