@@ -12,6 +12,7 @@ function Search() {
 
   const handleSearch = (e) => {
     setValue(e.target.value);
+    setOpenResultByIndex(-1);
   };
 
   const handleButtonClick = (index) => {
@@ -49,7 +50,8 @@ function Search() {
                   className='flex flex-col gap-2 py-4 text-4xl font-serif font-bold  text-black'
                   key={country.name.common}>
                   <div className=' flex flex-row align-baseline gap-4'>
-                    {country.name.common}
+                    {country.name.common} {"  "}
+                    {country.flag}
                     <button
                       onClick={() => handleButtonClick(index)}
                       className='middle none center rounded-lg py-3 px-6 font-sans text-xs font-bold uppercase bg-gray-200 text-cyan-500 transition-all hover:bg-cyan-700/10 active:bg-cyan-500/30 active:text-black disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
