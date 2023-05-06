@@ -66,7 +66,9 @@ function Search() {
                   <div className='my-4'>
                     <img src={country.flags.png} alt={country.flags.alt} />
                   </div>
-
+                  <div className='text-sm font-mono pt-5 pb-4'>
+                    Weather of {country.capital}
+                  </div>
                   <WeatherCard capitalInfo={country.capitalInfo} />
                 </li>
               ))}
