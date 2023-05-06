@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 import { countriesNames } from "../service/countries";
-import whetherCapital from "../service/whether";
-import WeatherCard from "../service/whether";
+import WeatherCard from "../component/WeatherCard";
 
 function Search() {
   const [value, setValue] = useState("");
@@ -69,9 +68,6 @@ function Search() {
                   </div>
 
                   <WeatherCard capitalInfo={country.capitalInfo} />
-                  <button className='mt-2 p-1  px-2 text-sm w-24 text-cyan-700 transition-colors duration-150 border border-cyan-500 rounded-lg focus:shadow-outline hover:bg-cyan-500 hover:text-cyan-100'>
-                    See more
-                  </button>
                 </li>
               ))}
             </ul>
