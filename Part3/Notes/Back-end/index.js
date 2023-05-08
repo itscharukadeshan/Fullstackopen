@@ -2,6 +2,9 @@
 
 const express = require("express");
 const app = express();
+const cors = require("cors");
+
+app.use(cors());
 
 const requestLogger = (request, response, next) => {
   console.log("Method:", request.method);
@@ -90,7 +93,7 @@ app.delete("/api/notes/:id", (request, response) => {
 
 app.use(unknownEndpoint);
 
-const PORT = 3003;
+const PORT = 3030;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
