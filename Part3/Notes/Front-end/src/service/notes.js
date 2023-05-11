@@ -1,20 +1,7 @@
 /** @format */
+import axios from "axios";
 
-const axios = require("axios");
 const baseUrl = "/api/notes";
-
-const mongoose = require("mongoose");
-const url = process.env.MONGODB_URI;
-
-mongoose.set("strictQuery", false);
-mongoose.connect(url);
-
-const noteSchema = new mongoose.Schema({
-  content: String,
-  important: Boolean,
-});
-
-const Note = mongoose.model("Note", noteSchema);
 
 const getAll = () => {
   const request = axios.get(baseUrl);
