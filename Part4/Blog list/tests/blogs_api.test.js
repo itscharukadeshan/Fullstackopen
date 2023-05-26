@@ -89,7 +89,7 @@ test ('successfully creates a new blog post',async() => {
 
 })
 
-test ('like have default values of zero',async () => {
+test ('likes have default values of zero',async () => {
 
   const postWithoutLikes = {
 
@@ -114,7 +114,41 @@ test ('like have default values of zero',async () => {
 
 })
 
+test ('title and url is required',async () => {
 
+  const invalidPosts = [
+    {
+      author: 'jenna ortega',
+      url: 'https://example.com/slay-post',
+      likes: 10,
+    },
+    {
+      title: 'pray post',
+      url: 'https://example.com/pray-post',
+      likes: 5,
+    }, {
+
+      url: 'https://example.com/gay-post',
+      likes: 68,
+    },
+  ]
+  await api.post ('/api/blogs')
+    .send (invalidPosts[0])
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+
+  await api.post ('/api/blogs')
+    .send (invalidPosts[1])
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+
+  await api.post ('/api/blogs')
+    .send (invalidPosts[2])
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+
+
+})
 
 afterAll(async () => {
   await mongoose.connection.close()
