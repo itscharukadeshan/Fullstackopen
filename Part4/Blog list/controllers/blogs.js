@@ -33,6 +33,8 @@ blogsRouter.post('/', async (request, response,next) => {
     const saveBlog = await blog.save()
     response.status(201).json(saveBlog)
   } catch(exception) {
+
+    console.log('Error saving blog:', exception.message)
     next(exception)
   }
 })
@@ -62,5 +64,16 @@ blogsRouter.put('/:id', (request, response, next) => {
     })
     .catch(error => next(error))
 })
+
+blogsRouter.use((exception, request, response, next) => {
+  if (exception.message.includes('Blog validation failed : title: Path `title` is required')) {
+    response.status(400).json({
+      error: 'Bad request. Please check your input.',
+    })
+  } else {
+    next(exception)
+  }
+})
+
 
 module.exports = blogsRouter
