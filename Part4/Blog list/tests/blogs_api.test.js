@@ -21,12 +21,6 @@ const initialBlogs = [
   },
 ]
 
-const newBlogPost = {
-  title: 'Second Blog Post',
-  author: 'Jain Doe',
-  url: 'https://example.com/second-post',
-  likes: 50,
-}
 
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -38,10 +32,6 @@ beforeEach(async () => {
   await noteObject.save()
 
 },10000)
-
-afterEach(async () => {
-  await Blog.deleteMany({})
-})
 
 test('blogs are returned as json', async () => {
   await api
@@ -67,6 +57,13 @@ test('blogs have unique ids', async () => {
 
 test ('successfully creates a new blog post',async() => {
 
+  const newBlogPost = {
+    title: 'Second Blog Post',
+    author: 'Jain Doe',
+    url: 'https://example.com/second-post',
+    likes: 50,
+  }
+
   await api.post ('/api/blogs')
     .send (newBlogPost)
     .expect(201)
@@ -75,7 +72,6 @@ test ('successfully creates a new blog post',async() => {
   const response = await api.get('/api/blogs')
 
   const blogs = response.body
-
 
   const createdBlog = blogs.find(blog =>
 
@@ -89,6 +85,31 @@ test ('successfully creates a new blog post',async() => {
   expect(createdBlog.author).toBe(newBlogPost.author)
   expect(createdBlog.url).toBe(newBlogPost.url)
   expect(createdBlog.likes).toBe(newBlogPost.likes)
+
+
+})
+
+test ('like have default values of zero',async () => {
+
+  const postWithoutLikes = {
+
+    title: 'third Blog Post',
+    author: 'Bob boson',
+    url: 'https://example.com/third-post'
+  }
+
+  await api.post ('/api/blogs')
+    .send (postWithoutLikes)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api.get('/api/blogs')
+
+  const blogs = response.body
+
+  const allBlogsHaveLikes = blogs.every(blog => typeof blog.likes !== 'undefined' && blog.likes >= 0 && blogs.length >=2 )
+
+  expect (allBlogsHaveLikes).toBe(true)
 
 
 })
