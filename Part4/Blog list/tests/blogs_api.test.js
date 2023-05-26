@@ -21,7 +21,6 @@ const initialBlogs = [
   },
 ]
 
-
 beforeEach(async () => {
   await Blog.deleteMany({})
 
@@ -30,8 +29,7 @@ beforeEach(async () => {
 
   noteObject = new Blog(initialBlogs[1])
   await noteObject.save()
-
-},10000)
+}, 10000)
 
 test('blogs are returned as json', async () => {
   await api
@@ -41,22 +39,22 @@ test('blogs are returned as json', async () => {
 })
 
 test('blogs have unique ids', async () => {
-
   const response = await api.get('/api/blogs')
 
   expect(response.body[0].id).toBeDefined()
 
-  const idList =  await response.body.map((blog) => blog.id)
+  const idList = await response.body.map((blog) => blog.id)
 
   expect(idList.length).toBeGreaterThan(0)
 
-  const hasDuplicates = await idList.some((id, index) => idList.indexOf(id) !== index)
+  const hasDuplicates = await idList.some(
+    (id, index) => idList.indexOf(id) !== index
+  )
 
   expect(hasDuplicates).toBe(false)
 })
 
-test ('successfully creates a new blog post',async() => {
-
+test('successfully creates a new blog post', async () => {
   const newBlogPost = {
     title: 'Second Blog Post',
     author: 'Jain Doe',
@@ -64,8 +62,9 @@ test ('successfully creates a new blog post',async() => {
     likes: 50,
   }
 
-  await api.post ('/api/blogs')
-    .send (newBlogPost)
+  await api
+    .post('/api/blogs')
+    .send(newBlogPost)
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
@@ -73,33 +72,30 @@ test ('successfully creates a new blog post',async() => {
 
   const blogs = response.body
 
-  const createdBlog = blogs.find(blog =>
-
-    blog.title === newBlogPost.title &&
-    blog.author === newBlogPost.author &&
-    blog.url === newBlogPost.url &&
-     blog.likes === newBlogPost.likes)
-
+  const createdBlog = blogs.find(
+    (blog) =>
+      blog.title === newBlogPost.title &&
+      blog.author === newBlogPost.author &&
+      blog.url === newBlogPost.url &&
+      blog.likes === newBlogPost.likes
+  )
 
   expect(createdBlog.title).toBe(newBlogPost.title)
   expect(createdBlog.author).toBe(newBlogPost.author)
   expect(createdBlog.url).toBe(newBlogPost.url)
   expect(createdBlog.likes).toBe(newBlogPost.likes)
-
-
 })
 
-test ('likes have default values of zero',async () => {
-
+test('likes have default values of zero', async () => {
   const postWithoutLikes = {
-
     title: 'third Blog Post',
     author: 'Bob boson',
-    url: 'https://example.com/third-post'
+    url: 'https://example.com/third-post',
   }
 
-  await api.post ('/api/blogs')
-    .send (postWithoutLikes)
+  await api
+    .post('/api/blogs')
+    .send(postWithoutLikes)
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
@@ -107,15 +103,15 @@ test ('likes have default values of zero',async () => {
 
   const blogs = response.body
 
-  const allBlogsHaveLikes = blogs.every(blog => typeof blog.likes !== 'undefined' && blog.likes >= 0 && blogs.length >=2 )
+  const allBlogsHaveLikes = blogs.every(
+    (blog) =>
+      typeof blog.likes !== 'undefined' && blog.likes >= 0 && blogs.length >= 2
+  )
 
-  expect (allBlogsHaveLikes).toBe(true)
-
-
+  expect(allBlogsHaveLikes).toBe(true)
 })
 
 test('title and url are required', async () => {
-
   const validPost = {
     title: 'Valid Post',
     author: 'John Doe',
@@ -136,22 +132,24 @@ test('title and url are required', async () => {
     },
   ]
 
-  await api.post('/api/blogs')
+  await api
+    .post('/api/blogs')
     .send(validPost)
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
-  await api.post('/api/blogs')
+  await api
+    .post('/api/blogs')
     .send(invalidPosts[0])
     .expect(400)
     .expect('Content-Type', /application\/json/)
 
-  await api.post('/api/blogs')
+  await api
+    .post('/api/blogs')
     .send(invalidPosts[1])
     .expect(400)
     .expect('Content-Type', /application\/json/)
 })
-
 
 afterAll(async () => {
   await mongoose.connection.close()

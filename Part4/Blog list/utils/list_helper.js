@@ -1,11 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 const dummy = (blogs) => {
-
   return 1
 }
-
-
 
 const totalLikes = (blogs) => {
   let totalLikes = 0
@@ -64,13 +61,9 @@ const mostBlogs = (blogs) => {
   return { author: mostBlogsAuthor, blogs: mostBlogsCount }
 }
 
-
-
-
-
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
 }
