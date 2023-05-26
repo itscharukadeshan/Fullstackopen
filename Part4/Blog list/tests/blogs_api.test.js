@@ -154,29 +154,36 @@ describe ('API data CRUD test',() => {
       .expect('Content-Type', /application\/json/)
   })
 
-  test('succeeds with status code 204 if id is valid', async () => {
+  test('update the blog post', async () => {
+    const updateBlog = {
+      title: 'This is updated post',
+      author: 'John del Doe',
+      url: 'https://example.com/valid-post',
+      likes: 100,
+    }
 
     const blogsAtStart = await helper.blogsInDb()
-    const blogToDelete = blogsAtStart[0]
-
+    const blogToUpdate = blogsAtStart[0]
 
     await api
-      .delete(`/api/blogs/${blogToDelete.id}`)
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(updateBlog)
       .expect(204)
 
-    const blogsAtEnd = await helper.blogsInDb()
+    const response = await api.get('/api/blogs')
+    const blogs = response.body
 
-    expect(blogsAtEnd).toHaveLength(initialBlogs.length - 1)
+    const updatedBlog = blogs.find((blog) => blog.id === blogToUpdate.id)
 
-    const id = blogsAtEnd.map(r => r.id)
-
-    expect(id).not.toContain(blogToDelete.content)
-
+    expect(updatedBlog.title).toBe(updateBlog.title)
+    expect(updatedBlog.author).toBe(updateBlog.author)
+    expect(updatedBlog.url).toBe(updateBlog.url)
+    expect(updatedBlog.likes).toEqual(updateBlog.likes)
   })
 
+
+
 })
-
-
 
 
 afterAll(async () => {
