@@ -51,12 +51,9 @@ test('blogs have unique ids', async () => {
 
   const idList =  await response.body.map((blog) => blog.id)
 
-  console.log (idList)
-
   expect(idList.length).toBeGreaterThan(0)
 
   const hasDuplicates = await idList.some((id, index) => idList.indexOf(id) !== index)
-  console.log (hasDuplicates)
 
   expect(hasDuplicates).toBe(false)
 })
