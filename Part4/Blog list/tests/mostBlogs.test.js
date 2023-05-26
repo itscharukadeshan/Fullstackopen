@@ -1,7 +1,9 @@
 const listHelper = require('../utils/list_helper')
 
-describe ('Most like aka most favorite blog',() => {
+
+describe ('Author with most blog post and count', () => {
   const blogs = [{
+
     _id: '5a422a851b54a676234d17f7',
     title: 'React patterns',
     author: 'Michael Chan',
@@ -50,17 +52,8 @@ describe ('Most like aka most favorite blog',() => {
     __v: 0
   }  ]
 
-
-  test ('correctly found',() => {
-    const result = listHelper.favoriteBlog (blogs)
-    expect (result).toEqual(  {
-      _id: '5a422b3a1b54a676234d17f9',
-      title: 'Canonical string reduction',
-      author: 'Edsger W. Dijkstra',
-      url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
-      likes: 12,
-      __v: 0
-    })
+  test('Found correctly', () => {
+    const result = listHelper.mostBlogs(blogs)
+    expect (result).toEqual({ author: 'Robert C. Martin', blogs: 3 })
   })
-
 })
