@@ -70,10 +70,15 @@ blogsRouter.use((exception, request, response, next) => {
     response.status(400).json({
       error: 'Bad request. Please check your input.',
     })
+  } else if (exception.message.includes('Blog validation failed : url: Path `url` is not a valid URL')) {
+    response.status(400).json({
+      error: 'Bad request. Invalid URL.',
+    })
   } else {
     next(exception)
   }
 })
+
 
 
 module.exports = blogsRouter
