@@ -21,6 +21,13 @@ const initialBlogs = [
   },
 ]
 
+const newBlogPost = {
+  title: 'Second Blog Post',
+  author: 'Jain Doe',
+  url: 'https://example.com/second-post',
+  likes: 50,
+}
+
 beforeEach(async () => {
   await Blog.deleteMany({})
 
@@ -56,6 +63,34 @@ test('blogs have unique ids', async () => {
   const hasDuplicates = await idList.some((id, index) => idList.indexOf(id) !== index)
 
   expect(hasDuplicates).toBe(false)
+})
+
+test ('successfully creates a new blog post',async() => {
+
+  await api.post ('/api/blogs')
+    .send (newBlogPost)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api.get('/api/blogs')
+
+  const blogs = response.body
+
+
+  const createdBlog = blogs.find(blog =>
+
+    blog.title === newBlogPost.title &&
+    blog.author === newBlogPost.author &&
+    blog.url === newBlogPost.url &&
+     blog.likes === newBlogPost.likes)
+
+
+  expect(createdBlog.title).toBe(newBlogPost.title)
+  expect(createdBlog.author).toBe(newBlogPost.author)
+  expect(createdBlog.url).toBe(newBlogPost.url)
+  expect(createdBlog.likes).toBe(newBlogPost.likes)
+
+
 })
 
 
