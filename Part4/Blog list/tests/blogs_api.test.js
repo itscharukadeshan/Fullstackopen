@@ -154,6 +154,26 @@ describe ('API data CRUD test',() => {
       .expect('Content-Type', /application\/json/)
   })
 
+  test('succeeds with status code 204 if id is valid', async () => {
+
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+
+
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(204)
+
+    const blogsAtEnd = await helper.blogsInDb()
+
+    expect(blogsAtEnd).toHaveLength(initialBlogs.length - 1)
+
+    const id = blogsAtEnd.map(r => r.id)
+
+    expect(id).not.toContain(blogToDelete.content)
+
+  })
+
   test('update the blog post', async () => {
     const updateBlog = {
       title: 'This is updated post',
