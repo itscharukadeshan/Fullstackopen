@@ -6,71 +6,82 @@ blogsRouter.get('/', async (request, response) => {
   response.json(blogs)
 })
 
+blogsRouter.get('/:id', async (request, response, next) => {
+  try {
+    let blog = await Blog.findById(request.params.id)
 
-blogsRouter.get('/:id', (request, response, next) => {
-  Blog.findById(request.params.id)
-    .then(blog => {
-      if (blog) {
-        response.json(blog)
-      } else {
-        response.status(404).end()
-      }
-    })
-    .catch(error => next(error))
+    if (blog) {
+      response.status(201).json(blog)
+    } else {
+      response.status(404).end()
+    }
+  } catch (exception) {
+    next(exception)
+  }
 })
 
-blogsRouter.post('/', async (request, response,next) => {
+blogsRouter.post('/', async (request, response, next) => {
   const body = request.body
 
   const blog = await new Blog({
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: body.likes
+    likes: body.likes,
   })
 
   try {
     const saveBlog = await blog.save()
     response.status(201).json(saveBlog)
-  } catch(exception) {
-
-    console.log('Error saving blog:', exception.message)
+  } catch (exception) {
     next(exception)
   }
 })
 
+blogsRouter.delete('/:id', async (request, response, next) => {
+  try {
+    await Blog.findByIdAndRemove(request.params.id)
 
-blogsRouter.delete('/:id', (request, response, next) => {
-  Blog.findByIdAndRemove(request.params.id)
-    .then(() => {
-      response.status(204).end()
-    })
-    .catch(error => next(error))
+    response.status(204).end()
+  } catch (exception) {
+    next(exception)
+  }
 })
 
-blogsRouter.put('/:id', (request, response, next) => {
-  const body = request.body
+blogsRouter.put('/:id', async (request, response, next) => {
+  const body = await request.body
 
-  const blog = new Blog({
+  const blog = await new Blog({
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: body.likes
+    likes: body.likes,
   })
 
-  Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
-    .then(updatedBlog => {
-      response.json(updatedBlog)
+  try {
+    let updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
+      new: true,
     })
-    .catch(error => next(error))
+    response.json(updatedBlog)
+  } catch (exception) {
+    next(exception)
+  }
 })
 
 blogsRouter.use((exception, request, response, next) => {
-  if (exception.message.includes('Blog validation failed : title: Path `title` is required')) {
+  if (
+    exception.message.includes(
+      'Blog validation failed : title: Path `title` is required'
+    )
+  ) {
     response.status(400).json({
       error: 'Bad request. Please check your input.',
     })
-  } else if (exception.message.includes('Blog validation failed : url: Path `url` is not a valid URL')) {
+  } else if (
+    exception.message.includes(
+      'Blog validation failed : url: Path `url` is not a valid URL'
+    )
+  ) {
     response.status(400).json({
       error: 'Bad request. Invalid URL.',
     })
@@ -78,7 +89,5 @@ blogsRouter.use((exception, request, response, next) => {
     next(exception)
   }
 })
-
-
 
 module.exports = blogsRouter
