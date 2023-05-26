@@ -114,41 +114,44 @@ test ('likes have default values of zero',async () => {
 
 })
 
-test ('title and url is required',async () => {
+test('title and url are required', async () => {
+
+  const validPost = {
+    title: 'Valid Post',
+    author: 'John Doe',
+    url: 'https://example.com/valid-post',
+    likes: 10,
+  }
 
   const invalidPosts = [
     {
-      author: 'jenna ortega',
-      url: 'https://example.com/slay-post',
-      likes: 10,
+      author: 'Jane Smith',
+      url: 'https://example.com/invalid-post',
+      likes: 5,
     },
     {
-      title: 'pray post',
-      url: 'https://example.com/pray-post',
-      likes: 5,
-    }, {
-
-      url: 'https://example.com/gay-post',
-      likes: 68,
+      title: 'Invalid Post',
+      author: 'Bob Johnson',
+      likes: 8,
     },
   ]
-  await api.post ('/api/blogs')
-    .send (invalidPosts[0])
+
+  await api.post('/api/blogs')
+    .send(validPost)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  await api.post('/api/blogs')
+    .send(invalidPosts[0])
     .expect(400)
     .expect('Content-Type', /application\/json/)
 
-  await api.post ('/api/blogs')
-    .send (invalidPosts[1])
+  await api.post('/api/blogs')
+    .send(invalidPosts[1])
     .expect(400)
     .expect('Content-Type', /application\/json/)
-
-  await api.post ('/api/blogs')
-    .send (invalidPosts[2])
-    .expect(400)
-    .expect('Content-Type', /application\/json/)
-
-
 })
+
 
 afterAll(async () => {
   await mongoose.connection.close()
