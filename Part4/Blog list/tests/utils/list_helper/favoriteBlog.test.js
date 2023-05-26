@@ -1,4 +1,4 @@
-const listHelper = require('../utils/list_helper')
+const listHelper = require('../../../utils/list_helper')
 
 describe ('Most like aka most favorite blog',() => {
   const blogs = [{
