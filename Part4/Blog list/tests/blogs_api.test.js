@@ -4,6 +4,7 @@ const app = require('../app')
 
 const api = supertest(app)
 
+
 test('blogs are returned as json', async () => {
   await api
     .get('/api/blogs')
