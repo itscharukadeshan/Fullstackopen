@@ -175,6 +175,7 @@ describe ('API data CRUD test',() => {
   })
 
   test('update the blog post', async () => {
+
     const updateBlog = {
       title: 'This is updated post',
       author: 'John del Doe',
