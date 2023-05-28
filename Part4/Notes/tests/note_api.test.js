@@ -53,7 +53,7 @@ describe('when there is initially some notes saved', () => {
 
     test('fails with statuscode 404 if note dose not exist', async () => {
 
-      const validNonexistingId = await helper.nonExistingId()
+      const validNonexistingId = '5a3d5da59070081a82a3445'
 
       await api
         .get(`/api/notes/${validNonexistingId}`)
