@@ -50,20 +50,20 @@ describe('when there is initially some notes saved', () => {
       expect(resultNote.body).toEqual(noteToView)
     })
 
-    test('fails with statuscode 404 if note does not exist', async () => {
-      const validNonexistingId = '5a3d5da59070081a82a3445'
+    test('fails with statuscode 400 if note does not exist', async () => {
+      const validNonexistingId = helper.generateNonExistingId()
 
       await api
         .get(`/api/notes/${validNonexistingId}`)
-        .expect(404)
+        .expect(400)
     })
 
-    test('fails with statuscode 400 id is invalid', async () => {
-      const invalidId = '5a3d5da59070081a82a3445'
+    test('fails with statuscode 404 id is invalid', async () => {
+      const invalidId = '6472ee7b9ab1dcb8c0426351'
 
       await api
         .get(`/api/notes/${invalidId}`)
-        .expect(400)
+        .expect(404)
     })
   })
 

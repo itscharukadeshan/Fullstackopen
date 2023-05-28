@@ -1,5 +1,11 @@
 const Note = require('../models/note')
 const User = require('../models/user')
+const crypto = require('crypto')
+
+const generateNonExistingId = () => {
+  return crypto.randomBytes(12).toString('hex')
+}
+
 
 const initialNotes = [
   {
@@ -35,4 +41,5 @@ module.exports = {
   nonExistingId,
   notesInDb,
   usersInDb,
+  generateNonExistingId
 }
