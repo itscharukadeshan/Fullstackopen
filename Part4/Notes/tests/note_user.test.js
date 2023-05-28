@@ -1,149 +1,32 @@
-const supertest = require('supertest')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const supertest = require('supertest')
 const helper = require('./test_helper')
 const app = require('../app')
 const api = supertest(app)
 const User = require('../models/user')
-const Note = require('../models/note')
 
-describe('when there is initially some notes saved', () => {
-  beforeEach(async () => {
-    await Note.deleteMany({})
-    await Note.insertMany(helper.initialNotes)
-  })
-
-  test('notes are returned as json', async () => {
-    await api
-      .get('/api/notes')
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
-  })
-
-  test('all notes are returned', async () => {
-    const response = await api.get('/api/notes')
-
-    expect(response.body).toHaveLength(helper.initialNotes.length)
-  })
-
-  test('a specific note is within the returned notes', async () => {
-    const response = await api.get('/api/notes')
-
-    const contents = response.body.map(r => r.content)
-    expect(contents).toContain(
-      'Browser can execute only JavaScript'
-    )
-  })
-
-  describe('viewing a specific note', () => {
-
-    test('succeeds with a valid id', async () => {
-      const notesAtStart = await helper.notesInDb()
-
-      const noteToView = notesAtStart[0]
-
-      const resultNote = await api
-        .get(`/api/notes/${noteToView.id}`)
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
-
-      expect(resultNote.body).toEqual(noteToView)
-    })
-
-    test('fails with statuscode 400 if note does not exist', async () => {
-      const validNonexistingUserId = helper.generateNonExistingUserId()
-
-      await api
-        .get(`/api/notes/${validNonexistingUserId}`)
-        .expect(400)
-    })
-
-    test('fails with statuscode 404 id is invalid', async () => {
-      const invalidId = '6472ee7b9ab1dcb8c0426351'
-
-      await api
-        .get(`/api/notes/${invalidId}`)
-        .expect(404)
-    })
-  })
-
-  describe('addition of a new note', () => {
-    test('succeeds with valid data', async () => {
-      const newNote = {
-        content: 'async/await simplifies making async calls',
-        important: true,
-      }
-
-      await api
-        .post('/api/notes')
-        .send(newNote)
-        .expect(201)
-        .expect('Content-Type', /application\/json/)
-
-      const notesAtEnd = await helper.notesInDb()
-      expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
-
-      const contents = notesAtEnd.map(n => n.content)
-      expect(contents).toContain(
-        'async/await simplifies making async calls'
-      )
-    })
-
-    test('fails with status code 400 if data invalid', async () => {
-      const newNote = {
-        important: true
-      }
-
-      await api
-        .post('/api/notes')
-        .send(newNote)
-        .expect(400)
-
-      const notesAtEnd = await helper.notesInDb()
-
-      expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
-    })
-  })
-
-  describe('deletion of a note', () => {
-    test('succeeds with status code 204 if id is valid', async () => {
-      const notesAtStart = await helper.notesInDb()
-      const noteToDelete = notesAtStart[0]
-
-      await api
-        .delete(`/api/notes/${noteToDelete.id}`)
-        .expect(204)
-
-      const notesAtEnd = await helper.notesInDb()
-
-      expect(notesAtEnd).toHaveLength(
-        helper.initialNotes.length - 1
-      )
-
-      const contents = notesAtEnd.map(r => r.content)
-
-      expect(contents).not.toContain(noteToDelete.content)
-    })
-  })
-})
-
-describe('when there is initially one user at db', () => {
+describe('when there is initially one user saved', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
-    const passwordHash = await bcrypt.hash('sekret', 10)
-    const user = new User({ username: 'root', passwordHash })
-
-    await user.save()
+    const passwordHash = await bcrypt.hash('password', 10)
+    await new User({ username: 'name', passwordHash }).save()
   })
 
-  test('creation succeeds with a fresh username', async () => {
+  test('user is returned', async () => {
+    const usersAtStart = await helper.usersInDb()
+
+    expect(usersAtStart[0].username).toBe('name')
+  })
+
+  test('creating a new user succeeds', async () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: 'mluukkai',
-      name: 'Matti Luukkainen',
-      password: 'salainen',
+      username: 'jennadleray',
+      name: 'jenna',
+      password: 'jenna1234',
     }
 
     await api
@@ -155,17 +38,16 @@ describe('when there is initially one user at db', () => {
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
 
-    const usernames = usersAtEnd.map(u => u.username)
+    const usernames = usersAtEnd.map((user) => user.username)
     expect(usernames).toContain(newUser.username)
   })
 
-  test('creation fails with proper statuscode and message if username already taken', async () => {
+  test('creation fails if username is missing', async () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: 'boot',
-      name: 'Superuser',
-      password: 'salainen',
+      name: 'usernameRebel',
+      password: 'check/the/user/name/looser',
     }
 
     const result = await api
@@ -174,13 +56,79 @@ describe('when there is initially one user at db', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    expect(result.body.error).toContain('expected `username` to be unique')
+    expect(result.body.error).toContain('username and password required')
+
+    const usersAtEnd = await helper.usersInDb()
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
+  })
+
+  test('creation fails if password is missing', async () => {
+    const usersAtStart = await helper.usersInDb()
+
+    const newUser = {
+      username: 'nameRebel',
+      name: 'Ada Lovelace no need use name',
+    }
+
+    const result = await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+
+    expect(result.body.error).toContain('username and password required')
+
+    const usersAtEnd = await helper.usersInDb()
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
+  })
+
+  test('creation fails if username is shorter than 3 characters', async () => {
+    const usersAtStart = await helper.usersInDb()
+
+    const newUser = {
+      username: 'Ut',
+      name: 'Waler',
+      password: 'jesse',
+    }
+
+    const result = await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+
+    expect(result.body.error).toContain(
+      'username and password must be atleast 3 characters long'
+    )
+
+    const usersAtEnd = await helper.usersInDb()
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
+  })
+
+  test('creation fails if password is shorter than 3 characters', async () => {
+    const usersAtStart = await helper.usersInDb()
+
+    const newUser = {
+      username: 'SadGirl112',
+      name: 'Austrian princess',
+      password: 'oo',
+    }
+
+    const result = await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
+
+    expect(result.body.error).toContain(
+      'username and password must be atleast 3 characters long'
+    )
 
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 })
 
-afterAll(async () => {
-  await mongoose.connection.close()
+afterAll(() => {
+  mongoose.connection.close()
 })
