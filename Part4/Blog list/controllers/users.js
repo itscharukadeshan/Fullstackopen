@@ -3,23 +3,38 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.post('/', async (request, response) => {
-  const { username, name, password } = request.body
-
-  const saltRounds = 10
-  const passwordHash = await bcrypt.hash(password, saltRounds)
-
-  const user = new User({
-    username,
-    name,
-    passwordHash,
-  })
-
-  const savedUser = await user.save()
-
-  response.status(201).json(savedUser)
+  try {
 
 
+    if (!request.body.username || !request.body.password ) {
+
+      return response.status(400).json({ error: 'Username and password are required' })
+    }
+    if (request.body.password.length < 3 || request.body.username.length < 3) {
+      return response.status(400).json({ error: 'Password and username must be at least 3 characters long' })
+    }
+
+    const { username, name, password } = request.body
+
+    const saltRounds = 10
+    const passwordHash = await bcrypt.hash(password, saltRounds)
+
+    const user = new User({
+      username,
+      name,
+      passwordHash,
+    })
+
+    const savedUser = await user.save()
+
+    return response.status(201).json(savedUser)
+  } catch (error) {
+    return response.status(500).json({ error: 'Internal Server Error' })
+  }
 })
+
+
+
 
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
@@ -38,7 +53,7 @@ usersRouter.delete('/:id', async (request, response) => {
 
   await User.findByIdAndRemove(request.params.id)
 
-  response.status(204).json({ complete : 'user is deleted' })
+  response.status(204).send({ complete : 'user is deleted' })
 
 })
 
