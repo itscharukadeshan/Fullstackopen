@@ -34,6 +34,12 @@ usersRouter.get('/:id', async (request, response) => {
   }
 })
 
+usersRouter.delete('/:id', async (request, response) => {
 
+  await User.findByIdAndRemove(request.params.id)
+
+  response.status(204).json({ complete : 'user is deleted' })
+
+})
 
 module.exports = usersRouter
