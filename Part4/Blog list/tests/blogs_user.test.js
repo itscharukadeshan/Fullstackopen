@@ -30,7 +30,7 @@ beforeEach(async () => {
   await userObject.save()
 })
 
-describe ('User crud tests',async () => {
+describe ('User crud tests', () => {
 
   test ('given correct format create user without problem',async() => {
 
@@ -43,7 +43,7 @@ describe ('User crud tests',async () => {
 
       .post ('/api/blogs')
       .send (user)
-      .expect (204)
+      .expect (201)
       .expect('Content-Type', /application\/json/)
 
     const response = await api.get('/api/users')
