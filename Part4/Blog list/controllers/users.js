@@ -5,6 +5,12 @@ const User = require('../models/user')
 usersRouter.post('/', async (request, response) => {
   try {
 
+    const userNameCheck = await User.findOne({ username: request.body.username })
+
+    if (userNameCheck){
+
+      return response.status(400).json({ error: 'user already exists' })
+    }
 
     if (!request.body.username || !request.body.password ) {
 
