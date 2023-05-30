@@ -9,7 +9,7 @@ usersRouter.post('/', async (request, response) => {
 
     if (userNameCheck){
 
-      return response.status(400).json({ error: 'user already exists' })
+      return response.status(400).json({ error: 'username already exists' })
     }
 
     if (!request.body.username || !request.body.password ) {

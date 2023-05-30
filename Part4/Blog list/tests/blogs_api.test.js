@@ -23,13 +23,14 @@ const initialBlogs = [
 ]
 
 beforeEach(async () => {
+
   await Blog.deleteMany({})
 
-  let noteObject = new Blog(initialBlogs[0])
-  await noteObject.save()
+  let blogObject = new Blog(initialBlogs[0])
+  await blogObject.save()
 
-  noteObject = new Blog(initialBlogs[1])
-  await noteObject.save()
+  blogObject = new Blog(initialBlogs[1])
+  await blogObject.save()
 }, 10000)
 
 describe ('API data CRUD test',() => {
