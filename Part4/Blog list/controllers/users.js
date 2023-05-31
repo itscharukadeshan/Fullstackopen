@@ -38,11 +38,9 @@ usersRouter.post('/', async (request, response) => {
     return response.status(500).json({ error: 'Internal Server Error' })
   }
 })
-
 usersRouter.get('/', async (request, response) => {
-
-  const users = await User.find({}).populate('blogs',{ title: 1 , url: 1 , likes :1 })
-
+  const users = await User
+    .find({}).populate('blogs', { tittle: 1, likes: 1 })
   response.json(users)
 })
 usersRouter.get('/:id', async (request, response) => {
