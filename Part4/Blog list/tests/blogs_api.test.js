@@ -42,6 +42,7 @@ beforeEach(async () => {
   userObject = new User (initialUser[1])
   await userObject.save()
 
+
   let blogObject = new Blog(initialBlogs[0])
   await blogObject.save()
 
