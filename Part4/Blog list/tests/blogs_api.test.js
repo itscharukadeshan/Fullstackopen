@@ -26,7 +26,8 @@ const initialUser = [
   { username:'John Doe' ,
     name : 'John Doe',
     password : '1234'
-  }, { username:'Jane Smith' ,
+  },
+  { username:'Jane Smith' ,
     name : 'Jane Smith',
     password : '4563'
   }
@@ -42,9 +43,8 @@ beforeEach(async () => {
   userObject = new User (initialUser[1])
   await userObject.save()
 
-
   let blogObject = new Blog(initialBlogs[0])
-  await blogObject.save()
+  await blogObject .save()
 
   blogObject = new Blog(initialBlogs[1])
   await blogObject.save()
@@ -76,15 +76,20 @@ describe ('API data CRUD test',() => {
   })
 
   test('successfully creates a new blog post', async () => {
+
+
+    const token = await helper.logInUser(initialUser[1].username, initialUser[1].password)
+
     const newBlogPost = {
       title: 'Second Blog Post',
-      author: 'Jain Doe',
+      author: 'John Doe',
       url: 'https://example.com/second-post',
       likes: 50,
     }
 
     await api
       .post('/api/blogs')
+      .set('Authorization', `Bearer ${token}`)
       .send(newBlogPost)
       .expect(201)
       .expect('Content-Type', /application\/json/)

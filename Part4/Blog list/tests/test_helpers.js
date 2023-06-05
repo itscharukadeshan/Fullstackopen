@@ -1,7 +1,6 @@
 const Blog = require('../models/blog')
 const User = require ('../models/user')
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
 
 
 const nonExistingId = async () => {
@@ -32,7 +31,7 @@ const oneUserInDb = async () => {
   const user = await User.find([0])
   return user.map (user => user.toJSON())
 }
-const logInUser = async (username, password) => {
+const logInUser = async (username) => {
   try {
     const user = await User.findOne({ username })
 
@@ -40,13 +39,7 @@ const logInUser = async (username, password) => {
       throw new Error('Invalid username or password')
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password)
-
-    if (!isPasswordValid) {
-      throw new Error('Invalid username or password')
-    }
-
-    const token = jwt.sign({ userId: user.id }, process.env.SECRET, { expiresIn: '1h' })
+    const token = jwt.sign({ userId: user.id }, process.env.SECRET)
 
     return token
 
