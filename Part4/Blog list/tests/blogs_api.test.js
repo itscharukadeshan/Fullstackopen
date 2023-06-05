@@ -6,7 +6,6 @@ const helper = require('./test_helpers')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
-const User = require('../models/user')
 
 const initialBlogs = [
   {
@@ -61,9 +60,6 @@ describe ('API data CRUD test',() => {
 
   test('successfully creates a new blog post', async () => {
 
-
-    const token = await helper.logInUser(initialUser[1].username, initialUser[1].password)
-
     const newBlogPost = {
       title: 'Second Blog Post',
       author: 'John Doe',
@@ -73,7 +69,6 @@ describe ('API data CRUD test',() => {
 
     await api
       .post('/api/blogs')
-      .set('Authorization', `Bearer ${token}`)
       .send(newBlogPost)
       .expect(201)
       .expect('Content-Type', /application\/json/)
