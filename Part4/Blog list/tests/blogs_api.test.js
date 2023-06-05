@@ -22,26 +22,10 @@ const initialBlogs = [
     likes: 5,
   },
 ]
-const initialUser = [
-  { username:'John Doe' ,
-    name : 'John Doe',
-    password : '1234'
-  },
-  { username:'Jane Smith' ,
-    name : 'Jane Smith',
-    password : '4563'
-  }
-]
 
 beforeEach(async () => {
 
   await Blog.deleteMany({})
-
-  let userObject = new User (initialUser[0])
-  await userObject.save()
-
-  userObject = new User (initialUser[1])
-  await userObject.save()
 
   let blogObject = new Blog(initialBlogs[0])
   await blogObject .save()
