@@ -59,6 +59,22 @@ describe ('API data CRUD test',() => {
 
     expect(hasDuplicates).toBe(false)
   })
+  test('If try to create post without token Fail with proper status 401 Unauthorized', async () => {
+
+
+    const newBlogPost = {
+      title: 'Without token Blog Post',
+      author: 'angeles père',
+      url: 'https://example.com/without-token-post',
+      likes: 23,
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlogPost)
+      .expect(401)
+      .expect('Content-Type', /application\/json/)
+  })
 
   test('successfully creates a new blog post', async () => {
 
