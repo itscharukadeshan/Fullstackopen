@@ -31,11 +31,24 @@ const oneUserInDb = async () => {
   return user.map (user => user.toJSON())
 }
 
+const loginUserAndGetToken = async (api, user) => {
+  await api
+    .post('/api/users')
+    .send(user)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
 
+  const loginUserResponse = await api
+    .post('/api/login')
+    .send(user)
+    .expect(200)
+
+  return loginUserResponse.body.token
+}
 
 
 
 
 module.exports = {
-  nonExistingId, blogsInDb,oneUserInDb,usersInDb
+  nonExistingId, blogsInDb,oneUserInDb,usersInDb,loginUserAndGetToken
 }

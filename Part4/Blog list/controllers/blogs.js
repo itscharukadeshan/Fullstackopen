@@ -27,7 +27,7 @@ blogsRouter.post('/', async (request, response, next) => {
   const body = request.body
 
   const user = request.user
-  
+
   try {
     if (!user) {
       return response.status(401).json({ error: 'token missing or invalid' })
@@ -37,7 +37,7 @@ blogsRouter.post('/', async (request, response, next) => {
       title: body.title,
       author: body.author,
       url: body.url,
-      likes: body.likes ? body.likes : 0,
+      likes: body.likes,
       user: user._id,
     })
 

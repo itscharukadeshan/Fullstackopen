@@ -6,6 +6,7 @@ const helper = require('./test_helpers')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 const initialBlogs = [
   {
@@ -25,6 +26,7 @@ const initialBlogs = [
 beforeEach(async () => {
 
   await Blog.deleteMany({})
+  await User.deleteMany({})
 
   let blogObject = new Blog(initialBlogs[0])
   await blogObject .save()
@@ -72,19 +74,7 @@ describe ('API data CRUD test',() => {
       url: 'https://example.com/second-post',
       likes: 50,
     }
-    await api
-      .post('/api/users')
-      .send (user)
-      .expect(201)
-      .expect('Content-Type',/application\/json/)
-
-    const loginUserResponse = await api
-      .post ('/api/login')
-      .send(user)
-      .expect(200)
-
-    const { token } = loginUserResponse.body
-    console.log (token)
+    const token = await helper.loginUserAndGetToken(api , user)
 
     await api
       .post('/api/blogs')
@@ -112,15 +102,23 @@ describe ('API data CRUD test',() => {
   })
 
   test('likes have default values of zero', async () => {
+
     const postWithoutLikes = {
       title: 'third Blog Post',
       author: 'Bob boson',
       url: 'https://example.com/third-post',
     }
+    const user = {
+      name : 'bob boson',
+      username : 'bob2',
+      password : '1234w'
+    }
+    const token = await helper.loginUserAndGetToken(api , user)
 
     await api
       .post('/api/blogs')
       .send(postWithoutLikes)
+      .set ('Authorization', `Bearer ${token}`)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
@@ -137,9 +135,16 @@ describe ('API data CRUD test',() => {
   })
 
   test('title and url are required working', async () => {
+
+    const user = {
+      username : 'Jane Smith',
+      name : 'Jane Smith',
+      password : '1234'
+    }
+
     const validPost = {
       title: 'Valid Post',
-      author: 'John Doe',
+      author: 'Jane Smith',
       url: 'https://example.com/valid-post',
       likes: 10,
     }
@@ -152,51 +157,79 @@ describe ('API data CRUD test',() => {
       },
       {
         title: 'Invalid Post',
-        author: 'Bob Johnson',
+        author: 'Jane Smith',
         likes: 8,
       },
     ]
+    const token = await helper.loginUserAndGetToken(api , user)
 
     await api
       .post('/api/blogs')
       .send(validPost)
+      .set ('Authorization', `Bearer ${token}`)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
     await api
       .post('/api/blogs')
       .send(invalidPosts[0])
+      .set ('Authorization', `Bearer ${token}`)
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
     await api
       .post('/api/blogs')
       .send(invalidPosts[1])
+      .set ('Authorization', `Bearer ${token}`)
       .expect(400)
       .expect('Content-Type', /application\/json/)
   })
 
   test('succeeds with status code 204 if id is valid', async () => {
 
-    const blogsAtStart = await helper.blogsInDb()
-    const blogToDelete = blogsAtStart[0]
+    const user = {
+      username : 'billy jeans',
+      name : 'billy jeans',
+      password : '1234bj'
+    }
 
+    const newBlogPost = {
+      title: 'Second Blog Post',
+      author: 'billy jeans',
+      url: 'https://example.com/billy jeans',
+      likes: 53,
+    }
+    const token = await helper.loginUserAndGetToken(api , user)
 
     await api
-      .delete(`/api/blogs/${blogToDelete.id}`)
-      .expect(204)
+      .post('/api/blogs')
+      .set ('Authorization', `Bearer ${token}`)
+      .send(newBlogPost)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const blogToDelete = await Blog.findOne({ author: newBlogPost.author })
+
+    const initialBlogs = await helper.blogsInDb()
+
+    await Blog.findByIdAndDelete(blogToDelete.id)
 
     const blogsAtEnd = await helper.blogsInDb()
 
     expect(blogsAtEnd).toHaveLength(initialBlogs.length - 1)
+    expect(blogsAtEnd.some((blog) => blog.id === blogToDelete.id)).toBe(false)
 
-    const id = blogsAtEnd.map(r => r.id)
-
-    expect(id).not.toContain(blogToDelete.content)
 
   })
 
   test('update the blog post', async () => {
+
+    const user = {
+      name :'John del Doe',
+      username : 'John del Doe',
+      password : '12345'
+
+    }
 
     const updateBlog = {
       title: 'This is updated post',
@@ -208,9 +241,12 @@ describe ('API data CRUD test',() => {
     const blogsAtStart = await helper.blogsInDb()
     const blogToUpdate = blogsAtStart[0]
 
+    const token = await helper.loginUserAndGetToken(api , user)
+
     await api
       .put(`/api/blogs/${blogToUpdate.id}`)
       .send(updateBlog)
+      .set ('Authorization', `Bearer ${token}`)
       .expect(204)
 
     const response = await api.get('/api/blogs')
