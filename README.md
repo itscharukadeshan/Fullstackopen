@@ -1,128 +1,140 @@
 
 ![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&$with=auto&height=350&section=header&text=Fullstackopen%20exercises&animation=fadeIn&fontSize=60)
 
+---
 
-<br></br>
-<h3>Why I choose full stack open </h3>
+### Why I choose full stack open
 
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
-<h3>What challenges I faced </h3>
-
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
-
-<h3>Other helpful resources for going through the project </h3>
-
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
+- To get an understanding about development process - Specially back-end tools and services
+- Learn Node.js, Redux, authentication, TypeScript, creating APIs, and handling data.
+- To get an understanding about the level of expertise in a university-level course
+- Understand how frontend can interact with the back end.
 
 ---
 
-<h3>Tools and technologies I used</h3>
+### My previous experience
+
+##### [Meta frontend development specialization | Basics of frontend development](https://coursera.org/share/3e93587f3532fa130e355dbf61b6b96f) 
+
+[![Thing in the specialization](https://skillicons.dev/icons?i=js,react,nodejs,css,html,git,linux,github,jest,figma,&perline=14)](https://skillicons.dev)
+#####  [Google UX Design | Basics of UX /UI development](https://coursera.org/share/e9a16ace37985180f9a8e4051e435019) 
+
+[![Thing in the specialization](https://skillicons.dev/icons?i=figma,webflow,xd&perline=14)](https://skillicons.dev)
+
+#### Other experience | learn by doing
+
+[![Thing in the specialization](https://skillicons.dev/icons?i=postman,vite,d3,tailwind,wordpress&perline=14)](https://skillicons.dev)
+
+---
+
+### What challenges I faced
+
+- Change of the learning style 
+  
+  - This is the first time I had to understand every step of the development process.
+ 
+-  Understanding different between Node s vs Express 
+	
+	- Node Js is JavaScript framework and express is more abstraction of node to make the Node development to easy.
+	- In other words, *Node is a JavaScript Farmwork and express is Node _Farmwork_.*
+
+
+- Using api data in react and handle the data inside of the apps
+- 
+
+### Other helpful resources for going through the project
+
+- [Mayanwolfe Run trough of react new docs | Youtube](https://www.youtube.com/watch?v=Of4SLBLlUAY)
+- [Traversy CRUD OAuth | Youtube](https://www.youtube.com/watch?v=SBvmnHTQIPY&t=1185s&pp=ygUUIFRyYXZlcnN5IENSVUQgT0F1dGg=) 
+-  [MERN Crash Course | JWT Authentication, Redux Toolkit, Deployment](https://www.youtube.com/watch?v=R4AhvYORZRY) 
+- My completed Repos | [CRUD OAuth](https://github.com/itscharukadeshan/Story-app) | [MERN JWT Auth app](https://github.com/itscharukadeshan/MERN---JWT---auth)
+
+---
+
+### Tools and technologies I used so far in the course
 
 [![My Skills](https://skillicons.dev/icons?i=js,react,d3,nodejs,express,css,html,docker,git,github,jest,postman,tailwind,vite,figma,webflow&perline=14)](https://skillicons.dev)
-<br></br>
-
-
----
-<h3>Part 01</h3>
-
-<p>What did I learn <p>
-
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
-
----
-<h3>Part 02</h3>
-
-<p>What did I learn <p>
-
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
 
 ---
 
-<h3>Part 03</h3>
+### Part 01
 
-<p>What did I learn <p>
+#### What did I learn
 
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
+- Basics of Html | CSS and http request 
+- Understanding CRUD methods
+- Main concept about internet and web development
+
 
 ---
-<h3>Part 04</h3>
 
-<p>What did I learn <p>
+### Part 02
 
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
+#### What did I learn
 
----
-<h3>Part 05</h3>
-
-<p>What did I learn <p>
-
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
+- 
+- 
+- 
+- 
 
 ---
-<h3>Part 06</h3>
 
-<p>What did I learn <p>
+### Part 03
 
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
+#### What did I learn
 
----
-<h3>Part 07</h3>
-
-<p>What did I learn <p>
-
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
+- 
+- 
+- 
+- 
 
 ---
+
+### Part 04
+
+#### What did I learn
+
+- 
+- 
+- 
+- 
+
+---
+
+### Part 05
+
+#### What did I learn
+
+- 
+- 
+- 
+- 
+
+---
+
+### Part 06
+
+#### What did I learn
+
+- 
+- 
+- 
+- 
+
+---
+
+### Part 07
+
+#### What did I learn
+
+- 
+- 
+- 
+- 
+
+---
+
+
 
 <h3 align="center">where can you find me  </h3>
 
@@ -135,4 +147,3 @@
 <br></br>
 
 ---
-
