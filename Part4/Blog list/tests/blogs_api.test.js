@@ -266,5 +266,7 @@ describe ('API data CRUD test',() => {
 
 
 afterAll(async () => {
+  Blog.findByIdAndRemove({})
+  User.findByIdAndRemove({})
   await mongoose.connection.close()
 })
