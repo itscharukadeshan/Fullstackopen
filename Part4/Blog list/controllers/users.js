@@ -3,6 +3,7 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.post('/', async (request, response) => {
+
   try {
 
     const userNameCheck = await User.findOne({ username: request.body.username })

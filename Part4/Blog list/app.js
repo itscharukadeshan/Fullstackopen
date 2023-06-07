@@ -28,7 +28,7 @@ app.use(express.static('build'))
 app.use(express.json())
 app.use(requestLogger)
 
-app.use('/api/blogs', blogsRouter,userExtractor,tokenExtractor)
+app.use('/api/blogs', blogsRouter,tokenExtractor,userExtractor)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 

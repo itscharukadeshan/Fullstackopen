@@ -60,15 +60,35 @@ describe ('API data CRUD test',() => {
 
   test('successfully creates a new blog post', async () => {
 
+    const user = {
+      username : 'John Doe',
+      name : 'John Doe',
+      password : '1234ch'
+    }
+
     const newBlogPost = {
       title: 'Second Blog Post',
       author: 'John Doe',
       url: 'https://example.com/second-post',
       likes: 50,
     }
+    await api
+      .post('/api/users')
+      .send (user)
+      .expect(201)
+      .expect('Content-Type',/application\/json/)
+
+    const loginUserResponse = await api
+      .post ('/api/login')
+      .send(user)
+      .expect(200)
+
+    const { token } = loginUserResponse.body
+    console.log (token)
 
     await api
       .post('/api/blogs')
+      .set ('Authorization', `Bearer ${token}`)
       .send(newBlogPost)
       .expect(201)
       .expect('Content-Type', /application\/json/)
