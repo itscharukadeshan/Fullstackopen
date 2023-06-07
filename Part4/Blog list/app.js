@@ -6,7 +6,13 @@ const cors = require('cors')
 const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
-const { requestLogger,unknownEndpoint,errorHandler,tokenExtractor,userExtractor } = require('./utils/middleware')
+const {
+  requestLogger,
+  unknownEndpoint,
+  errorHandler,
+  tokenExtractor,
+  userExtractor,
+} = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 

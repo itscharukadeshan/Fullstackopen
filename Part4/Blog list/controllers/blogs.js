@@ -2,9 +2,12 @@ const blogsRouter = require('express').Router()
 const jwt = require('jsonwebtoken')
 const Blog = require('../models/blog')
 
-
 blogsRouter.get('/', async (request, response) => {
-  const blogs = await Blog.find({}).populate('user',{ username: 1 , name: 1 , id :1 })
+  const blogs = await Blog.find({}).populate('user', {
+    username: 1,
+    name: 1,
+    id: 1,
+  })
 
   response.json(blogs)
 })
@@ -55,7 +58,6 @@ blogsRouter.post('/', async (request, response, next) => {
 })
 
 blogsRouter.delete('/:id', async (request, response, next) => {
-
   const id = request.params.id
 
   const token = request.token
@@ -69,22 +71,16 @@ blogsRouter.delete('/:id', async (request, response, next) => {
     } catch (exception) {
       next(exception)
     }
-
-  }else{
-
+  } else {
     try {
       return response.status(401).json({ error: 'token invalid' })
-
     } catch (exception) {
       next(exception)
-
     }
-
   }
 })
 
 blogsRouter.put('/:id', async (request, response, next) => {
-
   const token = request.token
   const { id } = request.params
   const { title, author, url, likes } = request.body
@@ -115,8 +111,6 @@ blogsRouter.put('/:id', async (request, response, next) => {
     next(exception)
   }
 })
-
-
 
 blogsRouter.use((exception, request, response, next) => {
   if (

@@ -3,22 +3,26 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.post('/', async (request, response) => {
-
   try {
+    const userNameCheck = await User.findOne({
+      username: request.body.username,
+    })
 
-    const userNameCheck = await User.findOne({ username: request.body.username })
-
-    if (userNameCheck){
-
+    if (userNameCheck) {
       return response.status(400).json({ error: 'username already exists' })
     }
 
-    if (!request.body.username || !request.body.password ) {
-
-      return response.status(400).json({ error: 'Username and password are required' })
+    if (!request.body.username || !request.body.password) {
+      return response
+        .status(400)
+        .json({ error: 'Username and password are required' })
     }
     if (request.body.password.length < 3 || request.body.username.length < 3) {
-      return response.status(400).json({ error: 'Password and username must be at least 3 characters long' })
+      return response
+        .status(400)
+        .json({
+          error: 'Password and username must be at least 3 characters long',
+        })
     }
 
     const { username, name, password } = request.body
@@ -40,8 +44,11 @@ usersRouter.post('/', async (request, response) => {
   }
 })
 usersRouter.get('/', async (request, response) => {
-  const users = await User
-    .find({}).populate('blogs',{ title : 1 , url : 1 , likes:1 })
+  const users = await User.find({}).populate('blogs', {
+    title: 1,
+    url: 1,
+    likes: 1,
+  })
   response.json(users)
 })
 usersRouter.get('/:id', async (request, response) => {
@@ -49,16 +56,14 @@ usersRouter.get('/:id', async (request, response) => {
   if (user) {
     response.json(user)
   } else {
-    response.status(404).json ({ error : 'user is not found' })
+    response.status(404).json({ error: 'user is not found' })
   }
 })
 
 usersRouter.delete('/:id', async (request, response) => {
-
   await User.findByIdAndRemove(request.params.id)
 
-  response.status(204).send({ complete : 'user is deleted' })
-
+  response.status(204).send({ complete: 'user is deleted' })
 })
 
 module.exports = usersRouter
