@@ -9,27 +9,30 @@ const requestLogger = (request, response, next) => {
   logger.info('---')
   next()
 }
-const tokenExtractor = async(request, response, next) => {
-
-  const authorization =  request.authorization
-  try {
-    if (authorization && authorization.startsWith('Bearer ')) {
-      let token = await authorization.replace('Bearer ', '')
-
-      request.token = token
-    }
-    return null
-  }catch(error){
-    next()}
+const tokenExtractor = (request, response, next) => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    request.token = authorization.substring(7)
+    return next()
+  }
+  request.token = null
+  return next()
 }
 
 const userExtractor = async (request, response, next) => {
-  const token = request.token
-  if (token) {
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-    request.user = await User.findById(decodedToken.id)
+  if (!request.token) {
+    request.user = null
+  } else {
+    const decodedToken = jwt.verify(request.token, process.env.SECRET)
+    if (!decodedToken.id) {
+      request.user = null
+    } else {
+      request.user = await User.findById(decodedToken.id)
+    }
   }
-  return next()}
+  next()
+}
+
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
