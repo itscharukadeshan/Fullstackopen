@@ -14,11 +14,9 @@ const create = async (newObject, token) => {
   }
   try {
     const response = await axios.post(baseUrl, newObject, config)
-    toast.success(`New blog created ${newPost.title} by ${newPost.author}`)
+
     return response.data
-  } catch (error) {
-    toast.error('check the data and try again')
-  }
+  } catch (error) {}
 }
 
 const update = async (id, newObject) => {
