@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
+import login from '../services/login'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-function LoginForm() {
+function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     const credentials = {
@@ -14,8 +17,12 @@ function LoginForm() {
     }
     setPassword('')
     setUsername('')
-
-    console.log(credentials)
+    try {
+      const userData = await login(credentials)
+      onLogin(userData)
+    } catch (error) {
+      toast.error('Login failed. Please check your credentials.')
+    }
   }
 
   const handleUsernameChange = (event) => {
@@ -50,6 +57,7 @@ function LoginForm() {
         <button type="submit" className="btn btn-outline btn-accent w-fit my-6">
           Log in
         </button>
+        <ToastContainer />
       </form>
     </div>
   )
