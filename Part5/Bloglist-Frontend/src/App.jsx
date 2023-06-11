@@ -11,8 +11,12 @@ const App = () => {
     blogService.getAll().then((blogs) => setBlogs(blogs))
   }, [])
 
+  const handleLogin = (userData) => {
+    setUser(userData)
+  }
+
   if (user === null) {
-    return <LoginForm />
+    return <LoginForm onLogin={handleLogin} />
   }
 
   return (
