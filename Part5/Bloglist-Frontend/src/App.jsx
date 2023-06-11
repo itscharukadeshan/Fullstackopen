@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>blogs</h2>
+      <h2 className="py-6 font-mono font-bold text-2xl">blogs</h2>
       {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
       ))}
