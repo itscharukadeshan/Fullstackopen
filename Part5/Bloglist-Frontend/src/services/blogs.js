@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const baseUrl = 'http://localhost:3000/api/blogs'
 
 const getAll = () => {
@@ -10,8 +12,13 @@ const create = async (newObject, token) => {
   const config = {
     headers: { Authorization: token },
   }
-  const response = await axios.post(baseUrl, newObject, config)
-  return response.data
+  try {
+    const response = await axios.post(baseUrl, newObject, config)
+    toast.success(`New blog created ${newPost.title} by ${newPost.author}`)
+    return response.data
+  } catch (error) {
+    toast.error('check the data and try again')
+  }
 }
 
 const update = async (id, newObject) => {

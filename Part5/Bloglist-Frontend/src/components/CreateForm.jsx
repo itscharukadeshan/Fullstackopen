@@ -30,9 +30,7 @@ function CreateForm({ token }) {
     setIsLoggingIn(true)
     try {
       blogService.create(newPost, token)
-      toast.success(`New blog created ${newPost.title} by ${newPost.author}`)
     } catch (error) {
-      toast.error('check the data and try again')
       console.log(error)
     } finally {
       setIsLoggingIn(false)
