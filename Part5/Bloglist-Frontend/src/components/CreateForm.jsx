@@ -27,6 +27,9 @@ function CreateForm({ token }) {
       author,
       url,
     }
+    if ((!title, !author, !url)) {
+      toast.error('Title , Author and url must be provided')
+    }
     setIsLoggingIn(true)
     try {
       const response = blogService.create(newPost, token)
