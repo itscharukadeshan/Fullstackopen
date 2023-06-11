@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css'
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -17,11 +18,15 @@ function LoginForm({ onLogin }) {
     }
     setPassword('')
     setUsername('')
+    setIsLoggingIn(true)
     try {
       const userData = await login(credentials)
+      toast.success('Login successfully')
       onLogin(userData)
     } catch (error) {
       toast.error('Login failed. Please check your credentials.')
+    } finally {
+      setIsLoggingIn(false)
     }
   }
 
@@ -64,7 +69,13 @@ function LoginForm({ onLogin }) {
             type="submit"
             className="btn btn-outline btn-accent w-fit my-6"
           >
-            Log in
+            {isLoggingIn ? (
+              <>
+                <span className="loading loading-spinner"></span> Logging in
+              </>
+            ) : (
+              'Log in'
+            )}
           </button>
           <ToastContainer />
         </form>
