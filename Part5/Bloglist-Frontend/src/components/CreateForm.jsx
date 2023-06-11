@@ -29,8 +29,10 @@ function CreateForm({ token }) {
     }
     setIsLoggingIn(true)
     try {
-      blogService.create(newPost, token)
-      toast.success(`New blog created ${newPost.title} by ${newPost.author}`)
+      const response = blogService.create(newPost, token)
+      if (response.data) {
+        toast.success(`New blog created ${newPost.title} by ${newPost.author}`)
+      }
     } catch (error) {
       toast.error('check the data and try again')
     } finally {
