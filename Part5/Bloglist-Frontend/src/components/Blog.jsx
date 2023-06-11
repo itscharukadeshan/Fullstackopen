@@ -1,6 +1,6 @@
 const Blog = ({ blog }) => (
-  <div>
-    {blog.title} {blog.author}
+  <div className="pt-2">
+    {blog.title} by {blog.author}
   </div>
 )
 

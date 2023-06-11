@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
 import blogService from './services/blogs'
+import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
+import CreateForm from './components/CreateForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -34,25 +35,34 @@ const App = () => {
   }
 
   return (
-    <div className="pl-2 pt-6">
-      <div className="pb-6 text-2xl flex flex-row items-center gap-4 border-b-2 border-gray-500">
+    <>
+      <div className="navbar bg-base-300">
+        <a className="btn btn-ghost normal-case text-xl">Blogs</a>
+      </div>
+      <div className="pl-2 py-6 ">
         <div>
-          {user.name} is logged in{'  '}
+          <CreateForm token={token} />
         </div>
-        <button
-          className="btn btn-xs btn-outline btn-warning  "
-          onClick={handleLogout}
-        >
-          Logout
-        </button>{' '}
+        <div>
+          <div className=" font-bold py-2">
+            {blogs.map((blog) => (
+              <Blog key={blog.id} blog={blog} />
+            ))}
+          </div>
+        </div>
+        <div className="pt-12 text-2xl flex flex-row items-center gap-4">
+          <div>
+            {user.name} is logged in{'  '}
+          </div>
+          <button
+            className="btn btn-xs btn-outline btn-warning  "
+            onClick={handleLogout}
+          >
+            Logout
+          </button>{' '}
+        </div>
       </div>
-      <h2 className="py-6 font-mono font-bold text-4xl">blogs</h2>
-      <div className=" font-bold py-2">
-        {blogs.map((blog) => (
-          <Blog key={blog.id} blog={blog} />
-        ))}
-      </div>
-    </div>
+    </>
   )
 }
 

@@ -1,18 +1,12 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:3000/api/blogs'
 
-let token = null
-
-const setToken = (newToken) => {
-  token = `Bearer ${newToken}`
-}
-
 const getAll = () => {
   const request = axios.get(baseUrl)
   return request.then((response) => response.data)
 }
 
-const create = async (newObject) => {
+const create = async (newObject, token) => {
   const config = {
     headers: { Authorization: token },
   }
@@ -33,5 +27,5 @@ const remove = async (id) => {
   return response.data
 }
 
-const blogService = { setToken, getAll, create, update, remove }
+const blogService = { getAll, create, update, remove }
 export default blogService
