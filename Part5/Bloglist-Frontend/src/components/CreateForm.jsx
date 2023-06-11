@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import blogService from '../services/blogs'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function CreateForm({ token }) {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value)
@@ -16,7 +19,7 @@ function CreateForm({ token }) {
     setUrl(event.target.value)
   }
 
-  const handleCreate = (event) => {
+  const handleCreate = async (event) => {
     event.preventDefault()
 
     const newPost = {
@@ -24,11 +27,15 @@ function CreateForm({ token }) {
       author,
       url,
     }
-
+    setIsLoggingIn(true)
     try {
       blogService.create(newPost, token)
+      toast.success(`New blog created ${newPost.title} by ${newPost.author}`)
     } catch (error) {
+      toast.error('check the data and try again')
       console.log(error)
+    } finally {
+      setIsLoggingIn(false)
     }
 
     setAuthor('')
@@ -68,9 +75,16 @@ function CreateForm({ token }) {
             type="submit"
             className="btn btn-outline btn-accent w-fit my-6"
           >
-            Create Post
+            {isLoggingIn ? (
+              <>
+                <span className="loading loading-spinner"></span> Creating
+              </>
+            ) : (
+              'Create Post'
+            )}
           </button>
         </form>
+        <ToastContainer />
       </div>
     </>
   )
