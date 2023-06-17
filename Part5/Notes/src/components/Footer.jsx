@@ -8,12 +8,11 @@ const Footer = () => {
   }
 
   return (
-    <div style={footerStyle}>
-      <br />
-      <em>
+    <footer className=" flex justify-center p-6 mt-6">
+      <p className="font-mono font-extralight text-opacity-70">
         Note app, Department of Computer Science, University of Helsinki 2023
-      </em>
-    </div>
+      </p>
+    </footer>
   )
 }
 

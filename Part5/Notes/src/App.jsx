@@ -1,15 +1,16 @@
-/** @format */
-
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Note from './components/Note'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
+import LoginForm from './components/LoginForm'
+import NoteForm from './components/NoteForm'
+import Togglable from './components/Togglable'
 import noteService from './services/notes'
 import loginService from './services/login'
+import Header from './components/Header'
 
 const App = () => {
   const [notes, setNotes] = useState([])
-  const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -32,6 +33,8 @@ const App = () => {
     }
   }, [])
 
+  const noteFormRef = useRef()
+
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
@@ -52,21 +55,11 @@ const App = () => {
     }
   }
 
-  const addNote = (event) => {
-    event.preventDefault()
-    const noteObject = {
-      content: newNote,
-      important: Math.random() > 0.5,
-    }
-
+  const addNote = (noteObject) => {
     noteService.create(noteObject).then((returnedNote) => {
       setNotes(notes.concat(returnedNote))
-      setNewNote('')
+      noteFormRef.current.toggleVisibility()
     })
-  }
-
-  const handleNoteChange = (event) => {
-    setNewNote(event.target.value)
   }
 
   const notesToShow = showAll ? notes : notes.filter((note) => note.important)
@@ -80,7 +73,7 @@ const App = () => {
       .then((returnedNote) => {
         setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
       })
-      .catch((error) => {
+      .catch(() => {
         setErrorMessage(
           `Note '${note.content}' was already removed from server`
         )
@@ -91,56 +84,42 @@ const App = () => {
       })
   }
 
-  const loginForm = () => (
-    <form onSubmit={handleLogin}>
-      <div>
-        username
-        <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
-        password
-        <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">login</button>
-    </form>
-  )
-
-  const noteForm = () => (
-    <form onSubmit={addNote}>
-      <input value={newNote} onChange={handleNoteChange} />
-      <button type="submit">save</button>
-    </form>
-  )
-
   return (
     <div>
-      <h1>Notes app</h1>
-      <Notification message={errorMessage} />
+      <Header />
 
-      {!user && loginForm()}
-      {user && (
+      <div className="mx-20">
+        <Notification message={errorMessage} />
+
+        {!user && (
+          <Togglable buttonLabel="log in">
+            <LoginForm
+              username={username}
+              password={password}
+              handleUsernameChange={({ target }) => setUsername(target.value)}
+              handlePasswordChange={({ target }) => setPassword(target.value)}
+              handleSubmit={handleLogin}
+            />
+          </Togglable>
+        )}
+        {user && (
+          <div>
+            <p>{user.name} logged in</p>
+            <Togglable buttonLabel="new note" ref={noteFormRef}>
+              <NoteForm createNote={addNote} />
+            </Togglable>
+          </div>
+        )}
+
         <div>
-          <p>{user.name} logged in</p>
-          {noteForm()}
+          <a
+            className=" mt-8 w-fit flex items-center justify-center gap-2 rounded-xl border-4 border-black bg-blue-100 px-3 py-2 text-sm shadow-[6px_6px_0_0_#000] transition hover:cursor-pointer hover:shadow-none focus:outline-none focus:ring active:bg-blue-50"
+            onClick={() => setShowAll(!showAll)}
+          >
+            show {showAll ? 'important' : 'all'}
+            <span aria-hidden="true" role="img"></span>
+          </a>
         </div>
-      )}
-
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
-        </button>
-      </div>
-      <ul>
         <ul>
           {notesToShow.map((note) => (
             <Note
@@ -150,9 +129,9 @@ const App = () => {
             />
           ))}
         </ul>
-      </ul>
 
-      <Footer />
+        <Footer />
+      </div>
     </div>
   )
 }
