@@ -33,6 +33,9 @@ const App = () => {
   if (user === null) {
     return <LoginForm onLogin={handleLogin} />
   }
+
+  const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
+
   return (
     <>
       <div className="navbar bg-base-300">
@@ -44,7 +47,7 @@ const App = () => {
         </div>
         <div>
           <div className=" font-bold py-2">
-            {blogs.map((blog) => (
+            {sortedBlogs.map((blog) => (
               <Blog key={blog.id} blog={blog} token={token} />
             ))}
           </div>
