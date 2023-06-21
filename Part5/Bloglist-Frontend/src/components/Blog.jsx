@@ -32,7 +32,7 @@ const Blog = ({ blog, token }) => {
   }
 
   return (
-    <div className="card w-96 bg-base-100 shadow-xl border-white border-solid border-2 border-opacity-10 indicator">
+    <div className="card w-96 bg-base-100 shadow-xl border-white border-solid border-2 border-opacity-10 indicator flex flex-col my-4">
       <button
         className="indicator-item badge badge-primary"
         onClick={handleVisibility}
@@ -41,18 +41,20 @@ const Blog = ({ blog, token }) => {
       </button>
 
       {visibility ? (
-        <div className="card-body">
-          <div className="mb-2">
-            <h2 className="card-title">{blog.title}</h2>
-            <h3 className=" font-normal">By {blog.author} </h3>
-          </div>
-          <div className="mb-4">
-            <a href={blog.url}>{blog.url}</a>
-          </div>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary" onClick={handleUpdate}>
-              Likes {blog.likes}
-            </button>
+        <div>
+          <div className="card-body">
+            <div className="mb-2">
+              <h2 className="card-title">{blog.title}</h2>
+              <h3 className=" font-normal">By {blog.author} </h3>
+            </div>
+            <div className="mb-4">
+              <a href={blog.url}>{blog.url}</a>
+            </div>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary" onClick={handleUpdate}>
+                Likes {blog.likes}
+              </button>
+            </div>
           </div>
         </div>
       ) : (
