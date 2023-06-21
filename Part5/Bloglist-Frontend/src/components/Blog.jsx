@@ -8,13 +8,20 @@ const Blog = ({ token }) => {
   const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => {
-      setBlogs(blogs)
-      setBlogVisibilities(new Array(blogs.length).fill(false))
-    })
+    fetchBlogs()
   }, [])
 
-  const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
+  const fetchBlogs = async () => {
+    try {
+      const blogs = await blogService.getAll()
+
+      const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
+      setBlogs(sortedBlogs)
+      setBlogVisibilities(new Array(sortedBlogs.length).fill(false))
+    } catch (error) {
+      console.error('Failed to fetch blogs:', error)
+    }
+  }
 
   const handleVisibility = (index) => {
     const updatedVisibilities = [...blogVisibilities]
@@ -24,16 +31,15 @@ const Blog = ({ token }) => {
 
   const handleUpdate = async (blog) => {
     try {
-      const newPost = {
-        title: blog.title,
-        author: blog.author,
-        url: blog.url,
+      const updatedBlog = {
+        ...blog,
         likes: blog.likes + 1,
       }
 
-      const response = await blogService.update(blog.id, newPost, token)
+      const response = await blogService.update(blog.id, updatedBlog, token)
       if (response.data) {
         toast.success(`You liked ${blog.title}`)
+        fetchBlogs()
       }
     } catch (error) {
       toast.error('Sorry, likes are not accepted today')
@@ -52,6 +58,7 @@ const Blog = ({ token }) => {
       const response = await blogService.remove(blog.id, token)
       if (response.data) {
         toast.success(`Deleted ${blog.title}`)
+        fetchBlogs()
       }
     } catch (error) {
       toast.error(`Sorry, you can't delete this post`)
@@ -60,7 +67,7 @@ const Blog = ({ token }) => {
 
   return (
     <div className="flex flex-col my-4">
-      {sortedBlogs.map((blog, index) => (
+      {blogs.map((blog, index) => (
         <div
           key={blog.id}
           className="card w-96 bg-base-100 shadow-xl border-white border-solid border-2 border-opacity-10 indicator my-4"
