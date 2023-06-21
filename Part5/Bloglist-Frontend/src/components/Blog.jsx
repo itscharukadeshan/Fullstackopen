@@ -63,6 +63,13 @@ const Blog = ({ blog, token }) => {
             <div className="mb-4">
               <a href={blog.url}>{blog.url}</a>
             </div>
+            {blog.user[0] ? (
+              <div className="card-action justify-start">
+                Post By {blog.user[0].username}
+              </div>
+            ) : (
+              ''
+            )}
             <div className="card-actions justify-end">
               <button
                 className="btn btn-outline btn-accent"
