@@ -30,6 +30,19 @@ const Blog = ({ blog, token }) => {
     } finally {
     }
   }
+  const handleDelete = async (event) => {
+    event.preventDefault()
+    console.log(blog)
+    try {
+      const response = await blogService.remove(blog.id, token)
+      if (response.data) {
+        toast.success(`Deleted ${blog.title}`)
+      }
+    } catch (error) {
+      toast.error(`Sorry you can't delete this post`)
+    } finally {
+    }
+  }
 
   return (
     <div className="card w-96 bg-base-100 shadow-xl border-white border-solid border-2 border-opacity-10 indicator flex flex-col my-4">
@@ -51,8 +64,17 @@ const Blog = ({ blog, token }) => {
               <a href={blog.url}>{blog.url}</a>
             </div>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary" onClick={handleUpdate}>
+              <button
+                className="btn btn-outline btn-accent"
+                onClick={handleUpdate}
+              >
                 Likes {blog.likes}
+              </button>
+              <button
+                className="btn btn-outline btn-warning"
+                onClick={handleDelete}
+              >
+                delete
               </button>
             </div>
           </div>
