@@ -32,9 +32,9 @@ const Blog = ({ blog, token }) => {
   }
   const handleDelete = async (event) => {
     event.preventDefault()
-    console.log(blog)
+    const userId = blog.user[0].id
     try {
-      const response = await blogService.remove(blog.id, token)
+      const response = await blogService.remove(blog.id, token, userId)
       if (response.data) {
         toast.success(`Deleted ${blog.title}`)
       }
