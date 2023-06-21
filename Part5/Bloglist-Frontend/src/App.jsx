@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
-import blogService from './services/blogs'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [token, setToken] = useState('')
 
@@ -16,9 +14,6 @@ const App = () => {
       setUser(userData)
       setToken(`Bearer ${userData.token}`)
     }
-  }, [])
-  useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs))
   }, [])
 
   const handleLogin = async (userData) => {
@@ -34,8 +29,6 @@ const App = () => {
     return <LoginForm onLogin={handleLogin} />
   }
 
-  const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
-
   return (
     <>
       <div className="navbar bg-base-300">
@@ -47,9 +40,7 @@ const App = () => {
         </div>
         <div>
           <div className=" font-bold py-2">
-            {sortedBlogs.map((blog) => (
-              <Blog key={blog.id} blog={blog} token={token} />
-            ))}
+            <Blog token={token} />
           </div>
         </div>
         <div className="pt-12 text-2xl flex flex-row items-center gap-4">
@@ -57,7 +48,7 @@ const App = () => {
             {user.name} is logged in{'  '}
           </div>
           <button
-            className="btn btn-xs btn-outline btn-warning  "
+            className="btn btn-xs btn-outline btn-warning"
             onClick={handleLogout}
           >
             Logout
