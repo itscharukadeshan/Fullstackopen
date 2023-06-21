@@ -33,7 +33,6 @@ const App = () => {
   if (user === null) {
     return <LoginForm onLogin={handleLogin} />
   }
-
   return (
     <>
       <div className="navbar bg-base-300">
@@ -46,7 +45,7 @@ const App = () => {
         <div>
           <div className=" font-bold py-2">
             {blogs.map((blog) => (
-              <Blog key={blog.id} blog={blog} />
+              <Blog key={blog.id} blog={blog} token={token} />
             ))}
           </div>
         </div>
