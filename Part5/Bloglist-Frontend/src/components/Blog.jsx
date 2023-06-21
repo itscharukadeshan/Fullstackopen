@@ -38,8 +38,10 @@ const Blog = ({ token }) => {
 
       const response = await blogService.update(blog.id, updatedBlog, token)
       if (response.data) {
-        toast.success(`You liked ${blog.title}`)
-        fetchBlogs()
+        const updatedBlogs = blogs.map((b) =>
+          b.id === blog.id ? { ...b, likes: updatedBlog.likes } : b
+        )
+        setBlogs(updatedBlogs)
       }
     } catch (error) {
       toast.error('Sorry, likes are not accepted today')
@@ -55,11 +57,9 @@ const Blog = ({ token }) => {
     }
 
     try {
-      const response = await blogService.remove(blog.id, token)
-      if (response.data) {
-        toast.success(`Deleted ${blog.title}`)
-        fetchBlogs()
-      }
+      await blogService.remove(blog.id, token)
+      const updatedBlogs = blogs.filter((b) => b.id !== blog.id)
+      setBlogs(updatedBlogs)
     } catch (error) {
       toast.error(`Sorry, you can't delete this post`)
     }
