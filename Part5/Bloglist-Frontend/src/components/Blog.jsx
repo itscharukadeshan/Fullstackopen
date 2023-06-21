@@ -32,6 +32,14 @@ const Blog = ({ blog, token }) => {
   }
   const handleDelete = async (event) => {
     event.preventDefault()
+
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this post?'
+    )
+    if (!confirmation) {
+      return
+    }
+
     try {
       const response = await blogService.remove(blog.id, token)
       if (response.data) {
