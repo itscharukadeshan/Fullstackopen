@@ -7,10 +7,11 @@ const Blog = ({ token }) => {
   const [blogVisibilities, setBlogVisibilities] = useState([])
   const [blogs, setBlogs] = useState([])
   const [keyPrefix, setKeyPrefix] = useState('')
+  const [render, setRender] = useState(false)
 
   useEffect(() => {
     fetchBlogs()
-  }, [])
+  }, [render])
 
   const fetchBlogs = async () => {
     try {
@@ -29,6 +30,9 @@ const Blog = ({ token }) => {
     updatedVisibilities[index] = !updatedVisibilities[index]
     setBlogVisibilities(updatedVisibilities)
   }
+  const handleRender = () => {
+    setRender(!render)
+  }
 
   const handleUpdate = async (blog) => {
     try {
@@ -38,6 +42,9 @@ const Blog = ({ token }) => {
       }
 
       const response = await blogService.update(blog.id, updatedBlog, token)
+
+      handleRender()
+
       if (response.data) {
         const updatedBlogs = blogs.map((b) =>
           b.id === blog.id ? { ...b, likes: response.data.likes } : b
