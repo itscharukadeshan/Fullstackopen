@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 const Blog = ({ token }) => {
   const [blogVisibilities, setBlogVisibilities] = useState([])
   const [blogs, setBlogs] = useState([])
+  const [keyPrefix, setKeyPrefix] = useState('')
 
   useEffect(() => {
     fetchBlogs()
@@ -39,9 +40,10 @@ const Blog = ({ token }) => {
       const response = await blogService.update(blog.id, updatedBlog, token)
       if (response.data) {
         const updatedBlogs = blogs.map((b) =>
-          b.id === blog.id ? { ...b, likes: updatedBlog.likes } : b
+          b.id === blog.id ? { ...b, likes: response.data.likes } : b
         )
         setBlogs(updatedBlogs)
+        setKeyPrefix(keyPrefix + ' ')
       }
     } catch (error) {
       toast.error('Sorry, likes are not accepted today')
@@ -60,6 +62,7 @@ const Blog = ({ token }) => {
       await blogService.remove(blog.id, token)
       const updatedBlogs = blogs.filter((b) => b.id !== blog.id)
       setBlogs(updatedBlogs)
+      setKeyPrefix(keyPrefix + ' ')
     } catch (error) {
       toast.error(`Sorry, you can't delete this post`)
     }
@@ -69,7 +72,7 @@ const Blog = ({ token }) => {
     <div className="flex flex-col my-4">
       {blogs.map((blog, index) => (
         <div
-          key={blog.id}
+          key={keyPrefix + blog.id}
           className="card w-96 bg-base-100 shadow-xl border-white border-solid border-2 border-opacity-10 indicator my-4"
         >
           <div className="card-body">
@@ -112,7 +115,6 @@ const Blog = ({ token }) => {
           </div>
         </div>
       ))}
-
       <ToastContainer />
     </div>
   )
