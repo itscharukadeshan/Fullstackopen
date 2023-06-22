@@ -43,7 +43,6 @@ const Blog = ({ token }) => {
           b.id === blog.id ? { ...b, likes: response.data.likes } : b
         )
         setBlogs(updatedBlogs)
-        setKeyPrefix(keyPrefix + ' ')
       }
     } catch (error) {
       toast.error('Sorry, likes are not accepted today')
