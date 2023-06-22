@@ -91,6 +91,7 @@ const Blog = ({ token }) => {
             <div className="mb-2">
               <h2 className="card-title">{blog.title}</h2>
               <h3 className="font-normal">By {blog.author}</h3>
+              <h3 className="font-normal">Likes {blog.likes}</h3>
             </div>
             {blogVisibilities[index] && (
               <>
