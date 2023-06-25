@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 
-import NoteForm from '../src/components/NoteForm.jsx'
+import NoteForm from '../../src/components/NoteForm'
 
 it('<NoteForm /> updates parent state and calls onSubmit', async () => {
   const user = userEvent.setup()
