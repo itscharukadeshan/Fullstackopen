@@ -1,15 +1,30 @@
-const NoteForm = ({ onSubmit, handleChange, value }) => {
+import { useState } from 'react'
+
+const NoteForm = ({ createNote }) => {
+  const [newNote, setNewNote] = useState('')
+
+  const addNote = (event) => {
+    event.preventDefault()
+    createNote({
+      content: newNote,
+      important: true,
+    })
+
+    setNewNote('')
+  }
+
   return (
     <div>
       <h2 className="text-xl font-sans font-bold pb-4 mt-6">
         Create a new note
       </h2>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={addNote}>
         <input
           className="relative block overflow-hidden border-b border-gray-600 bg-transparent focus-within:border-blue-600 my-4"
-          value={value}
-          onChange={handleChange}
+          value={newNote}
+          onChange={(event) => setNewNote(event.target.value)}
+          placeholder="Submit your note"
         />
         <button
           type="submit"
