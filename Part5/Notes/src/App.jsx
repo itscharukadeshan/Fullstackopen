@@ -72,12 +72,17 @@ const App = () => {
   const toggleImportanceOf = (id) => {
     const note = notes.find((n) => n.id === id)
     const changedNote = { ...note, important: !note.important }
+    const isImportant = changedNote.important
 
     noteService
       .update(id, changedNote)
       .then((returnedNote) => {
         setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
-        toast.success(`Updated the note`)
+        if (isImportant) {
+          toast.success('Note marked as important')
+        } else {
+          toast.success('Note marked as not important')
+        }
       })
       .catch(() => {
         setErrorMessage(
