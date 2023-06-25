@@ -8,6 +8,8 @@ import Togglable from './components/Togglable'
 import noteService from './services/notes'
 import loginService from './services/login'
 import Header from './components/Header'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
   const [notes, setNotes] = useState([])
@@ -45,10 +47,12 @@ const App = () => {
       noteService.setToken(user.token)
       window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
       setUser(user)
+      toast.success(`${user.name} you're logged in`)
       setUsername('')
       setPassword('')
     } catch (exception) {
       setErrorMessage('wrong credentials')
+      toast.error(errorMessage)
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -59,6 +63,7 @@ const App = () => {
     noteService.create(noteObject).then((returnedNote) => {
       setNotes(notes.concat(returnedNote))
       noteFormRef.current.toggleVisibility()
+      toast.success(`note created`)
     })
   }
 
@@ -72,11 +77,13 @@ const App = () => {
       .update(id, changedNote)
       .then((returnedNote) => {
         setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
+        toast.success(`Updated the note`)
       })
       .catch(() => {
         setErrorMessage(
           `Note '${note.content}' was already removed from server`
         )
+        toast.error('Note was already removed from server')
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
@@ -128,7 +135,7 @@ const App = () => {
             />
           ))}
         </ul>
-
+        <ToastContainer />
         <Footer />
       </div>
     </div>
