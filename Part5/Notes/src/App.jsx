@@ -20,7 +20,6 @@ const App = () => {
 
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
-      console.log(initialNotes)
       setNotes(initialNotes)
     })
   }, [])
