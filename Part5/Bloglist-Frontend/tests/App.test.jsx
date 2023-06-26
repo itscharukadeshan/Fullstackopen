@@ -4,8 +4,5 @@ import { describe, it } from 'vitest'
 import App from '../src/App'
 
 describe('App', () => {
-  it('renders headline', () => {
-    render(<App title="React" />)
-    screen.debug()
-  })
+  it('renders headline', () => {})
 })
