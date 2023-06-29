@@ -15,6 +15,7 @@ const LoginForm = ({
           <input
             className="relative block overflow-hidden border-b border-gray-600 bg-transparent focus-within:border-blue-600 my-4"
             value={username}
+            id="username"
             onChange={handleUsernameChange}
           />
         </div>
@@ -24,12 +25,14 @@ const LoginForm = ({
             type="password"
             className="relative block overflow-hidden border-b border-gray-600 bg-transparent focus-within:border-blue-600 my-4"
             value={password}
+            id="password"
             onChange={handlePasswordChange}
           />
         </div>
         <a
           className="inline-block rounded border border-current px-8 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500 mt-4"
           type="submit"
+          id="login-button"
           onClick={handleSubmit}
         >
           Login

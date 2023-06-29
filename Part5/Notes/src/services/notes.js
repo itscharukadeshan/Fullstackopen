@@ -42,7 +42,7 @@ const update = async (id, newObject) => {
 const handleRequestError = (error) => {
   if (error.response) {
     console.error('Request failed with response:', error.response.data)
-    toast.error(`('Something went wrong unable to get data from server`)
+    toast.error(`Something went wrong unable to get data from server`)
   } else if (error.request) {
     console.error('No response received:', error.request)
     toast.error(`Something went wrong unable to send data to the server`)
