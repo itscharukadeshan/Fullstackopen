@@ -13,9 +13,11 @@ function CreateForm({ token }) {
   const handleTitleChange = (event) => {
     setTitle(event.target.value)
   }
+
   const handleAuthorChange = (event) => {
     setAuthor(event.target.value)
   }
+
   const handleUrlChange = (event) => {
     setUrl(event.target.value)
   }
@@ -32,17 +34,21 @@ function CreateForm({ token }) {
       author,
       url,
     }
-    if ((!title, !author, !url)) {
-      toast.error('Title , Author and url must be provided')
+
+    if (!title || !author || !url) {
+      toast.error('Title, Author, and URL must be provided')
+      return
     }
+
     setIsLoggingIn(true)
+
     try {
-      const response = blogService.create(newPost, token)
+      const response = await blogService.create(newPost, token)
       if (response.data) {
-        toast.success(`New blog created ${newPost.title} by ${newPost.author}`)
+        toast.success(`New blog created: ${newPost.title} by ${newPost.author}`)
       }
     } catch (error) {
-      toast.error('check the data and try again')
+      toast.error('Check the data and try again')
     } finally {
       setIsLoggingIn(false)
     }
@@ -51,6 +57,7 @@ function CreateForm({ token }) {
     setTitle('')
     setUrl('')
   }
+
   return (
     <>
       {showForm ? (
@@ -78,7 +85,7 @@ function CreateForm({ token }) {
             />
             <input
               type="url"
-              placeholder="Type Url here"
+              placeholder="Type URL here"
               className="input input-bordered input-info w-full max-w-xs"
               id="url"
               value={url}

@@ -1,13 +1,6 @@
 describe('Blog app', function () {
   beforeEach(function () {
     cy.visit('')
-    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`)
-    const user = {
-      name: 'Matti Luukkainen',
-      username: 'mluukkai',
-      password: 'salainen',
-    }
-    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user)
   })
 
   it('Login form is shown', function () {
@@ -16,14 +9,14 @@ describe('Blog app', function () {
 
   describe('Login', function () {
     it('succeeds with correct credentials', function () {
-      cy.get('#username').type('mluukkai')
-      cy.get('#password').type('salainen')
+      cy.get('#username').type('lord')
+      cy.get('#password').type('lord')
       cy.get('#login-button').click()
-      cy.contains('Matti Luukkainen is logged in')
+      cy.contains('lord is logged in')
     })
 
     it('fails with wrong credentials', function () {
-      cy.get('#username').type('mluukkai')
+      cy.get('#username').type('lord')
       cy.get('#password').type('wrongpassword')
       cy.get('#login-button').click()
       cy.get('.Toastify__toast-body > :nth-child(2)').contains('Login failed')
@@ -31,8 +24,8 @@ describe('Blog app', function () {
   })
   describe('When logged in', function () {
     beforeEach(function () {
-      cy.get('#username').type('mluukkai')
-      cy.get('#password').type('salainen')
+      cy.get('#username').type('lord')
+      cy.get('#password').type('lord')
       cy.get('#login-button').click()
     })
 
