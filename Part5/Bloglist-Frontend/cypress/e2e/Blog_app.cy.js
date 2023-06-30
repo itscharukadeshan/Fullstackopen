@@ -1,5 +1,5 @@
-describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
+describe('Blog', () => {
+  it('can visit the app', () => {
+    cy.visit(`${Cypress.env('baseUrl')}`)
   })
 })
