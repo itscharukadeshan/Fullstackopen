@@ -1,6 +1,6 @@
 describe('Blog app', function () {
   beforeEach(function () {
-    cy.request('POST', `${Cypress.env('BACKEND')}/api/testing/reset`)
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`)
     cy.visit(`${Cypress.env('baseUrl')}`)
   })
 
