@@ -3,19 +3,19 @@ Cypress.Commands.add('login', ({ username, password }) => {
     username,
     password,
   }).then(({ body }) => {
-    localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
+    localStorage.setItem('loggedBlogappUser', JSON.stringify(body))
     cy.visit('')
   })
 })
 
-Cypress.Commands.add('createNote', ({ content, important }) => {
+Cypress.Commands.add('createBlog', ({ content, important }) => {
   cy.request({
-    url: `${Cypress.env('BACKEND')}/notes`,
+    url: `${Cypress.env('BACKEND')}/Blog`,
     method: 'POST',
     body: { content, important },
     headers: {
       Authorization: `Bearer ${
-        JSON.parse(localStorage.getItem('loggedNoteappUser')).token
+        JSON.parse(localStorage.getItem('loggedBlogappUser')).token
       }`,
     },
   })

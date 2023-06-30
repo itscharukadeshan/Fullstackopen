@@ -55,6 +55,7 @@ function LoginForm({ onLogin }) {
             type="text"
             placeholder="Type username here"
             className="input input-bordered input-info w-full max-w-xs"
+            id="username"
             value={username}
             onChange={handleUsernameChange}
           />
@@ -62,11 +63,13 @@ function LoginForm({ onLogin }) {
             type="password"
             placeholder="Type password here"
             className="input input-bordered input-info w-full max-w-xs"
+            id="password"
             value={password}
             onChange={handlePasswordChange}
           />
           <button
             type="submit"
+            id="login-button"
             className="btn btn-outline btn-accent w-fit my-6"
           >
             {isLoggingIn ? (

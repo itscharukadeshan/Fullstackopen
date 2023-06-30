@@ -64,6 +64,7 @@ function CreateForm({ token }) {
               type="text"
               placeholder="Type title here"
               className="input input-bordered input-info w-full max-w-xs"
+              id="title"
               value={title}
               onChange={handleTitleChange}
             />
@@ -71,6 +72,7 @@ function CreateForm({ token }) {
               type="text"
               placeholder="Type author here"
               className="input input-bordered input-info w-full max-w-xs"
+              id="author"
               value={author}
               onChange={handleAuthorChange}
             />
@@ -78,12 +80,14 @@ function CreateForm({ token }) {
               type="url"
               placeholder="Type Url here"
               className="input input-bordered input-info w-full max-w-xs"
+              id="url"
               value={url}
               onChange={handleUrlChange}
             />
             <div className="flex flex-row gap-3">
               <button
                 type="submit"
+                id="submit"
                 className="btn btn-outline btn-accent w-fit my-6"
               >
                 {isLoggingIn ? (
@@ -96,6 +100,7 @@ function CreateForm({ token }) {
               </button>
               <button
                 className="btn btn-outline btn-warning w-fit my-6"
+                id="cancel"
                 onClick={handleVisibility}
               >
                 Cancel
@@ -106,6 +111,7 @@ function CreateForm({ token }) {
       ) : (
         <button
           className="btn btn-outline btn-accent w-fit my-6"
+          id="new-blog"
           onClick={handleVisibility}
         >
           Create a post
