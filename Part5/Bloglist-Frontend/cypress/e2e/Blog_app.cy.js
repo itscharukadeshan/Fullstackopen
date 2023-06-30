@@ -37,6 +37,11 @@ describe('Blog app', function () {
       cy.get('#submit').click()
       cy.contains('a note created by cypress')
     })
+
+    it('users can like a blog', function () {})
+    it('user who created a blog can delete it', function () {})
+    it('only the creator can see the delete button of a blog', function () {})
+    it('users can like a blog', function () {})
   })
 
   afterEach(function () {
