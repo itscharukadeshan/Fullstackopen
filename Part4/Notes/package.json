@@ -13,7 +13,8 @@
     "logs:prod": "fly logs",
     "lint": "eslint .",
     "test": "NODE_ENV=test jest --verbose --runInBand",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "start:test": "NODE_ENV=test node index.js"
   },
   "author": "charuka deshan",
   "license": "MIT",
