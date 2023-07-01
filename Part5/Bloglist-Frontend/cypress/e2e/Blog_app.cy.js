@@ -35,6 +35,7 @@ describe('Blog app', function () {
       cy.get('#author').type('Cypress inc')
       cy.get('#url').type('https://example.com/cypress')
       cy.get('#submit').click()
+      cy.reload()
       cy.contains('a note created by cypress')
     })
     it('create blog can be cancel', function () {
