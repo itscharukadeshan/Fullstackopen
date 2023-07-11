@@ -37,6 +37,8 @@
     ]
   },
   "devDependencies": {
-    "deep-freeze": "^0.0.1"
+    "daisyui": "^3.2.1",
+    "deep-freeze": "^0.0.1",
+    "tailwindcss": "^3.3.2"
   }
 }
