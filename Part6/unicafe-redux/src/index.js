@@ -53,7 +53,7 @@ const App = () => {
       </div>
 
       <div>
-        <div className='stats stats-vertical lg:stats-horizontal shadow'>
+        <div className='stats stats-vertical lg:stats-horizontal shadow p-8'>
           <div className='stat'>
             <div className='stat-title'>Good</div>
             <div className='stat-value text-green-600'>
