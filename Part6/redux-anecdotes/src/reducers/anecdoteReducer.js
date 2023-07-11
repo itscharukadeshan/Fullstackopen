@@ -38,6 +38,14 @@ const reducer = (state = initialState, action) => {
       }
       break;
 
+    case "CREATE":
+      const newAnecdote = {
+        content: action.data.content,
+        id: getId(),
+        votes: 0,
+      };
+      return [...state, newAnecdote];
+
     default:
       return state;
   }

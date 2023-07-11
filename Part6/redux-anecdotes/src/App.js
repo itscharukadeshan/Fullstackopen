@@ -15,15 +15,32 @@ const App = () => {
       },
     });
   };
+  const createAnecdote = (event) => {
+    event.preventDefault();
+    const content = event.target.newAnecdote.value;
+    event.target.newAnecdote.value = "";
+
+    dispatch({
+      type: "CREATE",
+      data: {
+        content: content,
+      },
+    });
+  };
 
   return (
     <div className=' flex flex-col items-center'>
       <div className='flex flex-col items-center my-6'>
         <h2 className='py-6 text-4xl font-bold'>Create new</h2>
-        <form>
+        <form onSubmit={createAnecdote}>
           <div className='flex flex-row gap-2'>
-            <input className='input input-warning input-sm' />
-            <button className='btn btn-sm btn-warning btn-outline'>
+            <input
+              name='newAnecdote'
+              className='input input-warning input-sm'
+            />
+            <button
+              type='submit'
+              className='btn btn-sm btn-warning btn-outline'>
               create
             </button>
           </div>
