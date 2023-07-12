@@ -5,29 +5,31 @@ import { toggleImportanceOf } from "../reducers/noteReducer";
 
 const Note = ({ note, handleClick }) => {
   return (
-    <li className='my-6' onClick={handleClick}>
+    <li className='text-md font-bold my-4' onClick={handleClick}>
       {note.content}
-      <strong>
-        {note.important ? (
-          <button className=' ml-4 btn btn-success btn-sm lowercase'>
-            Important
-          </button>
-        ) : (
-          <button className='ml-4 btn btn-outline btn-sm lowercase'>
-            not impotent
-          </button>
-        )}
-      </strong>
+      <button
+        className={`ml-4 btn btn-outline btn-sm lowercase ${
+          note.important ? "btn-accent" : "btn-warning"
+        }`}>
+        {note.important ? "important" : "not important"}
+      </button>
     </li>
   );
 };
 
 const Notes = () => {
   const dispatch = useDispatch();
-  const notes = useSelector((state) => state);
+  const notes = useSelector((state) => {
+    if (state.filter === "ALL") {
+      return state.notes;
+    }
+    return state.filter === "IMPORTANT"
+      ? state.notes.filter((note) => note.important)
+      : state.notes.filter((note) => !note.important);
+  });
 
   return (
-    <ul className='text-xl py-8 '>
+    <ul>
       {notes.map((note) => (
         <Note
           key={note.id}

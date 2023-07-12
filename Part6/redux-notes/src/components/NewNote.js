@@ -14,7 +14,7 @@ const NewNote = (props) => {
   };
 
   return (
-    <form onSubmit={addNote}>
+    <form className='my-8 flex flex-row items-center' onSubmit={addNote}>
       <input
         className='input input-sm input-bordered w-full max-w-xs'
         name='note'
