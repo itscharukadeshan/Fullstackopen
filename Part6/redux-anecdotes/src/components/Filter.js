@@ -1,14 +1,24 @@
 /** @format */
 
+import { setFilter } from "../reducers/filterReducer";
+import { useDispatch } from "react-redux";
+
 const Filter = () => {
+  const dispatch = useDispatch();
+
   const handleChange = (event) => {
-    event.preventDefault();
+    const inputText = event.target.value;
+    dispatch(setFilter(inputText));
   };
 
   return (
     <div className='font-bold'>
       Filter{" "}
-      <input className='input input-info input-sm' onChange={handleChange} />
+      <input
+        className='input input-info input-sm'
+        name='filter'
+        onChange={handleChange}
+      />
     </div>
   );
 };
