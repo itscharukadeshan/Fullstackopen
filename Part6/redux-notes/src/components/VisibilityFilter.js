@@ -11,27 +11,27 @@ const VisibilityFilter = (props) => {
 
   return (
     <div className='flex flex-row items-center  gap-2 my-6 text-lg font-mono font-bold '>
-      All
       <input
         className={inputStyle}
         type='radio'
         name='filter'
         onChange={() => dispatch(filterChange("ALL"))}
       />
-      Important
+      All
       <input
         className={inputStyle}
         type='radio'
         name='filter'
         onChange={() => dispatch(filterChange("IMPORTANT"))}
       />
-      Nonimportant
+      Important
       <input
         className={inputStyle}
         type='radio'
         name='filter'
         onChange={() => dispatch(filterChange("NONIMPORTANT"))}
       />
+      Nonimportant
     </div>
   );
 };
