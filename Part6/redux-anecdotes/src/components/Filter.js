@@ -12,8 +12,8 @@ const Filter = () => {
   };
 
   return (
-    <div className='font-bold'>
-      Filter{" "}
+    <div className='font-bold my-8'>
+      Filter{"  "}
       <input
         className='input input-info input-sm'
         name='filter'
