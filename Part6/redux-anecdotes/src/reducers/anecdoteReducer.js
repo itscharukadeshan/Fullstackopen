@@ -1,7 +1,5 @@
 /** @format */
 
-import { createSlice } from "@reduxjs/toolkit";
-
 const anecdotesAtStart = [
   "If it hurts, do it more often",
   "Adding manpower to a late software project makes it later!",
@@ -13,39 +11,64 @@ const anecdotesAtStart = [
 
 const getId = () => (100000 * Math.random()).toFixed(0);
 
-const initialState = {
-  anecdotes: anecdotesAtStart.map((anecdote) => ({
+const asObject = (anecdote) => {
+  return {
     content: anecdote,
     id: getId(),
     votes: 0,
-  })),
+  };
 };
 
-const anecdoteSlice = createSlice({
-  name: "anecdotes",
-  initialState,
-  reducers: {
-    vote(state, action) {
-      const { id } = action.payload;
-      const anecdoteToVote = state.anecdotes.find(
-        (anecdote) => anecdote.id === id
-      );
+const initialState = anecdotesAtStart.map(asObject);
+
+const anecdoteReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "VOTE":
+      const { id } = action.data;
+      const anecdoteToVote = state.find((anecdote) => anecdote.id === id);
 
       if (anecdoteToVote) {
-        anecdoteToVote.votes += 1;
+        const updatedAnecdote = {
+          ...anecdoteToVote,
+          votes: anecdoteToVote.votes + 1,
+        };
+        return state.map((anecdote) =>
+          anecdote.id === id ? updatedAnecdote : anecdote
+        );
       }
-    },
-    create(state, action) {
+      break;
+
+    case "CREATE":
       const newAnecdote = {
-        content: action.payload.content,
+        content: action.data.content,
         id: getId(),
         votes: 0,
       };
-      state.anecdotes.push(newAnecdote);
+      return [...state, newAnecdote];
+
+    default:
+      return state;
+  }
+};
+
+export const voteAnecdote = (id) => {
+  return {
+    type: "VOTE",
+    data: {
+      id: id,
     },
-  },
-});
+  };
+};
 
-export const { vote, create } = anecdoteSlice.actions;
+export const createAnecdote = (content) => {
+  return {
+    type: "CREATE",
+    data: {
+      content,
+      id: getId(),
+      votes: 0,
+    },
+  };
+};
 
-export default anecdoteSlice.reducer;
+export default anecdoteReducer;
