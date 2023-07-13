@@ -8,11 +8,13 @@ import App from "./App";
 import { configureStore } from "@reduxjs/toolkit";
 import anecdoteSlice from "./slices/anecdoteSlice";
 import filterSlice from "./slices/filterSlice";
+import notificationSlice from "./slices/notificationSlice";
 
 const store = configureStore({
   reducer: {
     anecdotes: anecdoteSlice,
     filter: filterSlice,
+    notifications: notificationSlice,
   },
 });
 
