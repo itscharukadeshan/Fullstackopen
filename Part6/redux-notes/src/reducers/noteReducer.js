@@ -9,7 +9,8 @@ const noteSlice = createSlice({
   initialState: [],
   reducers: {
     createNote(state, action) {
-      return [...state, action.payload];
+      const newNote = action.payload;
+      state.push(newNote);
     },
     toggleImportanceOf(state, action) {
       const id = action.payload;
@@ -20,12 +21,12 @@ const noteSlice = createSlice({
       };
       return state.map((note) => (note.id !== id ? note : changedNote));
     },
-  },
-  appendNote(state, action) {
-    state.push(action.payload);
-  },
-  setNotes(state, action) {
-    return action.payload;
+    appendNote(state, action) {
+      state.push(action.payload);
+    },
+    setNotes(state, action) {
+      return action.payload;
+    },
   },
 });
 
