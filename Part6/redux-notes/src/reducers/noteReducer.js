@@ -2,8 +2,6 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-const generateId = () => Number((Math.random() * 1000000).toFixed(0));
-
 const noteSlice = createSlice({
   name: "notes",
   initialState: [],
