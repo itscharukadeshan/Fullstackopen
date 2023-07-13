@@ -1,6 +1,6 @@
 /** @format */
 
-import { setFilter } from "../reducers/filterReducer";
+import { setFilter } from "../slices/filterSlice";
 import { useDispatch } from "react-redux";
 
 const Filter = () => {

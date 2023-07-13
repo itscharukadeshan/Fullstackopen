@@ -6,8 +6,8 @@ import { Provider } from "react-redux";
 import App from "./App";
 
 import { configureStore } from "@reduxjs/toolkit";
-import anecdoteSlice from "./reducers/anecdoteReducer";
-import filterSlice from "./reducers/filterReducer";
+import anecdoteSlice from "./slices/anecdoteSlice";
+import filterSlice from "./slices/filterSlice";
 
 const store = configureStore({
   reducer: {
