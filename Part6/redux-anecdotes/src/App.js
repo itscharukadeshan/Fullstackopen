@@ -7,7 +7,7 @@ import Filter from "./components/Filter";
 import Notification from "./components/Notification";
 
 import anecdotesService from "./services/anecdotes";
-import { setAnecdotes } from "./slices/anecdoteSlice";
+import { setAnecdotes, initializeAnecdotes } from "./slices/anecdoteSlice";
 
 import { useDispatch } from "react-redux";
 
@@ -16,9 +16,7 @@ import "./index.css";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    anecdotesService
-      .getAll()
-      .then((anecdotes) => dispatch(setAnecdotes(anecdotes)));
+    dispatch(initializeAnecdotes());
   }, [dispatch]);
 
   return (
