@@ -1,7 +1,7 @@
 /** @format */
 
 import { useSelector, useDispatch } from "react-redux";
-import { voteAnecdote } from "../slices/anecdoteSlice";
+import { addVote } from "../slices/anecdoteSlice";
 
 const AnecdoteList = () => {
   const anecdotes = useSelector((state) =>
@@ -14,7 +14,7 @@ const AnecdoteList = () => {
   const dispatch = useDispatch();
 
   const vote = (id) => {
-    dispatch(voteAnecdote(id));
+    dispatch(addVote(id));
   };
 
   return (
