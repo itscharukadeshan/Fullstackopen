@@ -16,9 +16,11 @@ const AnecdoteList = () => {
 
   const vote = (id, content) => {
     dispatch(addVote(id));
-    dispatch(setNotification(`you voted '${content}'`));
-  };
 
+    const truncatedContent = content.match(/^.{1,20}(?=.*)/)[0] + "...";
+
+    dispatch(setNotification(`you voted to : '${truncatedContent}'`));
+  };
   return (
     <div className='flex flex-col items-center my-6'>
       <ul>
