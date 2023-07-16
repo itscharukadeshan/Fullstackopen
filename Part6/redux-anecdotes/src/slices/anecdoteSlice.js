@@ -1,6 +1,8 @@
 /** @format */
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import anecdotesServices from "../services/anecdotes";
+
+const anecdotesAdapter = createEntityAdapter();
 
 const anecdoteSlice = createSlice({
   name: "anecdotes",
@@ -10,7 +12,12 @@ const anecdoteSlice = createSlice({
       const id = action.payload;
       const anecdote = state.find((a) => a.id === id);
       if (anecdote) {
-        anecdote.votes++;
+        anecdotesAdapter.updateOne(state, {
+          id,
+          changes: {
+            votes: anecdote.votes + 1,
+          },
+        });
       }
     },
 
