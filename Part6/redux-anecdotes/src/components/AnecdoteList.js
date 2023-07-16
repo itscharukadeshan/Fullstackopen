@@ -2,6 +2,7 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import { addVote } from "../slices/anecdoteSlice";
+import { setNotification } from "../slices/notificationSlice";
 
 const AnecdoteList = () => {
   const anecdotes = useSelector((state) =>
@@ -13,8 +14,9 @@ const AnecdoteList = () => {
   );
   const dispatch = useDispatch();
 
-  const vote = (id) => {
+  const vote = (id, content) => {
     dispatch(addVote(id));
+    dispatch(setNotification(`you voted '${content}'`));
   };
 
   return (
@@ -30,7 +32,7 @@ const AnecdoteList = () => {
                 Votes: {anecdote.votes}
                 <button
                   className='ml-4 btn btn-sm btn-warning btn-outline'
-                  onClick={() => vote(anecdote.id)}>
+                  onClick={() => vote(anecdote.id, anecdote.content)}>
                   vote
                 </button>
               </div>
