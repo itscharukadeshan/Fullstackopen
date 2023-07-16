@@ -2,23 +2,20 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 import anecdotesServices from "../services/anecdotes";
 
-const anecdotesAdapter = createEntityAdapter();
-
 const anecdoteSlice = createSlice({
   name: "anecdotes",
   initialState: [],
   reducers: {
     voteAnecdote(state, action) {
       const id = action.payload;
-      const anecdote = state.find((a) => a.id === id);
-      if (anecdote) {
-        anecdotesAdapter.updateOne(state, {
-          id,
-          changes: {
-            votes: anecdote.votes + 1,
-          },
-        });
-      }
+      const anecdoteToUpdate = state.find((i) => i.id === id);
+      const updatedAnecdote = {
+        ...anecdoteToUpdate,
+        votes: anecdoteToUpdate.votes + 1,
+      };
+      return state.map((anecdote) =>
+        anecdote.id !== id ? anecdote : updatedAnecdote
+      );
     },
 
     createAnecdote(state, action) {
