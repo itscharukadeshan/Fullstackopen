@@ -23,7 +23,12 @@ const AnecdoteForm = () => {
     console.log(content);
     event.target.anecdote.value = "";
     newAnecdoteMutation.mutate({ content, votes: 0 });
-    setNotification(`${content} Added !`);
+    if (content.length <= 5) {
+      setNotification("Anecdote must be more than 5 letters.");
+    } else {
+      newAnecdoteMutation.mutate({ content, votes: 0 });
+      setNotification(`${content} Added!`);
+    }
   };
 
   return (
