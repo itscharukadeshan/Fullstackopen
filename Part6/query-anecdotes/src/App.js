@@ -7,6 +7,10 @@ import { getAnecdotes, updateAnecdotes } from "./services/anecdotes";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 
 const App = () => {
+  const result = useQuery("anecdotes", getAnecdotes, {
+    refetchOnWindowFocus: false,
+  });
+
   const queryClient = useQueryClient();
 
   const newAnecdoteMutation = useMutation(updateAnecdotes, {
@@ -14,8 +18,6 @@ const App = () => {
       queryClient.invalidateQueries("anecdotes");
     },
   });
-
-  const result = useQuery("anecdotes", getAnecdotes);
 
   if (result.isLoading) {
     return <div>loading data...</div>;
