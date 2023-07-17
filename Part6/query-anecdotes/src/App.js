@@ -3,15 +3,15 @@
 import AnecdoteForm from "./components/AnecdoteForm";
 import Notification from "./components/Notification";
 import { getAnecdotes, updateAnecdotes } from "./services/anecdotes";
-
 import { useQuery, useMutation, useQueryClient } from "react-query";
 
 const App = () => {
+  const queryClient = useQueryClient();
+
   const result = useQuery("anecdotes", getAnecdotes, {
     refetchOnWindowFocus: false,
+    retry: 1,
   });
-
-  const queryClient = useQueryClient();
 
   const newAnecdoteMutation = useMutation(updateAnecdotes, {
     onSuccess: () => {
@@ -20,7 +20,11 @@ const App = () => {
   });
 
   if (result.isLoading) {
-    return <div>loading data...</div>;
+    return <div>Loading data...</div>;
+  }
+
+  if (result.isError) {
+    return <div>Error fetching data. Please try again later.</div>;
   }
 
   const anecdotes = result.data;
