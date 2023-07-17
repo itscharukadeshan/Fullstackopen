@@ -26,11 +26,22 @@ const App = () => {
   });
 
   if (result.isLoading) {
-    return <div>Loading data...</div>;
+    return (
+      <div className='flex flex-row items-center gap-6 p-4 w-96'>
+        Loading data
+        <span className='loading loading-bars loading-sm'></span>
+      </div>
+    );
   }
 
   if (result.isError) {
-    return <div>Error fetching data. Please try again later.</div>;
+    return (
+      <div className='py-4 w-96'>
+        <div className='alert'>
+          <span>Error fetching data. Please try again later</span>
+        </div>
+      </div>
+    );
   }
 
   const anecdotes = result.data;
@@ -45,24 +56,31 @@ const App = () => {
   };
 
   return (
-    <div className='m-8'>
-      <h3>Anecdote app</h3>
+    <div className='m-8 '>
+      <h1 className='text-4xl font-sans font-extrabold my-8'>Anecdote app</h1>
+      <div className='flex flex-col items-center'>
+        <Notification
+          message={notification}
+          clearNotification={clearNotification}
+        />
+        <AnecdoteForm />
 
-      <Notification
-        message={notification}
-        clearNotification={clearNotification}
-      />
-      <AnecdoteForm />
-
-      {anecdotes.map((anecdote) => (
-        <div key={anecdote.id}>
-          <div>{anecdote.content}</div>
-          <div>
-            has {anecdote.votes}
-            <button onClick={() => handleVote(anecdote)}>vote</button>
+        {anecdotes.map((anecdote) => (
+          <div
+            className=' bg-slate-500 my-4 p-8 rounded-lg text-slate-900 text-xl font-bold font-mono w-96 shadow-lg border-slate-600 border-spacing-2 border-2'
+            key={anecdote.id}>
+            <div>{anecdote.content}</div>
+            <div className='flex flex-row items-center my-4'>
+              <div>Votes : {anecdote.votes}</div>
+              <button
+                className='btn btn-sm btn-outline mx-4 btn-warning'
+                onClick={() => handleVote(anecdote)}>
+                vote
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

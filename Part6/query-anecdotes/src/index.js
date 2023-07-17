@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import "@fontsource/nanum-myeongjo";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { NotificationProvider } from "./services/NotificationContext";

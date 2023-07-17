@@ -32,11 +32,18 @@ const AnecdoteForm = () => {
   };
 
   return (
-    <div>
-      <h3>create new</h3>
-      <form onSubmit={onCreate}>
-        <input name='anecdote' />
-        <button type='submit'>create</button>
+    <div className='my-8 flex flex-col items-start'>
+      <h2 className='text-xl font-bold my-2 uppercase'>create new</h2>
+      <form className='flex flex-row items-center' onSubmit={onCreate}>
+        <input
+          name='anecdote'
+          type='text'
+          placeholder='Create anecdotes'
+          className='input input-bordered input-md w-full max-w-xs'
+        />
+        <button className='my-2 mx-2 btn btn-md btn-outline ' type='submit'>
+          create
+        </button>
       </form>
     </div>
   );
