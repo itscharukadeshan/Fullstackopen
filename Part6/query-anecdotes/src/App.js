@@ -45,7 +45,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className='m-8'>
       <h3>Anecdote app</h3>
 
       <Notification
