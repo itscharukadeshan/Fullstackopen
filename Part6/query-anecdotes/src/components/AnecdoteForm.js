@@ -1,9 +1,13 @@
 /** @format */
 
+import React, { useContext } from "react";
+
 import { useMutation, useQueryClient } from "react-query";
 import { createAnecdotes } from "../services/anecdotes";
+import { NotificationContext } from "../services/NotificationContext";
 
 const AnecdoteForm = () => {
+  const { setNotification } = useContext(NotificationContext);
   const queryClient = useQueryClient();
 
   const newAnecdoteMutation = useMutation(createAnecdotes, {
@@ -19,6 +23,7 @@ const AnecdoteForm = () => {
     console.log(content);
     event.target.anecdote.value = "";
     newAnecdoteMutation.mutate({ content, votes: 0 });
+    setNotification(`${content} Added !`);
   };
 
   return (
