@@ -37,11 +37,15 @@ const Menu = () => {
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
-    <h2>Anecdotes</h2>
+    <h2 className='text-xl font-bold my-4'>Anecdotes</h2>
     <ul>
       {anecdotes.map((anecdote) => (
         <li key={anecdote.id}>
-          <Link to={`/anecdote/${anecdote.id}`}>{anecdote.content}</Link>
+          <Link
+            className='link my-3 text-justify font-semibold hover:text-gray-400'
+            to={`/anecdote/${anecdote.id}`}>
+            {anecdote.content}
+          </Link>
         </li>
       ))}
     </ul>
@@ -53,28 +57,31 @@ const Anecdote = ({ anecdotes }) => {
 
   const anecdote = anecdotes.find((a) => a.id === Number(id));
   return (
-    <div>
-      <div>{anecdote.content}</div>
+    <div className='flex flex-col items-center mt-40  '>
+      <div className=' text-2xl text-center sm:text-5xl font-mono font-bold '>
+        {anecdote.content}
+      </div>
     </div>
   );
 };
 
 const About = () => (
-  <div>
-    <h2>About anecdote app</h2>
-    <p>According to Wikipedia:</p>
+  <div className='flex flex-col items-center'>
+    <h2 className='text-2xl my-6'>About anecdote app</h2>
+    <p className='text-sm my-4'>According to Wikipedia</p>
+    <div className='bg-base-300 p-6 rounded-xl shadow-lg w-96'>
+      <em className='font-mono '>
+        An anecdote is a brief, revealing account of an individual person or an
+        incident. Occasionally humorous, anecdotes differ from jokes because
+        their primary purpose is not simply to provoke laughter but to reveal a
+        truth more general than the brief tale itself, such as to characterize a
+        person by delineating a specific quirk or trait, to communicate an
+        abstract idea about a person, place, or thing through the concrete
+        details of a short narrative. An anecdote is "a story with a point."
+      </em>
+    </div>
 
-    <em>
-      An anecdote is a brief, revealing account of an individual person or an
-      incident. Occasionally humorous, anecdotes differ from jokes because their
-      primary purpose is not simply to provoke laughter but to reveal a truth
-      more general than the brief tale itself, such as to characterize a person
-      by delineating a specific quirk or trait, to communicate an abstract idea
-      about a person, place, or thing through the concrete details of a short
-      narrative. An anecdote is "a story with a point."
-    </em>
-
-    <p>
+    <p className='text-md my-12'>
       Software engineering is full of excellent anecdotes, at this app you can
       find the best and add more.
     </p>
@@ -82,14 +89,16 @@ const About = () => (
 );
 
 const Footer = () => (
-  <div>
-    Anecdote app for <a href='https://fullstackopen.com/'>Full Stack Open</a>.
-    See{" "}
-    <a href='https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js'>
-      https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js
-    </a>{" "}
-    for the source code.
-  </div>
+  <footer className='footer footer-center p-4 bg-base-300 text-base-content '>
+    <div>
+      <p>
+        Copyright © 2023 - All right reserved by{" "}
+        <a className='link' href='https://fullstackopen.com/'>
+          Full Stack Open
+        </a>
+      </p>
+    </div>
+  </footer>
 );
 
 const CreateNew = (props) => {
@@ -117,33 +126,39 @@ const CreateNew = (props) => {
 
   return (
     <div>
-      <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          content
+      <h2 className='text-xl font-bold my-4'>create a new anecdote</h2>
+      <form className='w-96' onSubmit={handleSubmit}>
+        <div className='flex flex-row items-center'>
+          <div className='mr-3'>content</div>
           <input
+            className='input input-sm input-bordered rounded-none'
             name='content'
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
         </div>
-        <div>
-          author
+        <div className='flex flex-row items-center my-3'>
+          <div className='mr-5'>author</div>
+
           <input
+            className='input input-sm input-bordered rounded-none'
             name='author'
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
-        <div>
-          url for more info
+
+        <div className='flex flex-row items-center my-3'>
+          <div className='mr-12'>url</div>
+
           <input
+            className='input input-sm input-bordered rounded-none'
             name='info'
             value={info}
             onChange={(e) => setInfo(e.target.value)}
           />
         </div>
-        <button>create</button>
+        <button className='btn btn-sm btn-outline my-4'>create</button>
       </form>
     </div>
   );
@@ -187,9 +202,14 @@ const App = () => {
 
   const Navbar = () => {
     return (
-      <div className='navbar bg-stone-800 shadow-xl'>
+      <div className='navbar g-base-300 shadow-xl'>
         <div className='flex-1 flex-row justify-between m-2'>
-          <h1 className='text-xl font-bold my-4'>Software anecdotes</h1>
+          <Link to='/'>
+            <h1 className='text-xl font-bold my-4 hover:text-gray-500'>
+              Software anecdotes
+            </h1>
+          </Link>
+
           <Menu />
         </div>
       </div>
@@ -210,9 +230,9 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className='flex flex-col min-h-screen'>
       <Navbar />
-      <div className='m-8'>
+      <div className='m-8 flex-grow'>
         <Notification />
         <Routes>
           <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
