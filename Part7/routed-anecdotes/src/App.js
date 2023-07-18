@@ -1,6 +1,8 @@
 /** @format */
 
 import { useState } from "react";
+import { useField } from "./hooks";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -101,64 +103,68 @@ const Footer = () => (
   </footer>
 );
 
-const CreateNew = (props) => {
+export const CreateNew = (props) => {
   const navigate = useNavigate();
+  const content = useField("text");
+  const author = useField("text");
+  const info = useField("text");
 
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
-  const [info, setInfo] = useState("");
+  const handleReset = () => {
+    content.reset();
+    author.reset();
+    info.reset();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     props.addNew({
-      content,
-      author,
-      info,
+      content: content.value,
+      author: author.value,
+      info: info.value,
       votes: 0,
     });
-
-    setContent("");
-    setAuthor("");
-    setInfo("");
-
     navigate("/");
   };
 
   return (
     <div>
-      <h2 className='text-xl font-bold my-4'>create a new anecdote</h2>
-      <form className='w-96' onSubmit={handleSubmit}>
-        <div className='flex flex-row items-center'>
-          <div className='mr-3'>content</div>
+      <h2 className='text-xl font-bold my-4'>Create a new anecdote</h2>
+      <form className='w-96' onSubmit={handleSubmit} onReset={handleReset}>
+        <div className='flex flex-row items-center gap-4  '>
+          <div className=''>Content</div>
           <input
             className='input input-sm input-bordered rounded-none'
             name='content'
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={content.value}
+            onChange={content.onChange}
           />
         </div>
-        <div className='flex flex-row items-center my-3'>
-          <div className='mr-5'>author</div>
-
+        <div className='flex flex-row items-center my-3 gap-4'>
+          <div>Author</div>
           <input
             className='input input-sm input-bordered rounded-none'
             name='author'
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            value={author.value}
+            onChange={author.onChange}
           />
         </div>
-
-        <div className='flex flex-row items-center my-3'>
-          <div className='mr-12'>url</div>
-
+        <div className='flex flex-row items-center my-3 gap-4'>
+          <div>URL</div>
           <input
             className='input input-sm input-bordered rounded-none'
             name='info'
-            value={info}
-            onChange={(e) => setInfo(e.target.value)}
+            value={info.value}
+            onChange={info.onChange}
           />
         </div>
-        <button className='btn btn-sm btn-outline my-4'>create</button>
+        <div className='flex flex-row gap-4'>
+          <button type='submit' className='btn btn-sm btn-outline my-4'>
+            Create
+          </button>
+          <button type='reset' className='btn btn-sm btn-outline my-4'>
+            Reset
+          </button>
+        </div>
       </form>
     </div>
   );
