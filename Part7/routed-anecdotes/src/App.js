@@ -15,14 +15,20 @@ const Menu = () => {
     paddingRight: 5,
   };
   return (
-    <div>
-      <Link style={padding} to='/'>
+    <div className='menu menu-horizontal'>
+      <Link className='btn lowercase btn-ghost btn-sm' style={padding} to='/'>
         anecdotes
       </Link>
-      <Link style={padding} to='/create'>
+      <Link
+        className='btn lowercase btn-ghost btn-sm '
+        style={padding}
+        to='/create'>
         create new
       </Link>
-      <Link style={padding} to='/about'>
+      <Link
+        className='btn lowercase btn-ghost btn-sm'
+        style={padding}
+        to='/about'>
         about
       </Link>
     </div>
@@ -179,6 +185,17 @@ const App = () => {
     return <div>{notification}</div>;
   };
 
+  const Navbar = () => {
+    return (
+      <div className='navbar bg-stone-800 shadow-xl'>
+        <div className='flex-1 flex-row justify-between m-2'>
+          <h1 className='text-xl font-bold my-4'>Software anecdotes</h1>
+          <Menu />
+        </div>
+      </div>
+    );
+  };
+
   const anecdoteById = (id) => anecdotes.find((a) => a.id === id);
 
   const vote = (id) => {
@@ -193,20 +210,20 @@ const App = () => {
   };
 
   return (
-    <div className='m-6'>
-      <h1>Software anecdotes</h1>
-      <Menu />
-      <Notification />
-      <Routes>
-        <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/create' element={<CreateNew addNew={addNew} />} />
-        <Route
-          path='/anecdote/:id'
-          element={<Anecdote anecdotes={anecdotes} />}
-        />
-      </Routes>
-
+    <div>
+      <Navbar />
+      <div className='m-8'>
+        <Notification />
+        <Routes>
+          <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/create' element={<CreateNew addNew={addNew} />} />
+          <Route
+            path='/anecdote/:id'
+            element={<Anecdote anecdotes={anecdotes} />}
+          />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );
