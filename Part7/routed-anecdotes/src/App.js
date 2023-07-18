@@ -128,34 +128,36 @@ export const CreateNew = (props) => {
 
   return (
     <div>
-      <h2 className='text-xl font-bold my-4'>Create a new anecdote</h2>
+      <h2 className='text-xl font-bold my-12'>Create a new anecdote</h2>
       <form className='w-96' onSubmit={handleSubmit} onReset={handleReset}>
-        <div className='flex flex-row items-center gap-4  '>
-          <div className=''>Content</div>
-          <input
-            className='input input-sm input-bordered rounded-none'
-            name='content'
-            value={content.value}
-            onChange={content.onChange}
-          />
-        </div>
-        <div className='flex flex-row items-center my-3 gap-4'>
-          <div>Author</div>
-          <input
-            className='input input-sm input-bordered rounded-none'
-            name='author'
-            value={author.value}
-            onChange={author.onChange}
-          />
-        </div>
-        <div className='flex flex-row items-center my-3 gap-4'>
-          <div>URL</div>
-          <input
-            className='input input-sm input-bordered rounded-none'
-            name='info'
-            value={info.value}
-            onChange={info.onChange}
-          />
+        <div className='my-8'>
+          <div className='flex flex-row items-center gap-4  '>
+            <div className=''>Content</div>
+            <input
+              className='input input-sm input-bordered rounded-none'
+              name='content'
+              value={content.value}
+              onChange={content.onChange}
+            />
+          </div>
+          <div className='flex flex-row items-center my-3 gap-6'>
+            <div>Author</div>
+            <input
+              className='input input-sm input-bordered rounded-none'
+              name='author'
+              value={author.value}
+              onChange={author.onChange}
+            />
+          </div>
+          <div className='flex flex-row items-center my-3 gap-11'>
+            <div>URL</div>
+            <input
+              className='input input-sm input-bordered rounded-none'
+              name='info'
+              value={info.value}
+              onChange={info.onChange}
+            />
+          </div>
         </div>
         <div className='flex flex-row gap-4'>
           <button type='submit' className='btn btn-sm btn-outline my-4'>
