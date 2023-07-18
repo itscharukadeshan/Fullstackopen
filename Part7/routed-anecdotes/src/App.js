@@ -193,7 +193,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className='m-6'>
       <h1>Software anecdotes</h1>
       <Menu />
       <Notification />
