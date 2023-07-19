@@ -9,11 +9,15 @@ const useField = (type) => {
   const onChange = (event) => {
     setValue(event.target.value);
   };
+  const resetValue = () => {
+    setValue("");
+  };
 
   return {
     type,
     value,
     onChange,
+    resetValue,
   };
 };
 
@@ -23,6 +27,7 @@ const useCountry = (name) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!name) return;
     setLoading(true);
     setError(null);
 
@@ -52,7 +57,7 @@ const Country = ({ country }) => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  if (error === null) {
+  if (!error === null) {
     return <></>;
   }
 
@@ -89,6 +94,7 @@ const App = () => {
   const fetch = (e) => {
     e.preventDefault();
     setName(nameInput.value);
+    nameInput.resetValue();
   };
 
   return (
