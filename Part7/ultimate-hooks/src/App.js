@@ -30,8 +30,10 @@ const useResource = (baseUrl) => {
     });
   }, [baseUrl]);
 
-  const create = (resource) => {
-    return axios.post(baseUrl, resource);
+  const create = async (resource) => {
+    const response = await axios.post(baseUrl, resource);
+    setResources((prev) => [...prev, response.data]);
+    return response.data;
   };
 
   return [resources, { create }];
