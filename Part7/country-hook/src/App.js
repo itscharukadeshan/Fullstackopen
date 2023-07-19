@@ -55,14 +55,22 @@ const Country = ({ country }) => {
   const { isLoading, error, country: countryData } = country;
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        Loading<span className='loading loading-bars loading-md'></span>
+      </div>
+    );
   }
   if (!error === null) {
     return <></>;
   }
 
   if (error) {
-    return <div>Error fetching country</div>;
+    return (
+      <div className='my-6 text-warning font-mono'>
+        Error fetching country data
+      </div>
+    );
   }
 
   if (!countryData) {
@@ -70,18 +78,23 @@ const Country = ({ country }) => {
   }
 
   return (
-    <div>
-      <h3>{countryData.name}</h3>
+    <div className=' bg-slate-400 bg-opacity-70 p-6 rounded-md my-12 text-slate-900'>
+      <h3 className='text-2xl mb-4 font-bold'>{countryData.name}</h3>
 
       <img
+        className=' shadow-sm my-2'
         src={countryData.flags.png}
         height='100'
         alt={`the flag of ${countryData.name}`}
       />
 
-      <div>Capital : {countryData.capital}</div>
+      <div className='text-md mt-4 font-bold'>
+        Capital : {countryData.capital}
+      </div>
 
-      <div>population : {countryData.population}</div>
+      <div className='text-md font-bold'>
+        population : {countryData.population}
+      </div>
     </div>
   );
 };
@@ -98,10 +111,13 @@ const App = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={fetch}>
-        <input {...nameInput} />
-        <button>find</button>
+    <div className='flex flex-col items-center m-20'>
+      <form className='flex flex-row gap-6 items-center' onSubmit={fetch}>
+        <input
+          className='input input-sm input-bordered rounded-none'
+          {...nameInput}
+        />
+        <button className='btn btn-sm '>find</button>
       </form>
 
       <Country country={country} />
