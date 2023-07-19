@@ -63,7 +63,7 @@ const App = () => {
 
   return (
     <div>
-      <h2>notes</h2>
+      <h2 className='font:40 font:bold m:50 text:center'>notes</h2>
       <form onSubmit={handleNoteSubmit}>
         <input {...content} />
         <button>create</button>
@@ -72,7 +72,7 @@ const App = () => {
         <p key={n.id}>{n.content}</p>
       ))}
 
-      <h2>persons</h2>
+      <h2 className='font:40 font:bold m:50 text:center'>persons</h2>
       <form onSubmit={handlePersonSubmit}>
         name <input {...name} /> <br />
         number <input {...number} />
