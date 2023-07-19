@@ -54,7 +54,7 @@ const App = () => {
 
   const handlePersonSubmit = (event) => {
     event.preventDefault();
-    personService.create(baseUrl, { name: name.value, number: number.value });
+    personService.create({ name: name.value, number: number.value });
     name.restInput();
     number.restInput();
   };
