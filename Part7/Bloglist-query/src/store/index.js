@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 
-import notificationSliceReducer from './Slices/notificationSlice'
+import notificationReducer from './Slices/notificationSlice'
 
 const reducer = combineReducers({
-  notifications: notificationSliceReducer,
+  notifications: notificationReducer,
 })
 
 const store = configureStore({
