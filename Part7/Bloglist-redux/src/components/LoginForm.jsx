@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import login from '../services/login'
 import { handleNotification } from '../store/Slices/notificationSlice'
+import Notification from './Notification'
 
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('')
@@ -89,6 +90,7 @@ function LoginForm({ onLogin }) {
             )}
           </button>
         </form>
+        <Notification />
       </div>
     </>
   )
