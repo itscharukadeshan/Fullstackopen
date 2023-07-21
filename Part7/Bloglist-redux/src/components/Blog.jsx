@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
 import blogService from '../services/blogs'
-import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+
+import { showNotification } from '../store/Slices/notificationSlice'
 
 const Blog = ({ token }) => {
   const [blogVisibilities, setBlogVisibilities] = useState([])
   const [blogs, setBlogs] = useState([])
   const [keyPrefix, setKeyPrefix] = useState('')
   const [render, setRender] = useState(false)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     fetchBlogs()
@@ -21,7 +25,12 @@ const Blog = ({ token }) => {
       setBlogs(sortedBlogs)
       setBlogVisibilities(new Array(sortedBlogs.length).fill(false))
     } catch (error) {
-      console.error('Failed to fetch blogs:', error)
+      dispatch(
+        showNotification({
+          message: 'Failed to get blogs',
+          type: 'error',
+        })
+      )
     }
   }
 
@@ -50,9 +59,20 @@ const Blog = ({ token }) => {
           b.id === blog.id ? { ...b, likes: response.data.likes } : b
         )
         setBlogs(updatedBlogs)
+        dispatch(
+          showNotification({
+            message: 'Liked',
+            type: 'success',
+          })
+        )
       }
     } catch (error) {
-      toast.error('Sorry, likes are not accepted today')
+      dispatch(
+        showNotification({
+          message: 'sorry something went wrong',
+          type: 'error',
+        })
+      )
     }
   }
 
@@ -70,7 +90,12 @@ const Blog = ({ token }) => {
       setBlogs(updatedBlogs)
       setKeyPrefix(keyPrefix + ' ')
     } catch (error) {
-      toast.error(`Sorry, you can't delete this post`)
+      dispatch(
+        showNotification({
+          message: `sorry you can't delete this post`,
+          type: 'error',
+        })
+      )
     }
   }
 
@@ -122,7 +147,6 @@ const Blog = ({ token }) => {
           </div>
         </div>
       ))}
-      <ToastContainer />
     </div>
   )
 }

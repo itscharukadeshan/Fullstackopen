@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import blogService from '../services/blogs'
-import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+
+import { showNotification } from '../store/Slices/notificationSlice'
+import { useDispatch } from 'react-redux'
 
 function CreateForm({ token }) {
   const [title, setTitle] = useState('')
@@ -9,6 +10,8 @@ function CreateForm({ token }) {
   const [url, setUrl] = useState('')
   const [showForm, setShowForm] = useState(false)
   const [isLoggingIn, setIsLoggingIn] = useState(false)
+
+  const dispatch = useDispatch()
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value)
@@ -36,8 +39,12 @@ function CreateForm({ token }) {
     }
 
     if (!title || !author || !url) {
-      toast.error('Title, Author, and URL must be provided')
-      return
+      dispatch(
+        showNotification({
+          message: 'Title , Author and url should be provided',
+          type: 'error',
+        })
+      )
     }
 
     setIsLoggingIn(true)
@@ -45,10 +52,18 @@ function CreateForm({ token }) {
     try {
       const response = await blogService.create(newPost, token)
       if (response.data) {
-        toast.success(`New blog created: ${newPost.title} by ${newPost.author}`)
+        showNotification({
+          message: `New blog created: ${newPost.title} by ${newPost.author}`,
+          type: 'success',
+        })
       }
     } catch (error) {
-      toast.error('Check the data and try again')
+      dispatch(
+        showNotification({
+          message: 'Something went wrong check the data again',
+          type: 'error',
+        })
+      )
     } finally {
       setIsLoggingIn(false)
     }
@@ -124,8 +139,6 @@ function CreateForm({ token }) {
           Create a post
         </button>
       )}
-
-      <ToastContainer />
     </>
   )
 }

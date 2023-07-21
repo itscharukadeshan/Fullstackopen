@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
+import Notification from './components/Notification'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -55,6 +56,7 @@ const App = () => {
           </button>{' '}
         </div>
       </div>
+      <Notification />
     </>
   )
 }
