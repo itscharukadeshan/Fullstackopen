@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import login from '../services/login'
-import { showNotification } from '../store/Slices/notificationSlice'
+import { handleNotification } from '../store/Slices/notificationSlice'
 
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('')
@@ -24,19 +24,14 @@ function LoginForm({ onLogin }) {
     try {
       const userData = await login(credentials)
 
-      dispatch(
-        showNotification({
-          message: 'Login successfully',
-          type: 'success',
-        })
-      )
+      dispatch(handleNotification('Login successfully', 'success'))
       onLogin(userData)
     } catch (error) {
       dispatch(
-        showNotification({
-          message: 'Login failed. Please check your credentials',
-          type: 'error',
-        })
+        handleNotification(
+          'Login failed. Please check your credentials',
+          'error'
+        )
       )
     } finally {
       setIsLoggingIn(false)
