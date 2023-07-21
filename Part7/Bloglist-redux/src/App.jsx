@@ -27,7 +27,12 @@ const App = () => {
   }
 
   if (user === null) {
-    return <LoginForm onLogin={handleLogin} />
+    return (
+      <>
+        <LoginForm onLogin={handleLogin} />
+        <Notification />
+      </>
+    )
   }
 
   return (

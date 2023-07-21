@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import login from '../services/login'
 import { handleNotification } from '../store/Slices/notificationSlice'
-import Notification from './Notification'
 
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('')
@@ -24,9 +23,8 @@ function LoginForm({ onLogin }) {
     setIsLoggingIn(true)
     try {
       const userData = await login(credentials)
-
-      dispatch(handleNotification('Login successfully', 'success'))
       onLogin(userData)
+      dispatch(handleNotification('Login successfully', 'success'))
     } catch (error) {
       dispatch(
         handleNotification(
@@ -90,7 +88,6 @@ function LoginForm({ onLogin }) {
             )}
           </button>
         </form>
-        <Notification />
       </div>
     </>
   )
