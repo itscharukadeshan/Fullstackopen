@@ -45,6 +45,7 @@ function CreateForm({ token }) {
           type: 'error',
         })
       )
+      return
     }
 
     setIsLoggingIn(true)
