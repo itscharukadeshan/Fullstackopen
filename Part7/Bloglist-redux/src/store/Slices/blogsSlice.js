@@ -1,22 +1,29 @@
-// notificationSlice.js
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = []
+const initialState = {
+  blogs: [],
+}
 
-const blogsSlice = createSlice({
+const blogSlice = createSlice({
   name: 'blogs',
   initialState,
   reducers: {
-    addBlog(state, action) {
-      state.notifications.push(action.payload)
+    setBlogs(state, action) {
+      state.blogs = action.payload
     },
-    removeBlog(state, action) {
-      state.notifications = state.notifications.filter(
-        (notification) => notification.id !== action.payload
-      )
+    updateBlogLikes(state, action) {
+      const { blogId, likes } = action.payload
+      const blogIndex = state.blogs.findIndex((blog) => blog.id === blogId)
+      if (blogIndex !== -1) {
+        state.blogs[blogIndex].likes = likes
+      }
+    },
+    deleteBlog(state, action) {
+      const blogId = action.payload
+      state.blogs = state.blogs.filter((blog) => blog.id !== blogId)
     },
   },
 })
 
-export const { addBlog, removeBlog } = blogsSlice.actions
-export default blogsSlice.reducer
+export const { setBlogs, updateBlogLikes, deleteBlog } = blogSlice.actions
+export default blogSlice.reducer

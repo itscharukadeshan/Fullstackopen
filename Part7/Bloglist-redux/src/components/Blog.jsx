@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import blogService from '../services/blogs'
 
 import { showNotification } from '../store/Slices/notificationSlice'
 
+import {
+  setBlogs,
+  updateBlogLikes,
+  deleteBlog,
+} from '../store/Slices/blogsSlice'
+
 const Blog = ({ token }) => {
+  const blogs = useSelector((state) => state.blogs.blogs)
+
   const [blogVisibilities, setBlogVisibilities] = useState([])
-  const [blogs, setBlogs] = useState([])
-  const [keyPrefix, setKeyPrefix] = useState('')
-  const [render, setRender] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     fetchBlogs()
-  }, [render])
+  }, [dispatch])
 
   const fetchBlogs = async () => {
     try {
+      setIsLoading(true)
       const blogs = await blogService.getAll()
-
       const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
-      setBlogs(sortedBlogs)
-      setBlogVisibilities(new Array(sortedBlogs.length).fill(false))
+      dispatch(setBlogs(sortedBlogs))
     } catch (error) {
       dispatch(
         showNotification({
@@ -31,6 +36,8 @@ const Blog = ({ token }) => {
           type: 'error',
         })
       )
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -38,9 +45,6 @@ const Blog = ({ token }) => {
     const updatedVisibilities = [...blogVisibilities]
     updatedVisibilities[index] = !updatedVisibilities[index]
     setBlogVisibilities(updatedVisibilities)
-  }
-  const handleRender = () => {
-    setRender(!render)
   }
 
   const handleUpdate = async (blog) => {
@@ -52,13 +56,11 @@ const Blog = ({ token }) => {
 
       const response = await blogService.update(blog.id, updatedBlog, token)
 
-      handleRender()
-
       if (response.data) {
-        const updatedBlogs = blogs.map((b) =>
-          b.id === blog.id ? { ...b, likes: response.data.likes } : b
+        dispatch(
+          updateBlogLikes({ blogId: blog.id, likes: response.data.likes })
         )
-        setBlogs(updatedBlogs)
+
         dispatch(
           showNotification({
             message: 'Liked',
@@ -69,7 +71,7 @@ const Blog = ({ token }) => {
     } catch (error) {
       dispatch(
         showNotification({
-          message: 'sorry something went wrong',
+          message: 'Sorry, something went wrong',
           type: 'error',
         })
       )
@@ -86,9 +88,8 @@ const Blog = ({ token }) => {
 
     try {
       await blogService.remove(blog.id, token)
-      const updatedBlogs = blogs.filter((b) => b.id !== blog.id)
-      setBlogs(updatedBlogs)
-      setKeyPrefix(keyPrefix + ' ')
+
+      dispatch(deleteBlog(blog.id))
     } catch (error) {
       dispatch(
         showNotification({
@@ -103,7 +104,7 @@ const Blog = ({ token }) => {
     <div className="flex flex-col my-4">
       {blogs.map((blog, index) => (
         <div
-          key={keyPrefix + blog.id}
+          key={blog.id}
           className="card w-96 bg-base-100 shadow-xl border-white border-solid border-2 border-opacity-10 indicator my-4"
         >
           <div className="card-body">
