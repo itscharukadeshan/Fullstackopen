@@ -47,14 +47,19 @@ const Blog = ({ token }) => {
     setBlogVisibilities(updatedVisibilities)
   }
 
-  const handleUpdate = async (blog) => {
+  const handleLikes = async (blog) => {
     try {
       const updatedBlog = {
         ...blog,
         likes: blog.likes + 1,
       }
 
-      const response = await blogService.update(blog.id, updatedBlog, token)
+      const response = await blogService.updateLikes(
+        blog.id,
+        updatedBlog,
+        token,
+        'update-likes'
+      )
 
       if (response.data) {
         dispatch(
@@ -132,7 +137,7 @@ const Blog = ({ token }) => {
                 <div className="card-actions justify-end">
                   <button
                     className="btn btn-outline btn-accent"
-                    onClick={() => handleUpdate(blog)}
+                    onClick={() => handleLikes(blog)}
                   >
                     Likes {blog.likes}
                   </button>

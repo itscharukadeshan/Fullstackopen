@@ -26,6 +26,15 @@ const update = async (id, newObject, token) => {
   const response = await axios.put(`${baseUrl}/${id}`, newObject, config)
   return response.data
 }
+const updateLikes = async (id, newObject, token, operation) => {
+  const config = {
+    headers: { Authorization: token },
+    params: { operation },
+  }
+
+  const response = await axios.put(`${baseUrl}/${id}`, newObject, config)
+  return response.data
+}
 
 const remove = async (id, token) => {
   const config = {
@@ -35,5 +44,5 @@ const remove = async (id, token) => {
   return response.data
 }
 
-const blogService = { getAll, create, update, remove }
+const blogService = { getAll, create, update, remove, updateLikes }
 export default blogService
