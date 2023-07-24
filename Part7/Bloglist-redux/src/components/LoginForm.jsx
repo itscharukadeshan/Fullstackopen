@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import login from '../services/login'
 import { handleNotification } from '../store/Slices/notificationSlice'
 
-function LoginForm({ onLogin }) {
+function LoginForm() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isLoggingIn, setIsLoggingIn] = useState(false)
@@ -23,9 +23,11 @@ function LoginForm({ onLogin }) {
     setIsLoggingIn(true)
     try {
       const userData = await login(credentials)
-      onLogin(userData)
+      dispatch(setUser(userData.user))
+      dispatch(setToken(`Bearer ${userData.token}`))
       dispatch(handleNotification('Login successfully', 'success'))
     } catch (error) {
+      console.log(error)
       dispatch(
         handleNotification(
           'Login failed. Please check your credentials',

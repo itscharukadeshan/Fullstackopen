@@ -1,22 +1,27 @@
-// notificationSlice.js
+// loginSlice.js
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {}
+const initialState = {
+  user: null,
+  token: '',
+}
 
 const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    login(state, action) {
-      state.notifications.push(action.payload)
+    setUser(state, action) {
+      state.user = action.payload
     },
-    logOut(state, action) {
-      state.notifications = state.notifications.filter(
-        (notification) => notification.id !== action.payload
-      )
+    setToken(state, action) {
+      state.token = action.payload
+    },
+    logOut(state) {
+      state.user = null
+      state.token = ''
     },
   },
 })
 
-export const { login, logOut } = loginSlice.actions
+export const { setUser, setToken, logOut } = loginSlice.actions
 export default loginSlice.reducer

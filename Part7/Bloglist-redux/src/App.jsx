@@ -1,35 +1,29 @@
-import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser, setToken, logOut } from './store/Slices/loginSlice'
 import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
 import Notification from './components/Notification'
 
 const App = () => {
-  const [user, setUser] = useState(null)
-  const [token, setToken] = useState('')
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    const storedUserData = localStorage.getItem('userData')
-    if (storedUserData) {
-      const userData = JSON.parse(storedUserData)
-      setUser(userData)
-      setToken(`Bearer ${userData.token}`)
-    }
-  }, [])
+  const user = useSelector((state) => state.login.user)
+  const token = useSelector((state) => state.login.token)
 
   const handleLogin = async (userData) => {
-    await setUser(userData)
-    localStorage.setItem('userData', JSON.stringify(userData))
+    dispatch(setUser(userData.user))
+    dispatch(setToken(`Bearer ${userData.token}`))
   }
+
   const handleLogout = () => {
-    setUser(null)
-    localStorage.removeItem('userData')
+    dispatch(logOut())
   }
 
   if (user === null) {
     return (
       <>
-        <LoginForm onLogin={handleLogin} />
+        <LoginForm />
         <Notification />
       </>
     )
@@ -50,15 +44,13 @@ const App = () => {
           </div>
         </div>
         <div className="pt-12 text-2xl flex flex-row items-center gap-4">
-          <div>
-            {user.name} is logged in{'  '}
-          </div>
+          <div>{user.name} is logged in </div>
           <button
             className="btn btn-xs btn-outline btn-warning"
             onClick={handleLogout}
           >
             Logout
-          </button>{' '}
+          </button>
         </div>
       </div>
       <Notification />
