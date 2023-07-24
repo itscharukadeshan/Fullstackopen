@@ -1,6 +1,6 @@
 import Blog from './components/Blog'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUser, setToken, logOut } from './store/Slices/loginSlice'
+import { logOut } from './store/Slices/loginSlice'
 import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
 import Notification from './components/Notification'
@@ -10,11 +10,6 @@ const App = () => {
 
   const user = useSelector((state) => state.login.user)
   const token = useSelector((state) => state.login.token)
-
-  const handleLogin = async (userData) => {
-    dispatch(setUser(userData.user))
-    dispatch(setToken(`Bearer ${userData.token}`))
-  }
 
   const handleLogout = () => {
     dispatch(logOut())

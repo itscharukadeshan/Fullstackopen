@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import login from '../services/login'
+import { setUser, setToken } from '../store/Slices/loginSlice'
 import { handleNotification } from '../store/Slices/notificationSlice'
 
 function LoginForm() {
@@ -23,16 +24,19 @@ function LoginForm() {
     setIsLoggingIn(true)
     try {
       const userData = await login(credentials)
-      dispatch(setUser(userData.user))
-      dispatch(setToken(`Bearer ${userData.token}`))
-      dispatch(handleNotification('Login successfully', 'success'))
-    } catch (error) {
-      console.log(error)
-      dispatch(
-        handleNotification(
-          'Login failed. Please check your credentials',
-          'error'
+
+      if (userData.success) {
+        dispatch(setUser(userData.user))
+        dispatch(setToken(`Bearer ${userData.token}`))
+        dispatch(handleNotification('Login successfully', 'success'))
+      } else {
+        dispatch(
+          handleNotification('Login failed. Please check your credentials')
         )
+      }
+    } catch (error) {
+      dispatch(
+        handleNotification('Login failed. Please check your credentials')
       )
     } finally {
       setIsLoggingIn(false)
