@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Blog from './components/Blog'
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from './store/Slices/loginSlice'
@@ -11,7 +12,16 @@ const App = () => {
   const user = useSelector((state) => state.login.user)
   const token = useSelector((state) => state.login.token)
 
+  useEffect(() => {
+    if (user && token) {
+      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem('token', token)
+    }
+  }, [user, token])
+
   const handleLogout = () => {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
     dispatch(logOut())
   }
 
