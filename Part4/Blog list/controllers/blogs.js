@@ -89,7 +89,9 @@ blogsRouter.put('/:id', async (request, response, next) => {
   const { title, author, url, likes } = request.body
 
   const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!decodedToken.id === id) {
+  console.log(decodedToken.id)
+  console.log(id)
+  if (decodedToken.id !== id) {
     return response.status(401).json({ error: 'token invalid' })
   }
 
