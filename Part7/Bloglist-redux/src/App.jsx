@@ -33,8 +33,18 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <Blog token={token} />
-      <CreateForm token={token} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <CreateForm token={token} />
+              <Blog token={token} />
+            </>
+          }
+        />
+      </Routes>
+
       <Footer user={user} handleLogout={handleLogout} />
       <Notification />
     </>
