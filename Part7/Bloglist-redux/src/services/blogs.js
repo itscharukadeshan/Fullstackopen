@@ -6,7 +6,7 @@ const getAll = async () => {
   const response = await request
   return response.data
 }
-const getOne = async () => {
+const getOne = async (id) => {
   const request = axios.get(`${baseUrl}/${id}`)
   const response = await request
   return response.data
