@@ -61,6 +61,7 @@ function CreateForm({ token }) {
       )
     } finally {
       setIsLoggingIn(false)
+      handleVisibility()
     }
 
     setAuthor('')
