@@ -82,6 +82,26 @@ blogsRouter.delete('/:id', async (request, response, next) => {
     next(exception)
   }
 })
+blogsRouter.put('/:id/likes', async (req, res, next) => {
+  const { id } = req.params
+  const token = req.token
+  const { likes } = req.body
+
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token invalid' })
+  }
+  try {
+    const updatedLikesResult = await Blog.findByIdAndUpdate(
+      { _id: id },
+      { $set: { likes } }
+    )
+    res.status(200).json(updatedLikesResult)
+  } catch (exception) {
+    next(exception)
+  }
+})
 
 blogsRouter.put('/:id', async (request, response, next) => {
   const token = request.token

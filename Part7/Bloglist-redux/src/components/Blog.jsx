@@ -44,14 +44,13 @@ const Blog = ({ token }) => {
 
   const handleLikes = async (blog) => {
     try {
-      const updatedBlog = {
-        ...blog,
+      const updatedLikes = {
         likes: blog.likes + 1,
       }
 
       const response = await blogService.updateLikes(
         blog.id,
-        updatedBlog,
+        updatedLikes,
         token,
         'update-likes'
       )

@@ -32,7 +32,7 @@ const updateLikes = async (id, newObject, token, operation) => {
     params: { operation },
   }
 
-  const response = await axios.put(`${baseUrl}/${id}`, newObject, config)
+  const response = await axios.put(`${baseUrl}/${id}/likes`, newObject, config)
   return response.data
 }
 
