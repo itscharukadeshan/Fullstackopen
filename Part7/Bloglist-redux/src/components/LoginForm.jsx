@@ -31,9 +31,14 @@ function LoginForm() {
         dispatch(handleNotification('Login successfully', 'success'))
       }
     } catch (error) {
-      dispatch(
-        handleNotification('Login failed. Please check your credentials')
-      )
+      if (error.message == 'Request failed with status code 401') {
+        dispatch(
+          handleNotification(
+            'Login failed. Please check your credentials',
+            'error'
+          )
+        )
+      }
     } finally {
       setIsLoggingIn(false)
     }
