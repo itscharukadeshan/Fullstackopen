@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
 import Notification from './components/Notification'
 import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 
 import { Routes, Route } from 'react-router-dom'
 
@@ -42,15 +43,7 @@ const App = () => {
             <Blog token={token} />
           </div>
         </div>
-        <div className="pt-12 text-2xl flex flex-row items-center gap-4">
-          <div>{user.name} is logged in </div>
-          <button
-            className="btn btn-xs btn-outline btn-warning"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-        </div>
+        <Footer user={user} handleLogout={handleLogout} />
       </div>
       <Notification />
     </>
