@@ -11,11 +11,13 @@ const blogSlice = createSlice({
     setBlogs(state, action) {
       state.blogs = action.payload
     },
+
     updateBlogLikes(state, action) {
       const { blogId, likes } = action.payload
-      const blogIndex = state.blogs.findIndex((blog) => blog.id === blogId)
-      if (blogIndex !== -1) {
-        state.blogs[blogIndex].likes = likes
+
+      const blog = state.blogs.find((b) => b.id === blogId)
+      if (blog) {
+        blog.likes = likes
       }
     },
     deleteBlog(state, action) {
@@ -25,5 +27,6 @@ const blogSlice = createSlice({
   },
 })
 
-export const { setBlogs, updateBlogLikes, deleteBlog } = blogSlice.actions
+export const { setBlogs, updateBlogLikes, deleteBlog, findBlog } =
+  blogSlice.actions
 export default blogSlice.reducer

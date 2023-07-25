@@ -55,11 +55,9 @@ const Blog = ({ token }) => {
         'update-likes'
       )
 
-      if (response.data) {
-        dispatch(
-          updateBlogLikes({ blogId: blog.id, likes: response.data.likes })
-        )
+      dispatch(updateBlogLikes({ blogId: blog.id, likes: response.likes }))
 
+      if (response.likes) {
         dispatch(handleNotification('Liked', 'success'))
       }
     } catch (error) {
