@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs'
 
-import { showNotification } from '../store/Slices/notificationSlice'
+import { handleNotification } from '../store/Slices/notificationSlice'
 import { useDispatch } from 'react-redux'
 
 function CreateForm({ token }) {
@@ -40,10 +40,7 @@ function CreateForm({ token }) {
 
     if (!title || !author || !url) {
       dispatch(
-        showNotification({
-          message: 'Title , Author and url should be provided',
-          type: 'error',
-        })
+        handleNotification('Title , Author and url should be provided', 'error')
       )
       return
     }
@@ -53,17 +50,14 @@ function CreateForm({ token }) {
     try {
       const response = await blogService.create(newPost, token)
       if (response.data) {
-        showNotification({
-          message: `New blog created: ${newPost.title} by ${newPost.author}`,
-          type: 'success',
-        })
+        handleNotification(
+          `New blog created: ${newPost.title} by ${newPost.author}`,
+          'success'
+        )
       }
     } catch (error) {
       dispatch(
-        showNotification({
-          message: 'Something went wrong check the data again',
-          type: 'error',
-        })
+        handleNotification('Something went wrong check the data again', 'error')
       )
     } finally {
       setIsLoggingIn(false)
