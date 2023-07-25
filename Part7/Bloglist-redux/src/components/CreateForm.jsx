@@ -45,9 +45,9 @@ function CreateForm({ token }) {
       return
     }
 
-    setIsLoggingIn(true)
-
     try {
+      setIsLoggingIn(true)
+
       const response = await blogService.create(newPost, token)
       if (response.data) {
         handleNotification(
