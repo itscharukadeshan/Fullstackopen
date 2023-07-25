@@ -4,6 +4,9 @@ import { logOut } from './store/Slices/loginSlice'
 import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
 import Notification from './components/Notification'
+import NavBar from './components/NavBar'
+
+import { Routes, Route } from 'react-router-dom'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -28,9 +31,8 @@ const App = () => {
 
   return (
     <>
-      <div className="navbar bg-base-300">
-        <a className="btn btn-ghost normal-case text-xl">Blogs</a>
-      </div>
+      <NavBar />
+
       <div className="pl-2 py-6 ">
         <div>
           <CreateForm token={token} />
