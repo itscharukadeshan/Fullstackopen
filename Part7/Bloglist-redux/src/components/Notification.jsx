@@ -14,7 +14,7 @@ const Notification = () => {
         onClose: () => dispatch(hideNotification()),
       })
     }
-  }, [notification, dispatch])
+  }, [notification])
 
   return <ToastContainer />
 }

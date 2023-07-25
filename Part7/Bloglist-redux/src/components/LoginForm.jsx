@@ -29,10 +29,6 @@ function LoginForm() {
         dispatch(setUser(userData.user))
         dispatch(setToken(`Bearer ${userData.token}`))
         dispatch(handleNotification('Login successfully', 'success'))
-      } else {
-        dispatch(
-          handleNotification('Login failed. Please check your credentials')
-        )
       }
     } catch (error) {
       dispatch(
