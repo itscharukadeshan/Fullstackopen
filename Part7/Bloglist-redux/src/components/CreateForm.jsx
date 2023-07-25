@@ -9,7 +9,7 @@ function CreateForm({ token }) {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [showForm, setShowForm] = useState(false)
-  const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -46,7 +46,7 @@ function CreateForm({ token }) {
     }
 
     try {
-      setIsLoggingIn(true)
+      setIsLoading(true)
 
       const response = await blogService.create(newPost, token)
       if (response.data) {
@@ -60,7 +60,7 @@ function CreateForm({ token }) {
         handleNotification('Something went wrong check the data again', 'error')
       )
     } finally {
-      setIsLoggingIn(false)
+      setIsLoading(false)
       handleVisibility()
     }
 
@@ -108,7 +108,7 @@ function CreateForm({ token }) {
                 id="submit"
                 className="btn btn-outline btn-accent w-fit my-6"
               >
-                {isLoggingIn ? (
+                {isLoading ? (
                   <>
                     <span className="loading loading-spinner"></span> Creating
                   </>
