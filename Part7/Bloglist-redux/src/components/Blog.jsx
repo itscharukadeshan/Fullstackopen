@@ -34,7 +34,7 @@ const Blog = ({ token }) => {
       dispatch(handleNotification('Failed to get blogs', 'error'))
     } finally {
       setIsLoading(false)
-      setBlogVisibilities([])
+      setBlogVisibilities(updatedVisibilities)
     }
   }
 

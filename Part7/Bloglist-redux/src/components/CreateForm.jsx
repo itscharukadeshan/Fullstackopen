@@ -51,10 +51,11 @@ function CreateForm({ token }) {
 
       const response = await blogService.create(newPost, token)
       dispatch(addBlog(response))
-
-      handleNotification(
-        `New blog created: ${newPost.title} by ${newPost.author}`,
-        'success'
+      dispatch(
+        handleNotification(
+          `New blog created: ${newPost.title} by ${newPost.author}`,
+          'success'
+        )
       )
     } catch (error) {
       dispatch(
