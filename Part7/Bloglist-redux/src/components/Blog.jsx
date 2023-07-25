@@ -22,7 +22,7 @@ const Blog = ({ token }) => {
 
   useEffect(() => {
     fetchBlogs()
-  }, [dispatch, update])
+  }, [update])
 
   const fetchBlogs = async () => {
     try {
