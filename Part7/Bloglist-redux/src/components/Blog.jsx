@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import blogService from '../services/blogs'
 
-import { showNotification } from '../store/Slices/notificationSlice'
+import { handleNotification } from '../store/Slices/notificationSlice'
 
 import {
   setBlogs,
@@ -30,12 +30,7 @@ const Blog = ({ token }) => {
       const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
       dispatch(setBlogs(sortedBlogs))
     } catch (error) {
-      dispatch(
-        showNotification({
-          message: 'Failed to get blogs',
-          type: 'error',
-        })
-      )
+      dispatch(handleNotification('Failed to get blogs', 'error'))
     } finally {
       setIsLoading(false)
     }
@@ -66,20 +61,10 @@ const Blog = ({ token }) => {
           updateBlogLikes({ blogId: blog.id, likes: response.data.likes })
         )
 
-        dispatch(
-          showNotification({
-            message: 'Liked',
-            type: 'success',
-          })
-        )
+        dispatch(handleNotification('Liked', 'success'))
       }
     } catch (error) {
-      dispatch(
-        showNotification({
-          message: 'Sorry, something went wrong',
-          type: 'error',
-        })
-      )
+      dispatch(handleNotification('Sorry, something went wrong', 'error'))
     }
   }
 
@@ -96,12 +81,7 @@ const Blog = ({ token }) => {
 
       dispatch(deleteBlog(blog.id))
     } catch (error) {
-      dispatch(
-        showNotification({
-          message: `sorry you can't delete this post`,
-          type: 'error',
-        })
-      )
+      dispatch(handleNotification(`sorry you can't delete this post`, 'error'))
     }
   }
 
