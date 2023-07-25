@@ -3,6 +3,7 @@ import blogService from '../services/blogs'
 
 import { handleNotification } from '../store/Slices/notificationSlice'
 import { useDispatch } from 'react-redux'
+import { setBlogs } from '../store/Slices/blogsSlice'
 
 function CreateForm({ token }) {
   const [title, setTitle] = useState('')
@@ -49,7 +50,8 @@ function CreateForm({ token }) {
       setIsLoading(true)
 
       const response = await blogService.create(newPost, token)
-      if (response.data) {
+
+      if (response) {
         handleNotification(
           `New blog created: ${newPost.title} by ${newPost.author}`,
           'success'

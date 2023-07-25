@@ -1,11 +1,16 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:3000/api/blogs'
 
-const getAll = () => {
+const getAll = async () => {
   const request = axios.get(baseUrl)
-  return request.then((response) => response.data)
+  const response = await request
+  return response.data
 }
-
+const getOne = async () => {
+  const request = axios.get(`${baseUrl}/:id`)
+  const response = await request
+  return response.data
+}
 const create = async (newObject, token) => {
   const config = {
     headers: { Authorization: token },
@@ -44,5 +49,5 @@ const remove = async (id, token) => {
   return response.data
 }
 
-const blogService = { getAll, create, update, remove, updateLikes }
+const blogService = { getAll, create, update, remove, updateLikes, getOne }
 export default blogService
