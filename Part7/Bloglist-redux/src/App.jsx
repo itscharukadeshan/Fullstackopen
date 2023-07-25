@@ -33,18 +33,9 @@ const App = () => {
   return (
     <>
       <NavBar />
-
-      <div className="pl-2 py-6 ">
-        <div>
-          <CreateForm token={token} />
-        </div>
-        <div>
-          <div className=" font-bold py-2">
-            <Blog token={token} />
-          </div>
-        </div>
-        <Footer user={user} handleLogout={handleLogout} />
-      </div>
+      <Blog token={token} />
+      <CreateForm token={token} />
+      <Footer user={user} handleLogout={handleLogout} />
       <Notification />
     </>
   )
