@@ -16,12 +16,13 @@ const Blog = ({ token }) => {
 
   const [blogVisibilities, setBlogVisibilities] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [update, setUpdate] = useState(false)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     fetchBlogs()
-  }, [dispatch])
+  }, [dispatch, update])
 
   const fetchBlogs = async () => {
     try {
@@ -43,6 +44,7 @@ const Blog = ({ token }) => {
   }
 
   const handleLikes = async (blog) => {
+    setUpdate(true)
     try {
       const updatedLikes = {
         likes: blog.likes + 1,
@@ -62,6 +64,8 @@ const Blog = ({ token }) => {
       }
     } catch (error) {
       dispatch(handleNotification('Sorry, something went wrong', 'error'))
+    } finally {
+      setUpdate(false)
     }
   }
 
