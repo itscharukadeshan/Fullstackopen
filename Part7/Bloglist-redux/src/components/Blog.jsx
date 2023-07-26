@@ -17,8 +17,6 @@ export default function Blog() {
   const blog = blogs.find((blog) => blog.id === id)
   const comments = blog.comments || []
 
-  console.log(blog)
-
   if (!blog) {
     return <></>
   }
