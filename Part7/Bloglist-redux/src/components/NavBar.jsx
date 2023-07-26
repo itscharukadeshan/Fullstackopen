@@ -12,9 +12,6 @@ function NavBar() {
           <Link to={'/users'}>
             <li className="mx-2 btn btn-sm btn-ghost normal-case">Users</li>
           </Link>
-          <Link to={'blogs'}>
-            <li className="mx-2 btn btn-sm btn-ghost normal-case">Blogs</li>
-          </Link>
         </ul>
       </div>
     </nav>
