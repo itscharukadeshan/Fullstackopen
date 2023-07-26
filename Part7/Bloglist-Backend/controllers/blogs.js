@@ -107,6 +107,28 @@ blogsRouter.put('/:id/likes', async (req, res, next) => {
     next(exception)
   }
 })
+blogsRouter.post('/:id/comments', async (req, res, next) => {
+  const { id } = req.params
+
+  const { text, userId } = req.body
+
+  const newComment = {
+    text,
+    user: userId,
+  }
+
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      id,
+      { $push: { comments: newComment } },
+      { new: true }
+    )
+
+    res.status(201).json(updatedBlog)
+  } catch (error) {
+    next(error)
+  }
+})
 
 blogsRouter.put('/:id', async (request, response, next) => {
   const token = request.token
