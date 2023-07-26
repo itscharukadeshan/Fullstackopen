@@ -1,44 +1,34 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
-import userService from '../services/users'
-import { useDispatch, useSelector } from 'react-redux'
-import { setUsers } from '../store/Slices/usersSlice'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function Profile() {
+  const { id } = useParams()
   const users = useSelector((state) => state.users.users)
+  const user = users.find((user) => user.id === id)
+  const blogs = user.blogs
 
   const [isLoading, setIsLoading] = useState(false)
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    fetchUsers()
-  }, [])
-
-  const fetchUsers = async () => {
-    try {
-      setIsLoading(true)
-      const users = await userService.getAll()
-      dispatch(setUsers(users))
-    } catch (error) {
-      dispatch(handleNotification('Failed to get users', 'error'))
-    } finally {
-      setIsLoading(false)
-    }
+  if (!user) {
+    return <p>User not found!</p>
   }
+
   return (
     <>
-      <h2 className="my-4 text-3xl ml-5 font-bold">Users</h2>
-      <ul className="menu w-96 rounded-box my-8 font-bold">
-        {users.map((user) => (
-          <li
-            key={user.id}
-            className="flex flex-row w-56 justify-between gap-0 "
-          >
-            <div>{user.name}</div>
-            <div>{user.blogs.length}</div>
-          </li>
-        ))}
-      </ul>
+      <h2 className="my-4 text-3xl ml-5 font-bold">{user.name}</h2>
+      <h3 className="ml-5 font-mono my-4">Added blogs</h3>
+      {blogs.map((blog) => (
+        <ul key={blog.id} className="menu w-96 rounded-box my-4 font-bold">
+          <Link to={blog.id}>
+            <li className="flex flex-row w-56 justify-between gap-0 ">
+              <h3>{blog.title}</h3>
+            </li>
+          </Link>
+        </ul>
+      ))}
     </>
   )
 }

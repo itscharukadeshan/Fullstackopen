@@ -7,6 +7,7 @@ import Notification from './components/Notification'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import Users from './components/Users'
+import Profile from './components/Profile'
 
 import { Routes, Route } from 'react-router-dom'
 
@@ -45,6 +46,7 @@ const App = () => {
           }
         />
         <Route path="users" element={<Users />}></Route>
+        <Route path="users/:id" element={<Profile />}></Route>
       </Routes>
 
       <Footer user={user} handleLogout={handleLogout} />
