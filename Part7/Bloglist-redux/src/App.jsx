@@ -9,6 +9,7 @@ import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import Users from './components/Users'
 import Profile from './components/Profile'
+import LogOut from './components/LogOut'
 
 import { Routes, Route } from 'react-router-dom'
 
@@ -36,23 +37,27 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <CreateForm token={token} />
-              <BlogList token={token} />
-            </>
-          }
-        />
-        <Route path="users" element={<Users />}></Route>
-        <Route path="users/:id" element={<Profile />}></Route>{' '}
-        <Route path="blogs/:id" element={<Blog />}></Route>
-      </Routes>
+      <main className="h-screen">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <CreateForm token={token} />
+                <BlogList token={token} />
+                <LogOut user={user} handleLogout={handleLogout} />
+              </>
+            }
+          />
+          <Route path="users" element={<Users />}></Route>
+          <Route path="users/:id" element={<Profile />}></Route>{' '}
+          <Route path="blogs/:id" element={<Blog />}></Route>
+        </Routes>
+      </main>
 
-      <Footer user={user} handleLogout={handleLogout} />
       <Notification />
+
+      <Footer />
     </>
   )
 }
