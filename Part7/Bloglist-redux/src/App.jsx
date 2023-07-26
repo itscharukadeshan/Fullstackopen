@@ -49,9 +49,32 @@ const App = () => {
               </>
             }
           />
-          <Route path="users" element={<Users />}></Route>
-          <Route path="users/:id" element={<Profile />}></Route>{' '}
-          <Route path="blogs/:id" element={<Blog />}></Route>
+          <Route
+            path="users"
+            element={
+              <>
+                <Users />
+                <LogOut user={user} handleLogout={handleLogout} />
+              </>
+            }
+          ></Route>
+          <Route
+            path="users/:id"
+            element={
+              <>
+                <Profile />
+              </>
+            }
+          ></Route>{' '}
+          <Route
+            path="blogs/:id"
+            element={
+              <>
+                <Blog />
+                <LogOut user={user} handleLogout={handleLogout} />
+              </>
+            }
+          ></Route>
         </Routes>
       </main>
 
