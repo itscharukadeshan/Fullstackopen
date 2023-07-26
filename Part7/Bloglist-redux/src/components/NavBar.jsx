@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function NavBar() {
   return (
-    <div className="navbar bg-base-300">
+    <nav className="navbar bg-base-300">
       <div className="flex flex-row w-full justify-between items-center px-4">
         <a className="btn btn-ghost normal-case text-xl">
           <Link to={'/'}>Blogs</Link>
@@ -17,7 +17,7 @@ function NavBar() {
           </Link>
         </ul>
       </div>
-    </div>
+    </nav>
   )
 }
 

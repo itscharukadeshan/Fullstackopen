@@ -6,6 +6,7 @@ import CreateForm from './components/CreateForm'
 import Notification from './components/Notification'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
+import Users from './components/Users'
 
 import { Routes, Route } from 'react-router-dom'
 
@@ -43,6 +44,7 @@ const App = () => {
             </>
           }
         />
+        <Route path="users" element={<Users />}></Route>
       </Routes>
 
       <Footer user={user} handleLogout={handleLogout} />
