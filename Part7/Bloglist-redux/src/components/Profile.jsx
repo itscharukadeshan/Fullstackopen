@@ -22,7 +22,7 @@ function Profile() {
       <h3 className="ml-5 font-mono my-4">Added blogs</h3>
       {blogs.map((blog) => (
         <ul key={blog.id} className="menu w-96 rounded-box my-4 font-bold">
-          <Link to={blog.id}>
+          <Link to={`/blogs/${blog.id}`}>
             <li className="flex flex-row w-56 justify-between gap-0 ">
               <h3>{blog.title}</h3>
             </li>
