@@ -124,7 +124,7 @@ blogsRouter.post('/:id/comments', async (req, res, next) => {
       { new: true }
     )
 
-    res.status(201).json(updatedBlog)
+    res.status(201).json(updatedBlog.comments)
   } catch (error) {
     next(error)
   }

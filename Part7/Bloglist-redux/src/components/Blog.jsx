@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import blogService from '../services/blogs'
 
+import { updateBlogComments } from '../store/Slices/blogsSlice'
+
 export default function Blog() {
+  const dispatch = useDispatch()
+
   const [input, setInput] = useState('')
   const blogs = useSelector((state) => state.blogs.blogs)
 
   const { id } = useParams()
 
   const blog = blogs.find((blog) => blog.id === id)
-  const comments = blogs.find((blog) => blog.id === id).comments
+  const comments = blog.comments || []
 
   if (!blog) {
     return <></>
@@ -21,7 +25,8 @@ export default function Blog() {
     setInput(event.target.value)
   }
   const handleSubmit = async () => {
-    await blogService.addComment(id, input)
+    const response = await blogService.addComment(id, input)
+    dispatch(updateBlogComments({ blogId: id, comments: response }))
     setInput('')
   }
   return (
@@ -44,6 +49,7 @@ export default function Blog() {
       <h3 className="text-xl font-bold">Comments</h3>
       <input
         onChange={handleInput}
+        value={input}
         type="text"
         className="input input-sm  input-accent rounded-none"
       />
