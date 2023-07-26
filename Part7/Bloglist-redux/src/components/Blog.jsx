@@ -9,7 +9,9 @@ export default function Blog() {
   const blogs = useSelector((state) => state.blogs.blogs)
 
   const { id } = useParams()
+
   const blog = blogs.find((blog) => blog.id === id)
+  const comments = blogs.find((blog) => blog.id === id).comments
 
   if (!blog) {
     return <></>
@@ -48,6 +50,11 @@ export default function Blog() {
       <button onClick={handleSubmit} className="btn btn-sm btn-outline">
         Add comment
       </button>
+      {comments.map((comment) => (
+        <div key={comment.id}>
+          <p>{comment.text}</p>
+        </div>
+      ))}
     </>
   )
 }
