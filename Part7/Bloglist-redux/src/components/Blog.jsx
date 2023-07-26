@@ -17,6 +17,8 @@ export default function Blog() {
   const blog = blogs.find((blog) => blog.id === id)
   const comments = blog.comments || []
 
+  console.log(blog)
+
   if (!blog) {
     return <></>
   }
@@ -36,6 +38,7 @@ export default function Blog() {
           <h2 className="card-title text-4xl">{blog.title}</h2>
           <p className="font-mono">Author {blog.author}</p>
           <p className="font-mono">Url {blog.url}</p>
+          <p className="font-mono">Likes {blog.likes}</p>
           <div className="card-actions justify-end">
             by
             <Link to={`/users/${blog.user[0].id}`}>
