@@ -1,4 +1,4 @@
-import Blog from './components/Blog'
+import BlogList from './components/BlogList'
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from './store/Slices/loginSlice'
 import LoginForm from './components/LoginForm'
@@ -41,7 +41,7 @@ const App = () => {
           element={
             <>
               <CreateForm token={token} />
-              <Blog token={token} />
+              <BlogList token={token} />
             </>
           }
         />

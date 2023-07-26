@@ -11,7 +11,7 @@ import {
   deleteBlog,
 } from '../store/Slices/blogsSlice'
 
-const Blog = ({ token }) => {
+const BlogList = ({ token }) => {
   const blogs = useSelector((state) => state.blogs.blogs)
 
   const [blogVisibilities, setBlogVisibilities] = useState([])
@@ -139,4 +139,4 @@ const Blog = ({ token }) => {
   )
 }
 
-export default Blog
+export default BlogList
