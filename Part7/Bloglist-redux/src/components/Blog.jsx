@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import blogService from '../services/blogs'
 
 export default function Blog() {
-  const [input, setInput] = useState({})
+  const [input, setInput] = useState('')
   const blogs = useSelector((state) => state.blogs.blogs)
 
   const { id } = useParams()
@@ -20,8 +20,8 @@ export default function Blog() {
     event.preventDefault()
     setInput(event.target.value)
   }
-  const handleSubmit = () => {
-    blogService.addComment(id, input)
+  const handleSubmit = async () => {
+    await blogService.addComment(id, input)
     setInput('')
   }
   return (
@@ -47,11 +47,15 @@ export default function Blog() {
         type="text"
         className="input input-sm  input-accent rounded-none"
       />
-      <button onClick={handleSubmit} className="btn btn-sm btn-outline">
+      <button
+        value={input}
+        onClick={handleSubmit}
+        className="btn btn-sm btn-outline"
+      >
         Add comment
       </button>
       {comments.map((comment) => (
-        <div key={comment.id}>
+        <div key={comment._id}>
           <p>{comment.text}</p>
         </div>
       ))}
