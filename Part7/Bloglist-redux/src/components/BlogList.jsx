@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import blogService from '../services/blogs'
-
 import { handleNotification } from '../store/Slices/notificationSlice'
+
+import { Link } from 'react-router-dom'
 
 import {
   setBlogs,
@@ -102,7 +103,11 @@ const BlogList = ({ token }) => {
               {blogVisibilities[index] ? 'Hide' : 'Show'}
             </button>
             <div className="mb-2">
-              <h2 className="card-title">{blog.title}</h2>
+              <Link to={`blogs/${blog.id}`}>
+                <h2 className="card-title underline underline-offset-auto hover:text-accent">
+                  {blog.title}
+                </h2>
+              </Link>
               <h3 className="font-normal">By {blog.author}</h3>
               <h3 className="font-normal">Likes {blog.likes}</h3>
             </div>
@@ -112,8 +117,13 @@ const BlogList = ({ token }) => {
                   <a href={blog.url}>{blog.url}</a>
                 </div>
                 {blog.user[0] && (
-                  <div className="card-action justify-start font-mono font-normal">
-                    Post by @{blog.user[0].username}
+                  <div className="card-action justify-start font-mono font-normal flex flex-row gap-2">
+                    Post by{' '}
+                    <Link to={`/users/${blog.user[0].id}`}>
+                      <div className="underline underline-offset-2 hover:text-accent">
+                        @{blog.user[0].username}
+                      </div>
+                    </Link>
                   </div>
                 )}
                 <div className="card-actions justify-end">

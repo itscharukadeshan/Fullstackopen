@@ -1,4 +1,5 @@
 import BlogList from './components/BlogList'
+import Blog from './components/Blog'
 import { useDispatch, useSelector } from 'react-redux'
 import { logOut } from './store/Slices/loginSlice'
 import LoginForm from './components/LoginForm'
@@ -46,7 +47,8 @@ const App = () => {
           }
         />
         <Route path="users" element={<Users />}></Route>
-        <Route path="users/:id" element={<Profile />}></Route>
+        <Route path="users/:id" element={<Profile />}></Route>{' '}
+        <Route path="blogs/:id" element={<Blog />}></Route>
       </Routes>
 
       <Footer user={user} handleLogout={handleLogout} />

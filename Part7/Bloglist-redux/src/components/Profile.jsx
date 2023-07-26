@@ -8,11 +8,10 @@ function Profile() {
   const { id } = useParams()
   const users = useSelector((state) => state.users.users)
   const user = users.find((user) => user.id === id)
-  const blogs = user.blogs
 
   const [isLoading, setIsLoading] = useState(false)
 
-  if (!user) {
+  if (!user || !blogs) {
     return <p>User not found!</p>
   }
 
