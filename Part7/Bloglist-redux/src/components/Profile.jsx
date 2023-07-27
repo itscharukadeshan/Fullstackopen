@@ -1,27 +1,44 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+
+import userService from '../services/users'
+import { handleNotification } from '../store/Slices/notificationSlice'
+import { updateUser } from '../store/Slices/usersSlice'
 
 function Profile() {
   const [blogs, setBlogs] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [user, setUser] = useState([])
 
   const { id } = useParams()
+  const dispatch = useDispatch()
 
   const users = useSelector((state) => state.users.users)
 
-  const user = users.find((user) => user.id === id)
-
-  if (!user) {
-    return <p>User not found!</p>
-  }
-
   useEffect(() => {
-    if (user) {
-      setBlogs(user.blogs || [])
+    fetchUser()
+  }, [])
+
+  const fetchUser = async () => {
+    setIsLoading(true)
+
+    try {
+      let user = await userService.getOne(id)
+      setUser(user)
+      setBlogs(user.blogs)
+      dispatch(updateUser(id, user))
+
+      if (user.length === 0) {
+        return <>User not found</>
+      }
+    } catch (err) {
+      dispatch(handleNotification('Something went wrong', 'error'))
+    } finally {
+      setIsLoading(false)
     }
-  }, [user])
+  }
 
   return (
     <>

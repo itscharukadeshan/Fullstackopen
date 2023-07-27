@@ -37,7 +37,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <main className="h-screen">
+      <main>
         <Routes>
           <Route
             path="/"

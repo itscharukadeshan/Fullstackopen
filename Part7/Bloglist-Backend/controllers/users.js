@@ -18,11 +18,9 @@ usersRouter.post('/', async (request, response) => {
         .json({ error: 'Username and password are required' })
     }
     if (request.body.password.length < 3 || request.body.username.length < 3) {
-      return response
-        .status(400)
-        .json({
-          error: 'Password and username must be at least 3 characters long',
-        })
+      return response.status(400).json({
+        error: 'Password and username must be at least 3 characters long',
+      })
     }
 
     const { username, name, password } = request.body
@@ -52,7 +50,11 @@ usersRouter.get('/', async (request, response) => {
   response.json(users)
 })
 usersRouter.get('/:id', async (request, response) => {
-  const user = await User.findById(request.params.id)
+  const user = await User.findById(request.params.id).populate('blogs', {
+    title: 1,
+    url: 1,
+    likes: 1,
+  })
   if (user) {
     response.json(user)
   } else {

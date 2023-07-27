@@ -11,8 +11,16 @@ const userSlice = createSlice({
     setUsers(state, action) {
       state.users = action.payload
     },
+    updateUser(state, action) {
+      const { userId, newUser } = action.payload
+
+      const user = state.users.find((user) => user.id === userId)
+      if (user) {
+        user = newUser
+      }
+    },
   },
 })
 
-export const { setUsers } = userSlice.actions
+export const { setUsers, updateUser } = userSlice.actions
 export default userSlice.reducer
