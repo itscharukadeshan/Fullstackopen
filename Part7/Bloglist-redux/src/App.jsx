@@ -37,7 +37,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <main>
+      <main className="flex flex-col h-screen">
         <Routes>
           <Route
             path="/"
@@ -80,7 +80,7 @@ const App = () => {
 
       <Notification />
 
-      <Footer />
+      <Footer className="mt-auto" />
     </>
   )
 }
