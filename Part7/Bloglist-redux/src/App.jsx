@@ -37,7 +37,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <main className="flex flex-col h-screen">
+      <main className="flex flex-col h-screen items-center">
         <Routes>
           <Route
             path="/"

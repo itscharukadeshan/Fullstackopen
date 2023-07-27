@@ -29,7 +29,7 @@ function Users() {
   return (
     <>
       <h2 className="my-4 text-3xl ml-5 font-bold">Users</h2>
-      <ul className="menu w-96 rounded-box my-8 font-bold">
+      <ul className="menu w-96 rounded-box my-8 font-bold items-center bg-base p-6 shadow-lg">
         {users.map((user) => (
           <Link to={user.id}>
             <li

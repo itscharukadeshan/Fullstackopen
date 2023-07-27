@@ -41,25 +41,28 @@ function Profile() {
   }
 
   return (
-    <>
-      <h2 className="my-4 text-3xl ml-5 font-bold">{user.name}</h2>
+    <div>
+      <h2 className="my-12 text-3xl ml-5 font-bold">{user.name}</h2>
+      <div className="bg-base p-6 w-full rounded-lg shadow-lg">
+        <h3 className="ml-5 font-mono menu-title mt-15">
+          Added blogs by {user.name}
+        </h3>
 
-      <h3 className="ml-5 font-mono my-4">Added blogs</h3>
-
-      {blogs.length > 0 ? (
-        blogs.map((blog) => (
-          <ul key={blog.id} className="menu w-96 rounded-box my-4 font-bold">
-            <Link to={`/blogs/${blog.id}`}>
-              <li className="flex flex-row w-56 justify-between gap-0 ">
-                <h3>{blog.title}</h3>
-              </li>
-            </Link>
-          </ul>
-        ))
-      ) : (
-        <p>No blogs for this user</p>
-      )}
-    </>
+        {blogs.length > 0 ? (
+          blogs.map((blog) => (
+            <ul key={blog.id} className="menu  w-96 rounded-box mt-2 font-bold">
+              <Link to={`/blogs/${blog.id}`}>
+                <li className="flex flex-row w-56 justify-between gap-0 underline">
+                  <h3>{blog.title}</h3>
+                </li>
+              </Link>
+            </ul>
+          ))
+        ) : (
+          <p>No blogs for this user</p>
+        )}
+      </div>
+    </div>
   )
 }
 
