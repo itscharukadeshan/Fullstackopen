@@ -47,20 +47,28 @@ function Profile() {
         <h3 className="ml-5 font-mono menu-title mt-15">
           Added blogs by {user.name}
         </h3>
+        <div className="flex flex-col items-start ml-6 pt-6">
+          {isLoading && (
+            <span className="loading loading-bars loading-sm py-2"></span>
+          )}
 
-        {blogs.length > 0 ? (
-          blogs.map((blog) => (
-            <ul key={blog.id} className="menu  w-96 rounded-box mt-2 font-bold">
-              <Link to={`/blogs/${blog.id}`}>
-                <li className="flex flex-row w-56 justify-between gap-0 underline">
-                  <h3>{blog.title}</h3>
-                </li>
-              </Link>
-            </ul>
-          ))
-        ) : (
-          <p>No blogs for this user</p>
-        )}
+          {blogs.length > 0 ? (
+            blogs.map((blog) => (
+              <ul
+                key={blog.id}
+                className="menu  w-96 rounded-box mt-2 font-bold"
+              >
+                <Link to={`/blogs/${blog.id}`}>
+                  <li className="flex flex-row w-56 justify-between gap-0 underline">
+                    <h3>{blog.title}</h3>
+                  </li>
+                </Link>
+              </ul>
+            ))
+          ) : (
+            <p>No blogs found this user</p>
+          )}
+        </div>
       </div>
     </div>
   )

@@ -30,8 +30,8 @@ export default function Blog() {
     setInput('')
   }
   return (
-    <>
-      <div className="card w-96 bg-gray-800 shadow-xl">
+    <div className="p-6 ">
+      <div className="card w-96 bg-base-800 shadow-xl py-6">
         <div className="card-body">
           <h2 className="card-title text-4xl">{blog.title}</h2>
           <p className="font-mono">Author {blog.author}</p>
@@ -46,26 +46,32 @@ export default function Blog() {
             </Link>
           </div>
         </div>
-      </div>
-      <h3 className="text-xl font-bold">Comments</h3>
-      <input
-        onChange={handleInput}
-        value={input}
-        type="text"
-        className="input input-sm  input-accent rounded-none"
-      />
-      <button
-        value={input}
-        onClick={handleSubmit}
-        className="btn btn-sm btn-outline"
-      >
-        Add comment
-      </button>
-      {comments.map((comment) => (
-        <div key={comment._id}>
-          <p>{comment.text}</p>
+        <div className="mx-5">
+          <h3 className="text-xl font-bold my-4">Comments</h3>
+          <div className="flex flex-row gap-4">
+            <input
+              onChange={handleInput}
+              value={input}
+              type="text"
+              className="input input-sm  input-accent rounded-none"
+            />
+            <button
+              value={input}
+              onClick={handleSubmit}
+              className="btn btn-sm btn-outline"
+            >
+              Add comment
+            </button>
+          </div>
+          <div className="my-4 font-bold">
+            {comments.map((comment) => (
+              <div key={comment._id}>
+                <p>{comment.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </>
+      </div>
+    </div>
   )
 }
