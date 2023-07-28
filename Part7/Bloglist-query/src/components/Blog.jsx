@@ -39,9 +39,6 @@ const Blog = ({ token }) => {
       onSuccess: () => {
         queryClient.invalidateQueries('blogs')
       },
-      onError: (error) => {
-        addNotification(`Sorry, unable to add your like`, 'error')
-      },
     }
   )
   const deleteBlogMutation = useMutation(
@@ -49,6 +46,9 @@ const Blog = ({ token }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries('blogs')
+      },
+      onError: (error) => {
+        addNotification(`Sorry, unable to delete this blog`, 'error')
       },
     }
   )
