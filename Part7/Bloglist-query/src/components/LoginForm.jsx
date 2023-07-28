@@ -1,13 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import login from '../services/login'
-import { toast, ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useNotification } from '../hooks/useNotification'
 
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isLoggingIn, setIsLoggingIn] = useState(false)
+
+  const { notifications, addNotification } = useNotification()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -21,10 +24,11 @@ function LoginForm({ onLogin }) {
     setIsLoggingIn(true)
     try {
       const userData = await login(credentials)
-      toast.success('Login successfully')
+      addNotification(`Login successfully`, 'success')
+
       onLogin(userData)
     } catch (error) {
-      toast.error('Login failed. Please check your credentials.')
+      addNotification(`Login failed. Please check your credentials.`, 'error')
     } finally {
       setIsLoggingIn(false)
     }

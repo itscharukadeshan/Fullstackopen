@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { ToastContainer } from 'react-toastify'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
@@ -55,6 +56,7 @@ const App = () => {
           </button>{' '}
         </div>
       </div>
+      <ToastContainer />
     </>
   )
 }

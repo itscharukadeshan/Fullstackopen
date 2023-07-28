@@ -34,7 +34,6 @@ export const NotificationProvider = ({ children }) => {
       const latestNotification =
         state.notifications[state.notifications.length - 1]
       toast[latestNotification.type](latestNotification.message, {
-        position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       })
 

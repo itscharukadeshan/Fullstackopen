@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import blogService from '../services/blogs'
-import { toast, ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useNotification } from '../hooks/useNotification'
 
 const Blog = ({ token }) => {
+  const { notifications, addNotification } = useNotification()
+
   const [blogVisibilities, setBlogVisibilities] = useState([])
   const [blogs, setBlogs] = useState([])
   const [keyPrefix, setKeyPrefix] = useState('')
@@ -21,7 +24,7 @@ const Blog = ({ token }) => {
       setBlogs(sortedBlogs)
       setBlogVisibilities(new Array(sortedBlogs.length).fill(false))
     } catch (error) {
-      console.error('Failed to fetch blogs:', error)
+      addNotification(`Fail to get blog please refresh`, 'error')
     }
   }
 
@@ -52,7 +55,7 @@ const Blog = ({ token }) => {
         setBlogs(updatedBlogs)
       }
     } catch (error) {
-      toast.error('Sorry, likes are not accepted today')
+      addNotification(`Sorry, likes are not accepted today`, 'error')
     }
   }
 
@@ -70,7 +73,7 @@ const Blog = ({ token }) => {
       setBlogs(updatedBlogs)
       setKeyPrefix(keyPrefix + ' ')
     } catch (error) {
-      toast.error(`Sorry, you can't delete this post`)
+      addNotification(`Sorry, you can't delete this post`, 'error')
     }
   }
 
