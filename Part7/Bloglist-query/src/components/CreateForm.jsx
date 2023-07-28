@@ -3,6 +3,7 @@ import blogService from '../services/blogs'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useNotification } from '../hooks/useNotification'
+import { useMutation, useQueryClient } from 'react-query'
 
 function CreateForm({ token }) {
   const [title, setTitle] = useState('')
@@ -12,6 +13,28 @@ function CreateForm({ token }) {
   const [isLoading, setIsLoading] = useState(false)
 
   const { notifications, addNotification } = useNotification()
+
+  const queryClient = useQueryClient()
+
+  const createBlogMutation = useMutation(
+    (newPost) => blogService.create(newPost, token),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('blogs')
+
+        addNotification(`New blog created: ${title} by ${author}`, 'success')
+
+        setAuthor('')
+        setTitle('')
+        setUrl('')
+        setIsLoading(false)
+      },
+      onError: (error) => {
+        addNotification('Unable to post try agin', 'error')
+        setIsLoading(false)
+      },
+    }
+  )
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value)
@@ -40,28 +63,25 @@ function CreateForm({ token }) {
 
     if (!title || !author || !url) {
       addNotification(`Title, Author, and URL must be provided`, 'error')
+
+      setIsLoading(true)
+
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 500)
+
       return
     }
-
     setIsLoading(true)
-
     try {
-      const response = await blogService.create(newPost, token)
-      if (response) {
-        addNotification(
-          `New blog created: ${newPost.title} by ${newPost.author}`,
-          'success'
-        )
-      }
+      createBlogMutation.mutate(newPost)
     } catch (error) {
       addNotification(`Check the data and try again`, 'error')
     } finally {
-      setIsLoading(false)
+      setAuthor('')
+      setTitle('')
+      setUrl('')
     }
-
-    setAuthor('')
-    setTitle('')
-    setUrl('')
   }
 
   return (
