@@ -50,9 +50,6 @@ const Blog = ({ token }) => {
       onSuccess: () => {
         queryClient.invalidateQueries('blogs')
       },
-      onError: (error) => {
-        addNotification(`Sorry, you can't delete this post`, 'error')
-      },
     }
   )
 
