@@ -9,8 +9,6 @@ const App = () => {
   const { state, dispatch } = useContext(UserContext)
   const { user, token } = state
 
-  console.log(user)
-
   const handleLogin = async (userData) => {
     dispatch({ type: 'LOGIN', payload: { userData } })
     localStorage.setItem('userData', JSON.stringify(userData))
