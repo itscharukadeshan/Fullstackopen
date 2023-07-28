@@ -9,6 +9,8 @@ const App = () => {
   const { state, dispatch } = useContext(UserContext)
   const { user, token } = state
 
+  console.log(user)
+
   const handleLogin = async (userData) => {
     dispatch({ type: 'LOGIN', payload: { userData } })
     localStorage.setItem('userData', JSON.stringify(userData))
@@ -39,7 +41,7 @@ const App = () => {
         </div>
         <div className="pt-12 text-2xl flex flex-row items-center gap-4">
           <div>
-            {user.name} is logged in{'  '}
+            {user.user.username} is logged in{'  '}
           </div>
           <button
             className="btn btn-xs btn-outline btn-warning"
