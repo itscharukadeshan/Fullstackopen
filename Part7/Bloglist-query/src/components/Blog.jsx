@@ -41,6 +41,17 @@ const Blog = ({ token }) => {
       },
     }
   )
+  const deleteBlogMutation = useMutation(
+    (blogId) => blogService.remove(blogId, token),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('blogs')
+      },
+      onError: (error) => {
+        addNotification(`Sorry, you can't delete this post`, 'error')
+      },
+    }
+  )
 
   const handleUpdate = async (blog) => {
     try {
@@ -64,10 +75,8 @@ const Blog = ({ token }) => {
     }
 
     try {
-      await blogService.remove(blog.id, token)
-    } catch (error) {
-      addNotification(`Sorry, you can't delete this post`, 'error')
-    }
+      const response = await deleteBlogMutation.mutateAsync(blog.id)
+    } catch (error) {}
   }
 
   return (
