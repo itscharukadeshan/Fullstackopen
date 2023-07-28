@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import blogService from '../services/blogs'
-import { toast, ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useNotification } from '../hooks/useNotification'
 
@@ -9,7 +9,7 @@ function CreateForm({ token }) {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [showForm, setShowForm] = useState(false)
-  const [isLoggingIn, setIsLoggingIn] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const { notifications, addNotification } = useNotification()
 
@@ -39,11 +39,11 @@ function CreateForm({ token }) {
     }
 
     if (!title || !author || !url) {
-      toast.error('Title, Author, and URL must be provided')
+      addNotification(`Title, Author, and URL must be provided`, 'error')
       return
     }
 
-    setIsLoggingIn(true)
+    setIsLoading(true)
 
     try {
       const response = await blogService.create(newPost, token)
@@ -54,9 +54,9 @@ function CreateForm({ token }) {
         )
       }
     } catch (error) {
-      toast.error('Check the data and try again')
+      addNotification(`Check the data and try again`, 'error')
     } finally {
-      setIsLoggingIn(false)
+      setIsLoading(false)
     }
 
     setAuthor('')
@@ -103,7 +103,7 @@ function CreateForm({ token }) {
                 id="submit"
                 className="btn btn-outline btn-accent w-fit my-6"
               >
-                {isLoggingIn ? (
+                {isLoading ? (
                   <>
                     <span className="loading loading-spinner"></span> Creating
                   </>
