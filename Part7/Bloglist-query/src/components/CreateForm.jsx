@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import blogService from '../services/blogs'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useNotification } from '../hooks/useNotification'
 
 function CreateForm({ token }) {
   const [title, setTitle] = useState('')
@@ -9,6 +10,8 @@ function CreateForm({ token }) {
   const [url, setUrl] = useState('')
   const [showForm, setShowForm] = useState(false)
   const [isLoggingIn, setIsLoggingIn] = useState(false)
+
+  const { notifications, addNotification } = useNotification()
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value)
@@ -44,8 +47,11 @@ function CreateForm({ token }) {
 
     try {
       const response = await blogService.create(newPost, token)
-      if (response.data) {
-        toast.success(`New blog created: ${newPost.title} by ${newPost.author}`)
+      if (response) {
+        addNotification(
+          `New blog created: ${newPost.title} by ${newPost.author}`,
+          'success'
+        )
       }
     } catch (error) {
       toast.error('Check the data and try again')
