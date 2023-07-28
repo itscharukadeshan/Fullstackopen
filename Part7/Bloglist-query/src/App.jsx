@@ -1,28 +1,21 @@
-import { useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { ToastContainer } from 'react-toastify'
 import Blog from './components/Blog'
 import LoginForm from './components/LoginForm'
 import CreateForm from './components/CreateForm'
+import { UserContext } from './state/UserProvider'
 
 const App = () => {
-  const [user, setUser] = useState(null)
-  const [token, setToken] = useState('')
-
-  useEffect(() => {
-    const storedUserData = localStorage.getItem('userData')
-    if (storedUserData) {
-      const userData = JSON.parse(storedUserData)
-      setUser(userData)
-      setToken(`Bearer ${userData.token}`)
-    }
-  }, [])
+  const { state, dispatch } = useContext(UserContext)
+  const { user, token } = state
 
   const handleLogin = async (userData) => {
-    await setUser(userData)
+    dispatch({ type: 'LOGIN', payload: { userData } })
     localStorage.setItem('userData', JSON.stringify(userData))
   }
+
   const handleLogout = () => {
-    setUser(null)
+    dispatch({ type: 'LOGOUT' })
     localStorage.removeItem('userData')
   }
 
