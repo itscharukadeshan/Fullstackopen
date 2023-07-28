@@ -82,9 +82,9 @@ const Blog = ({ token }) => {
   return (
     <div className="flex flex-col my-4">
       {isLoading ? (
-        <div>Loading...</div>
+        <span className="loading loading-bars loading-md"></span>
       ) : error ? (
-        <div>Error: {error.message}</div>
+        <div className="text-sm">Error: {error.message}</div>
       ) : (
         blogs.map((blog, index) => (
           <div
@@ -133,7 +133,6 @@ const Blog = ({ token }) => {
           </div>
         ))
       )}
-      <ToastContainer />
     </div>
   )
 }
