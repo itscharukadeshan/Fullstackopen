@@ -6,7 +6,7 @@
   },
   "name": "library-backend",
   "version": "1.0.0",
-  "description": "Library backend for graphql ",
+  "description": "Library backend for graphql",
   "main": "index.js",
   "devDependencies": {
     "coffee-script": "^1.3.3"
