@@ -29,20 +29,6 @@ let authors = [
   },
 ];
 
-/*
- * Suomi:
- * Saattaisi olla järkevämpää assosioida kirja ja sen tekijä tallettamalla kirjan yhteyteen tekijän nimen sijaan tekijän id
- * Yksinkertaisuuden vuoksi tallennamme kuitenkin kirjan yhteyteen tekijän nimen
- *
- * English:
- * It might make more sense to associate a book with its author by storing the author's id in the context of the book instead of the author's name
- * However, for simplicity, we will store the author's name in connection with the book
- *
- * Spanish:
- * Podría tener más sentido asociar un libro con su autor almacenando la id del autor en el contexto del libro en lugar del nombre del autor
- * Sin embargo, por simplicidad, almacenaremos el nombre del autor en conección con el libro
- */
-
 let books = [
   {
     title: "Clean Code",
@@ -95,19 +81,51 @@ let books = [
   },
 ];
 
-/*
-  you can remove the placeholder query once your first own has been implemented 
-*/
-
 const typeDefs = `
+  type Author {
+    name: String!
+    id: ID!
+    born: Int
+    books: [Book!]!
+    bookCount: Int!
+  }
+
+  type Book {
+    title: String!
+    published: Int!
+    author: Author!
+    id: ID!
+    genres: [String!]!
+  }
+
   type Query {
-    dummy: Int
+    allAuthors: [Author!]!
+    author(id: ID!): Author
+    authorCount: Int!
+    allBooks: [Book!]!
+    book(id: ID!): Book
+    bookCount: Int!
   }
 `;
 
 const resolvers = {
   Query: {
-    dummy: () => 0,
+    allAuthors: () => authors,
+    author: (parent, { id }) => authors.find((author) => author.id === id),
+    authorCount: () => authors.length,
+    allBooks: () => books,
+    book: (parent, { id }) => books.find((book) => book.id === id),
+    bookCount: () => books.length,
+  },
+  Author: {
+    books: (parent) => books.filter((book) => book.author.id === parent.id),
+    bookCount: (parent) => {
+      const authorBooks = books.filter((book) => book.author.id === parent.id);
+      return authorBooks.length;
+    },
+  },
+  Book: {
+    author: (parent) => authors.find((author) => author.id === parent.author),
   },
 };
 
