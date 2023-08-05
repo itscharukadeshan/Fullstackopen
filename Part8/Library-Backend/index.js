@@ -82,50 +82,17 @@ let books = [
 ];
 
 const typeDefs = `
-  type Author {
-    name: String!
-    id: ID!
-    born: Int
-    books: [Book!]!
-    bookCount: Int!
-  }
-
-  type Book {
-    title: String!
-    published: Int!
-    author: Author!
-    id: ID!
-    genres: [String!]!
-  }
-
   type Query {
-    allAuthors: [Author!]!
-    author(id: ID!): Author
-    authorCount: Int!
-    allBooks: [Book!]!
-    book(id: ID!): Book
-    bookCount: Int!
+    bookCount: Int
+    authorCount: Int
+
   }
 `;
 
 const resolvers = {
   Query: {
-    allAuthors: () => authors,
-    author: (parent, { id }) => authors.find((author) => author.id === id),
-    authorCount: () => authors.length,
-    allBooks: () => books,
-    book: (parent, { id }) => books.find((book) => book.id === id),
     bookCount: () => books.length,
-  },
-  Author: {
-    books: (parent) => books.filter((book) => book.author.id === parent.id),
-    bookCount: (parent) => {
-      const authorBooks = books.filter((book) => book.author.id === parent.id);
-      return authorBooks.length;
-    },
-  },
-  Book: {
-    author: (parent) => authors.find((author) => author.id === parent.author),
+    authorCount: () => authors.length,
   },
 };
 
