@@ -5,15 +5,14 @@ import Home from "./pages/Home";
 import Authors from "./pages/Authors";
 import AddBook from "./pages/AddBook";
 import Books from "./pages/Books";
-import NavBar from "./components/NavBar";
 
 import Navigation from "./components/Navigation";
 
 const App = () => {
   return (
-    <>
+    <div>
       <Navigation />
-      <main className='flex justify-center my-10'>
+      <main className='flex justify-center flex-grow my-10'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='authors' element={<Authors />} />
@@ -21,8 +20,7 @@ const App = () => {
           <Route path='add-book' element={<AddBook />} />
         </Routes>
       </main>
-      <NavBar />
-    </>
+    </div>
   );
 };
 
