@@ -93,7 +93,7 @@ type Book {
 }
 type Author {
   name:String!
-  born:Int!
+  born:Int
   bookCount:Int!
   id:ID!
 
@@ -113,6 +113,9 @@ type Author {
     published: Int!
     genres: [String!]!
   ): Book
+
+  editAuthor(name: String!, setBornTo: Int!): Author 
+
 }
 `;
 
@@ -152,6 +155,24 @@ const resolvers = {
       const book = { ...args, id: uuid() };
       books = books.concat(book);
       return book;
+    },
+    editAuthor: (root, args) => {
+      const { name, setBornTo } = args;
+
+      const FindAuthor = authors.findIndex((author) => author.name === name);
+
+      if (FindAuthor === -1) {
+        throw new Error("Author not found");
+      }
+
+      const updatedAuthor = {
+        ...authors[FindAuthor],
+        born: setBornTo,
+      };
+
+      authors.splice(FindAuthor, 1, updatedAuthor);
+
+      return updatedAuthor;
     },
   },
 };
