@@ -1,10 +1,6 @@
 /** @format */
 
-const Books = (props) => {
-  if (!props.show) {
-    return null;
-  }
-
+const Book = () => {
   const books = [];
 
   return (
@@ -31,4 +27,4 @@ const Books = (props) => {
   );
 };
 
-export default Books;
+export default Book;

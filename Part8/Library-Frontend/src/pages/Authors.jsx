@@ -1,7 +1,8 @@
 /** @format */
+import Author from "../components/Author";
 
 function Authors() {
-  return <div>Authors</div>;
+  return <Author />;
 }
 
 export default Authors;

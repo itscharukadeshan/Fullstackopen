@@ -1,7 +1,8 @@
 /** @format */
+import NewBook from "../components/NewBook";
 
 function AddBook() {
-  return <div>AddBook</div>;
+  return <NewBook />;
 }
 
 export default AddBook;
