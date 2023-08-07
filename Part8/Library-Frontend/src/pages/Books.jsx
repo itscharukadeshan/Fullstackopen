@@ -7,7 +7,15 @@ import { GET_BOOKS } from "../queries/booksQueries";
 function Books() {
   const { loading, error, data } = useQuery(GET_BOOKS);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+
+    return (
+      <div className='flex justify-center items-center h-full'>
+        <span className='loading'></span>
+      </div>
+    );
+
+  }
 
   if (error) return <p>Error fetching books!</p>;
 

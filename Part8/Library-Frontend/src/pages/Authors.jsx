@@ -7,7 +7,13 @@ import { GET_AUTHORS } from "../queries/authorsQueries";
 function Authors() {
   const { loading, data, error } = useQuery(GET_AUTHORS);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className='flex justify-center items-center h-full'>
+        <span className='loading'></span>
+      </div>
+    );
+  }
 
   if (error) return <p>Error fetching books!</p>;
 
