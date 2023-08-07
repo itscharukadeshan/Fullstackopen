@@ -8,6 +8,7 @@ const GET_BOOKS = gql`
       author
       published
       genres
+      id
     }
   }
 `;
