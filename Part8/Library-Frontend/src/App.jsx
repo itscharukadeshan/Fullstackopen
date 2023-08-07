@@ -12,13 +12,14 @@ const App = () => {
   return (
     <>
       <Navigation />
-
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='authors' element={<Authors />} />
-        <Route path='books' element={<Books />} />
-        <Route path='add-book' element={<AddBook />} />
-      </Routes>
+      <main className='flex justify-center my-10'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='authors' element={<Authors />} />
+          <Route path='books' element={<Books />} />
+          <Route path='add-book' element={<AddBook />} />
+        </Routes>
+      </main>
     </>
   );
 };

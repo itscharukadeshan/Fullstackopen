@@ -48,25 +48,29 @@ const NewBook = () => {
   };
 
   return (
-    <div>
+    <div className='bg-base-300 py-6 px-8 rounded-box shadow-lg'>
+      <h3 className='text-2xl py-6 font-serif font-bold'>Add book</h3>
       <form onSubmit={submit}>
         <div>
-          title
+          Title
           <input
+            className='input input-sm my-2 mx-2'
             value={title}
             onChange={({ target }) => setTitle(target.value)}
           />
         </div>
         <div>
-          author
+          Author
           <input
+            className='input input-sm my-2 mx-2'
             value={author}
             onChange={({ target }) => setAuthor(target.value)}
           />
         </div>
         <div>
-          published
+          Published
           <input
+            className='input input-sm my-2 mx-2'
             type='number'
             value={published}
             onChange={({ target }) => setPublished(target.value)}
@@ -74,6 +78,7 @@ const NewBook = () => {
         </div>
         <div>
           <input
+            className='input input-sm my-2 mx-2'
             value={genre}
             onChange={({ target }) => setGenre(target.value)}
           />
@@ -85,7 +90,9 @@ const NewBook = () => {
           </button>
         </div>
         <div>genres: {genres.join(" ")}</div>
-        <button className='btn btn-outline btn-sm' type='submit'>
+        <button
+          className='my-4 btn btn-outline btn-md btn-warning'
+          type='submit'>
           create book
         </button>
       </form>

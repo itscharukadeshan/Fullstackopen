@@ -12,13 +12,13 @@ function Authors() {
   if (error) return <p>Error fetching books!</p>;
 
   return (
-    <>
-      <table>
+    <div className='flex flex-col'>
+      <table className='table'>
         <thead>
           <tr>
             <th>Name</th>
             <th>Born</th>
-            <th>Published</th>
+            <th>books</th>
           </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@ function Authors() {
         </tbody>
       </table>
       <AddYearForm authors={data.allAuthors} />
-    </>
+    </div>
   );
 }
 

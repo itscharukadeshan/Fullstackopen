@@ -12,7 +12,7 @@ function Books() {
   if (error) return <p>Error fetching books!</p>;
 
   return (
-    <table>
+    <table className='table w-fit'>
       <thead>
         <tr>
           <th>Title</th>
