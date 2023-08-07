@@ -89,7 +89,18 @@ const NewBook = () => {
             add genre
           </button>
         </div>
-        <div>genres: {genres.join(" ")}</div>
+        <div>
+          Genres
+          <div className='genres'>
+            {genres.map((genre) => (
+              <div
+                key={genre}
+                className='badge badge-white my-2 mx-1  font-semi-bold badge-outline'>
+                {genre}
+              </div>
+            ))}
+          </div>
+        </div>
         <button
           className='my-4 btn btn-outline btn-md btn-warning'
           type='submit'>
