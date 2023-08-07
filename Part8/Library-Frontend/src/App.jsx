@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Authors from "./pages/Authors";
 import AddBook from "./pages/AddBook";
 import Books from "./pages/Books";
+import NavBar from "./components/NavBar";
 
 import Navigation from "./components/Navigation";
 
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='add-book' element={<AddBook />} />
         </Routes>
       </main>
+      <NavBar />
     </>
   );
 };
