@@ -1,6 +1,6 @@
 /** @format */
 import Author from "../components/Author";
-import AddAgeForm from "../components/AddAgeForm";
+import AddYearForm from "../components/AddYearForm";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHORS } from "../queries/authorsQueries";
 
@@ -27,7 +27,7 @@ function Authors() {
           ))}
         </tbody>
       </table>
-      <AddAgeForm />
+      <AddYearForm authors={data.allAuthors} />
     </>
   );
 }
