@@ -7,6 +7,7 @@ const GET_AUTHORS = gql`
       name
       born
       bookCount
+      id
     }
   }
 `;

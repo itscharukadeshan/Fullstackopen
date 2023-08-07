@@ -1,5 +1,6 @@
 /** @format */
 import Author from "../components/Author";
+import AddAgeForm from "../components/AddAgeForm";
 import { useQuery } from "@apollo/client";
 import { GET_AUTHORS } from "../queries/authorsQueries";
 
@@ -17,7 +18,7 @@ function Authors() {
           <tr>
             <th>Name</th>
             <th>Born</th>
-            <th>Books</th>
+            <th>Published</th>
           </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@ function Authors() {
           ))}
         </tbody>
       </table>
+      <AddAgeForm />
     </>
   );
 }
