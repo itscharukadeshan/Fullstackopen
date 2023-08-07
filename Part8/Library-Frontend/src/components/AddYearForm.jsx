@@ -1,13 +1,16 @@
 /** @format */
 import { useState } from "react";
 import { ADD_AUTHOR_YEAR } from "../mutations/authorsMutations";
+import { GET_AUTHORS } from "../queries/authorsQueries";
 import { useMutation } from "@apollo/client";
 
 function AddYearForm({ authors }) {
   const [author, setAuthor] = useState("");
   const [year, setYear] = useState(0);
 
-  const [addYear, { data, loading, error }] = useMutation(ADD_AUTHOR_YEAR);
+  const [addYear, { data, loading, error }] = useMutation(ADD_AUTHOR_YEAR, {
+    refetchQueries: [{ query: GET_AUTHORS }],
+  });
 
   const handleSelection = (e) => {
     setAuthor(e.target.value);
@@ -22,8 +25,8 @@ function AddYearForm({ authors }) {
 
     const { data } = await addYear({
       variables: {
-        author,
-        year,
+        name: author,
+        setBornTo: year,
       },
     });
   };
