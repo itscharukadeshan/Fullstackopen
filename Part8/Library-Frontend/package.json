@@ -17,6 +17,7 @@
     "react-router-dom": "^6.14.2"
   },
   "devDependencies": {
+    "@graphql-eslint/eslint-plugin": "^3.20.1",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",

@@ -1,29 +1,12 @@
 /** @format */
 
-const Book = () => {
-  const books = [];
-
+const Book = ({ book }) => {
   return (
-    <div>
-      <h2>books</h2>
-
-      <table>
-        <tbody>
-          <tr>
-            <th></th>
-            <th>author</th>
-            <th>published</th>
-          </tr>
-          {books.map((a) => (
-            <tr key={a.title}>
-              <td>{a.title}</td>
-              <td>{a.author}</td>
-              <td>{a.published}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <tr>
+      <td>{book.title}</td>
+      <td>{book.author}</td>
+      <td>{book.published}</td>
+    </tr>
   );
 };
 
