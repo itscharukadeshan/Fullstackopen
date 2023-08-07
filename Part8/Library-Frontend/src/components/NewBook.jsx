@@ -4,11 +4,14 @@ import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { ADD_BOOK } from "../mutations/booksMutations";
+import { GET_BOOKS } from "../queries/booksQueries";
 
 const NewBook = () => {
   const navigate = useNavigate();
 
-  const [addBook, { data, loading, error }] = useMutation(ADD_BOOK);
+  const [addBook, { data, loading, error }] = useMutation(ADD_BOOK, {
+    refetchQueries: [{ query: GET_BOOKS }],
+  });
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
