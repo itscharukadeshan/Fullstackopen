@@ -1,5 +1,9 @@
 /** @format */
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+
+import Home from "./pages/Home";
+
 import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
@@ -26,6 +30,10 @@ const App = () => {
           add book
         </button>
       </div>
+
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
 
       <Authors show={page === "authors"} />
 
