@@ -6,8 +6,10 @@ const { startStandaloneServer } = require("@apollo/server/standalone");
 const mongoose = require("mongoose");
 const Author = require("./models/author");
 const Book = require("./models/book");
+const User = require("./models/user");
 
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 async function connect() {
   await mongoose.connect(process.env.MONGODB_URI);
@@ -32,12 +34,23 @@ type Author {
   id:ID!
 
 }
+type User {
+  username: String!
+  id: ID!
+}
+type Token {
+  value: String!
+}
+
+
 
   type Query {
     bookCount: Int
     authorCount: Int
     allBooks(genre: String , author:String):[Book!]!
     allAuthors:[Author!]!
+    me: User
+
 
   }
   type Mutation {
@@ -47,6 +60,16 @@ type Author {
     published: Int!
     genres: [String!]!
   ): Book
+
+  createUser(
+    username: String!
+    favoriteGenre: String!
+  ): User
+  login(
+    username: String!
+    password: String!
+  ): Token
+
 
   editAuthor(name: String!, setBornTo: Int!): Author 
 
@@ -112,6 +135,37 @@ const resolvers = {
           throw new GraphQLError("Error updating author");
         }
       }
+    },
+    createUser: async (root, args) => {
+      const user = new User({ username: args.username });
+
+      return user.save().catch((error) => {
+        throw new GraphQLError("Creating the user failed", {
+          extensions: {
+            code: "BAD_USER_INPUT",
+            invalidArgs: args.name,
+            error,
+          },
+        });
+      });
+    },
+    login: async (root, args) => {
+      const user = await User.findOne({ username: args.username });
+
+      if (!user || args.password !== "secret") {
+        throw new GraphQLError("wrong credentials", {
+          extensions: {
+            code: "BAD_USER_INPUT",
+          },
+        });
+      }
+
+      const userForToken = {
+        username: user.username,
+        id: user._id,
+      };
+
+      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) };
     },
   },
 };
