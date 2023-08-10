@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
-import { LOGIN } from "../queries/loginMutations";
+import { LOGIN } from "../mutations/loginMutations.js";
 
 const Login = ({ setError, setToken }) => {
   const [username, setUsername] = useState("");
