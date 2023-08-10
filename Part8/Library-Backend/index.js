@@ -1,6 +1,7 @@
 /** @format */
 
-const { ApolloServer } = require("@apollo/server");
+const { ApolloServer, GraphQLError } = require("@apollo/server");
+
 const { startStandaloneServer } = require("@apollo/server/standalone");
 
 const mongoose = require("mongoose");
@@ -155,7 +156,7 @@ const resolvers = {
     login: async (root, args) => {
       const user = await User.findOne({ username: args.username });
 
-      if (!user || args.password !== "secret") {
+      if (!user) {
         throw new GraphQLError("wrong credentials", {
           extensions: {
             code: "BAD_USER_INPUT",

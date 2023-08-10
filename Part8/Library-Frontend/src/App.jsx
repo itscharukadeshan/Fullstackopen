@@ -18,11 +18,11 @@ const App = () => {
       <Navigation token={token} setToken={setToken} />
       <main className='flex justify-center flex-grow my-10'>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home token={token} />} />
           <Route path='authors' element={<Authors />} />
           <Route path='books' element={<Books />} />
           <Route path='add-book' element={<AddBook />} />
-          <Route path='login' element={<Login />} />
+          <Route path='login' element={<Login setToken={setToken} />} />
         </Routes>
       </main>
     </div>

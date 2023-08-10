@@ -12,8 +12,10 @@ const Login = ({ setToken }) => {
   const [password, setPassword] = useState("");
 
   const [login, result] = useMutation(LOGIN, {
+    variables: { username, password },
+
     onError: (error) => {
-      new Error(error.graphQLErrors[0].message);
+      throw new Error(error.graphQLErrors[0].message);
     },
   });
 
