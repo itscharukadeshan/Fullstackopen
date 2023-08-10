@@ -1,7 +1,6 @@
 /** @format */
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
-import { useApolloClient } from "@apollo/client";
 
 import Home from "./pages/Home";
 import Authors from "./pages/Authors";
@@ -13,23 +12,17 @@ import Navigation from "./components/Navigation";
 
 const App = () => {
   const [token, setToken] = useState(null);
-  const client = useApolloClient();
-
-  const logout = () => {
-    setToken(null);
-    localStorage.clear();
-    client.resetStore();
-  };
 
   return (
     <div>
-      <Navigation />
+      <Navigation token={token} setToken={setToken} />
       <main className='flex justify-center flex-grow my-10'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='authors' element={<Authors />} />
           <Route path='books' element={<Books />} />
           <Route path='add-book' element={<AddBook />} />
+          <Route path='login' element={<Login />} />
         </Routes>
       </main>
     </div>

@@ -2,15 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
+import { useNavigate } from "react-router";
 import { LOGIN } from "../mutations/loginMutations.js";
 
-const Login = ({ setError, setToken }) => {
+const Login = ({ setToken }) => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [login, result] = useMutation(LOGIN, {
     onError: (error) => {
-      setError(error.graphQLErrors[0].message);
+      new Error(error.graphQLErrors[0].message);
     },
   });
 
@@ -19,6 +22,7 @@ const Login = ({ setError, setToken }) => {
       const token = result.data.login.value;
       setToken(token);
       localStorage.setItem("user-token", token);
+      navigate("/");
     }
   }, [result.data]);
 
@@ -30,23 +34,32 @@ const Login = ({ setError, setToken }) => {
 
   return (
     <div>
-      <form onSubmit={submit}>
+      <form
+        className='flex flex-col gap-4 bg-base-300 p-8 py-12 rounded-box shadow-md'
+        onSubmit={submit}>
+        <h5 className='text-2xl font-mono font-bold my-4'>Login</h5>
         <div>
-          username{" "}
+          <span>Username</span>
           <input
+            className='input input-sm mx-2'
             value={username}
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
         <div>
-          password{" "}
+          <span>Password</span>
           <input
+            className='input input-sm mx-2'
             type='password'
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type='submit'>login</button>
+        <button
+          className='btn btn-sm btn-outline btn-warning my-4'
+          type='submit'>
+          login
+        </button>
       </form>
     </div>
   );
