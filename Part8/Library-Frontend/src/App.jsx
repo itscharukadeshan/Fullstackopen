@@ -1,6 +1,7 @@
 /** @format */
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
+import { useApolloClient } from "@apollo/client";
 
 import Home from "./pages/Home";
 import Authors from "./pages/Authors";
@@ -12,6 +13,13 @@ import Navigation from "./components/Navigation";
 
 const App = () => {
   const [token, setToken] = useState(null);
+  const client = useApolloClient();
+
+  const logout = () => {
+    setToken(null);
+    localStorage.clear();
+    client.resetStore();
+  };
 
   return (
     <div>
