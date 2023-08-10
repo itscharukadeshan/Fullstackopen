@@ -9,4 +9,4 @@ const schema = new mongoose.Schema({
 
 schema.plugin(uniqueValidator);
 
-module.export = mongoose.model("User", schema);
+module.exports = mongoose.model("User", schema);
