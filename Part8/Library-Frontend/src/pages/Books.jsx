@@ -5,8 +5,12 @@ import { useQuery } from "@apollo/client";
 import { GET_BOOKS } from "../queries/booksQueries";
 
 function Books() {
-  const { loading, error, data } = useQuery(GET_BOOKS);
   const [genres, setGenres] = useState([]);
+  const [genre, setGenre] = useState("");
+
+  const { loading, error, data } = useQuery(GET_BOOKS, {
+    variables: { genres: genre },
+  });
 
   useEffect(() => {
     if (data) {
