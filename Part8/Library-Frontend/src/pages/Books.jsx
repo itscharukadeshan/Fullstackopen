@@ -50,8 +50,8 @@ function Books() {
           ))}
         </tbody>
       </table>
-
-      <span className='my-16 w-64 flex flex-row item-center flex-wrap '>
+      <h3 className='mt-16 text-2xl font-mono'>Filter book</h3>
+      <span className='my-8 w-64 flex flex-row item-center flex-wrap'>
         {genres.length > 0 &&
           genres.map((genre) => (
             <button
