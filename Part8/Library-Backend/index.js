@@ -51,6 +51,7 @@ type Token {
     authorCount: Int
     allBooks(genre: String , author:String):[Book!]!
     allAuthors:[Author!]!
+    genres: [String!]! 
     me: User
 
 
@@ -107,6 +108,20 @@ const resolvers = {
         return null;
       }
       return context.user;
+    },
+    genres: async () => {
+      const books = await Book.find();
+
+      const genres = [];
+      books.forEach((book) => {
+        book.genres.forEach((genre) => {
+          if (!genres.includes(genre)) {
+            genres.push(genre);
+          }
+        });
+      });
+
+      return genres;
     },
   },
 
