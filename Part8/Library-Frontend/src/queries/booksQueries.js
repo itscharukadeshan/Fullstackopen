@@ -7,6 +7,7 @@ const GET_BOOKS = gql`
       title
       author {
         name
+        id
       }
       published
       genres

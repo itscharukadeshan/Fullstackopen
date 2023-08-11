@@ -1,6 +1,7 @@
 /** @format */
 
-const { ApolloServer, GraphQLError } = require("@apollo/server");
+const { ApolloServer } = require("@apollo/server");
+const { GraphQLError } = require("graphql");
 
 const { startStandaloneServer } = require("@apollo/server/standalone");
 
@@ -89,7 +90,7 @@ const resolvers = {
       if (args.genre) filter.genres = args.genre;
       if (args.author) filter.author = args.author;
 
-      return await Book.find(filter);
+      return Book.find(filter).populate("author").populate("genres");
     },
 
     allAuthors: async () => {
@@ -109,6 +110,8 @@ const resolvers = {
 
         const newBook = new Book({ ...args, author: author._id });
         await newBook.save();
+        await newBook.populate("author");
+
         return newBook;
       } catch (error) {
         if (error.code === 11000) {
