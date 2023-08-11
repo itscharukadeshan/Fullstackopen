@@ -32,7 +32,7 @@ function AddYearForm({ authors }) {
   };
 
   return (
-    <div className='bg-base-300 p-8 rounded-box my-6 shadow-lg'>
+    <div className='bg-base-300 p-8 rounded-box my-16 shadow-lg'>
       <h2 className='my-6 text-xl font-bold font-mono'>
         Add Authors born year
       </h2>
