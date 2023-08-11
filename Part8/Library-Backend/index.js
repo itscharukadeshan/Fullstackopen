@@ -79,6 +79,12 @@ type Token {
 `;
 
 const resolvers = {
+  Author: {
+    bookCount: async (parent) => {
+      return await Book.countDocuments({ author: parent.id });
+    },
+  },
+
   Query: {
     bookCount: async () => {
       return await Book.countDocuments();
