@@ -2,8 +2,8 @@
 import { gql } from "@apollo/client";
 
 const GET_BOOKS = gql`
-  query {
-    allBooks {
+  query ($genre: String!) {
+    allBooks(genre: $genre) {
       title
       author {
         name

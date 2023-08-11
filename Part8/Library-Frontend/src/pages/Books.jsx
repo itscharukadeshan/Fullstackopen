@@ -9,7 +9,7 @@ function Books() {
   const [genre, setGenre] = useState("");
 
   const { loading, error, data } = useQuery(GET_BOOKS, {
-    variables: { genres: genre },
+    variables: { genre },
   });
 
   useEffect(() => {
@@ -59,7 +59,7 @@ function Books() {
         {genres.length > 0 &&
           genres.map((genre) => (
             <button
-              className='btn btn-sm btn-outline btn-warning mx-2 my-2'
+              className='btn btn-sm btn-outline btn-warning lowercase mx-2 my-2'
               key={genre}>
               {genre}
             </button>
