@@ -102,6 +102,12 @@ const resolvers = {
     allAuthors: async () => {
       return await Author.find();
     },
+    me: async (parent, args, context) => {
+      if (!context.user) {
+        return null;
+      }
+      return context.user;
+    },
   },
 
   Mutation: {
