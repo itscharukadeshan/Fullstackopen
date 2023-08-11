@@ -38,13 +38,17 @@ function AddYearForm({ authors }) {
       </h2>
       <form onSubmit={handleSubmit} className='flex flex-col items-start gap-4'>
         <select>
+          <option value=''>Select an author</option>
+
           {authors.map((author) => (
-            <option
-              onClick={handleSelection}
-              key={author.id}
-              value={author.name}>
-              {author.name}
-            </option>
+            <>
+              <option
+                onClick={handleSelection}
+                key={author.id}
+                value={author.name}>
+                {author.name}
+              </option>
+            </>
           ))}
         </select>
         <input onChange={handleInput} type='number' />
