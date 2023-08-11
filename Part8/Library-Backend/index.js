@@ -121,9 +121,11 @@ const resolvers = {
         return newBook;
       } catch (error) {
         if (error.code === 11000) {
-          throw new GraphQLError("Book already exists");
+          throw new GraphQLError("Book already exists", {
+            originalError: error,
+          });
         } else {
-          throw new GraphQLError("Error adding book");
+          throw new GraphQLError("Error adding book", { originalError: error });
         }
       }
     },
@@ -140,9 +142,11 @@ const resolvers = {
         return author;
       } catch (error) {
         if (error.kind === "ObjectId") {
-          throw new GraphQLError("Author not found");
+          throw new GraphQLError("Author not found", { originalError: error });
         } else {
-          throw new GraphQLError("Error updating author");
+          throw new GraphQLError("Error updating author", {
+            originalError: error,
+          });
         }
       }
     },
