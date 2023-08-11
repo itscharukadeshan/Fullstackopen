@@ -56,6 +56,8 @@ const NewBook = () => {
           <input
             className='input input-sm my-2 mx-2'
             value={title}
+            type='text'
+            minLength={5}
             onChange={({ target }) => setTitle(target.value)}
           />
         </div>
@@ -64,6 +66,8 @@ const NewBook = () => {
           <input
             className='input input-sm my-2 mx-2'
             value={author}
+            minLength={4}
+            type='text'
             onChange={({ target }) => setAuthor(target.value)}
           />
         </div>
