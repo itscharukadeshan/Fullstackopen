@@ -15,5 +15,10 @@ const GET_BOOKS = gql`
     }
   }
 `;
+const { GET_ALL_GENRES } = gql`
+  query {
+    genres
+  }
+`;
 
-export { GET_BOOKS };
+export { GET_BOOKS, GET_ALL_GENRES };

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Book from "../components/Book";
 import { useQuery } from "@apollo/client";
 import { GET_BOOKS } from "../queries/booksQueries";
+import { GET_ALL_GENRES } from "../queries/booksQueries";
 
 function Books() {
   const [genres, setGenres] = useState([]);
