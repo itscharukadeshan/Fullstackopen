@@ -104,10 +104,7 @@ const resolvers = {
       return await Author.find();
     },
     me: async (parent, args, context) => {
-      if (!context.user) {
-        return null;
-      }
-      return context.user;
+      return await User.findById(context.user._id);
     },
     genres: async () => {
       const books = await Book.find();
@@ -187,7 +184,7 @@ const resolvers = {
         });
       });
     },
-    login: async (root, args) => {
+    login: async (_, args, context) => {
       const user = await User.findOne({ username: args.username });
 
       if (!user) {
@@ -197,6 +194,8 @@ const resolvers = {
           },
         });
       }
+
+      context.user = user;
 
       const userForToken = {
         username: user.username,
@@ -211,6 +210,7 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: () => ({ user: null }),
 });
 
 startStandaloneServer(server, {
