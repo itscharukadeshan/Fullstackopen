@@ -7,6 +7,7 @@ import Authors from "./pages/Authors";
 import AddBook from "./pages/AddBook";
 import Books from "./pages/Books";
 import Login from "./pages/Login";
+import Reconditions from "./pages/Reconditions";
 
 import Navigation from "./components/Navigation";
 
@@ -23,6 +24,8 @@ const App = () => {
           <Route path='books' element={<Books />} />
           <Route path='add-book' element={<AddBook />} />
           <Route path='login' element={<Login setToken={setToken} />} />
+          <Route path='recondition' element={<Reconditions />} />
+          <Route path='*' element={<Home token={token} />} />
         </Routes>
       </main>
     </div>

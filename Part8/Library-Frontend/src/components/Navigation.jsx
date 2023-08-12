@@ -47,6 +47,9 @@ function Navigation({ token, setToken }) {
               <li className='hover:underline'>
                 <Link to='/add-book'>Add Book</Link>
               </li>
+              <li className='hover:underline'>
+                <Link to='/recondition'>Recondition</Link>
+              </li>
               <li onClick={logout} className='hover:underline'>
                 <Link to='/'>Log out</Link>
               </li>
