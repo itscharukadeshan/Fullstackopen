@@ -15,7 +15,7 @@ const GET_BOOKS = gql`
     }
   }
 `;
-const { GET_ALL_GENRES } = gql`
+const GET_ALL_GENRES = gql`
   query {
     genres
   }

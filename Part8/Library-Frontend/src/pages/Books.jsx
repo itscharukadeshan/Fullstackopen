@@ -1,33 +1,18 @@
 /** @format */
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
 import Book from "../components/Book";
+import Filters from "../components/Filters";
+
 import { useQuery } from "@apollo/client";
 import { GET_BOOKS } from "../queries/booksQueries";
-import { GET_ALL_GENRES } from "../queries/booksQueries";
 
 function Books() {
-  const [genres, setGenres] = useState([]);
   const [genre, setGenre] = useState("");
 
   const { loading, error, data } = useQuery(GET_BOOKS, {
     variables: { genre },
   });
-
-  useEffect(() => {
-    if (data) {
-      const genres = [];
-
-      data.allBooks.forEach((book) => {
-        book.genres.forEach((genre) => {
-          if (!genres.includes(genre)) {
-            genres.push(genre);
-          }
-        });
-      });
-
-      setGenres(genres);
-    }
-  }, [data]);
 
   if (loading) {
     return (
@@ -56,16 +41,7 @@ function Books() {
         </tbody>
       </table>
       <h3 className='mt-16 text-2xl font-mono'>Filter book</h3>
-      <span className='my-8 w-64 flex flex-row item-center flex-wrap'>
-        {genres.length > 0 &&
-          genres.map((genre) => (
-            <button
-              className='btn btn-sm btn-outline btn-warning lowercase mx-2 my-2'
-              key={genre}>
-              {genre}
-            </button>
-          ))}
-      </span>
+      <Filters setGenre={setGenre} />
     </main>
   );
 }
