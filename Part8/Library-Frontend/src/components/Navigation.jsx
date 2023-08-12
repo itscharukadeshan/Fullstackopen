@@ -25,7 +25,7 @@ function Navigation({ token, setToken }) {
 
   return (
     <nav className='navbar bg-base-100'>
-      <div className='flex-1'>
+      <div className='flex-1 flex-row item-center '>
         <Link to='/'>
           <div className='btn btn-ghost normal-case text-xl font-bold'>
             Library
@@ -34,7 +34,7 @@ function Navigation({ token, setToken }) {
       </div>
 
       <div className='flex-none font-bold'>
-        <ul className='menu menu-horizontal gap-2 px-1'>
+        <ul className='menu menu-horizontal  px-1'>
           <li className='hover:underline'>
             <Link to='/books'>Books</Link>
           </li>
@@ -47,9 +47,7 @@ function Navigation({ token, setToken }) {
               <li className='hover:underline'>
                 <Link to='/add-book'>Add Book</Link>
               </li>
-              <li className='hover:underline'>
-                <Link to='/recondition'>Recondition</Link>
-              </li>
+
               <li onClick={logout} className='hover:underline'>
                 <Link to='/'>Log out</Link>
               </li>

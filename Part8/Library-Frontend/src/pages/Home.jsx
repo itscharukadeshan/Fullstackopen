@@ -16,25 +16,37 @@ function Home({ token }) {
     }
   }, [token]);
   return (
-    <div className='flex flex-col items-center gap-4 my-44'>
-      <Link to={"books"}>
-        <button className='btn btn-warning btn-outline'>
-          <GiBookshelf />
-          Books
-        </button>
-      </Link>
-      <Link to={"authors"}>
-        <button className='btn btn-warning btn-outline'>
-          <ImProfile />
-          Authors
-        </button>
-      </Link>
+    <div className='flex flex-col items-center gap-6 my-44'>
+      {!isLoggedIn && (
+        <>
+          <Link to={"books"}>
+            <button className='btn btn-warning btn-outline'>
+              <GiBookshelf />
+              Books
+            </button>
+          </Link>
+          <Link to={"authors"}>
+            <button className='btn btn-warning btn-outline'>
+              <ImProfile />
+              Authors
+            </button>
+          </Link>
+        </>
+      )}
+
       {isLoggedIn && (
         <>
           <Link to={"add-book"}>
-            <button className='btn btn-warning btn-outline'>
+            <button className='btn btn-warning btn-outline font-bold '>
               <BiBookAdd />
               Add Books
+            </button>
+          </Link>
+
+          <Link to={"recommendation"}>
+            <button className='btn btn-warning btn-outline font-bold'>
+              <GiBookshelf />
+              Recommendations
             </button>
           </Link>
         </>
