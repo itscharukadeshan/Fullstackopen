@@ -7,7 +7,7 @@ function Recommendations({ token }) {
   const { loading, data, error } = useQuery(GET_USER, {
     context: {
       headers: {
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     },
   });
