@@ -103,8 +103,8 @@ const resolvers = {
     allAuthors: async () => {
       return await Author.find();
     },
-    me: async (parent, args, context) => {
-      return await User.findById(context.user._id);
+    me: (root, args, context) => {
+      return context.currentUser;
     },
     genres: async () => {
       const books = await Book.find();
@@ -210,7 +210,15 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => ({ user: null }),
+  context: async ({ req }) => {
+    const auth = req ? req.headers.authorization : null;
+    if (auth && auth.toLowerCase().startsWith("bearer ")) {
+      const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET);
+      const currentUser = await User.findById(decodedToken.id);
+      console.log(currentUser);
+      return { currentUser };
+    }
+  },
 });
 
 startStandaloneServer(server, {
