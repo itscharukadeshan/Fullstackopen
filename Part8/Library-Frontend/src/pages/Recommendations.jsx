@@ -3,8 +3,14 @@
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../queries/userQueries";
 
-function Recommendations() {
-  const { loading, data, error } = useQuery(GET_USER);
+function Recommendations({ token }) {
+  const { loading, data, error } = useQuery(GET_USER, {
+    context: {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    },
+  });
 
   if (loading) {
     return (
