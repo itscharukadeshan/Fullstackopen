@@ -39,6 +39,7 @@ type Author {
 type User {
   username: String!
   id: ID!
+  favoriteGenre: String!
 }
 type Token {
   value: String!
