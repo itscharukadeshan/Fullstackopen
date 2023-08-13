@@ -219,7 +219,7 @@ const server = new ApolloServer({
         process.env.JWT_SECRET
       );
       const currentUser = await User.findById(decodedToken.id);
-      return { currentUser, authToken: auth.substring(7) };
+      return { currentUser };
     }
   },
 });
