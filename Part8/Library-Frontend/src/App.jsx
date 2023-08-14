@@ -24,10 +24,7 @@ const App = () => {
           <Route path='books' element={<Books />} />
           <Route path='add-book' element={<AddBook />} />
           <Route path='login' element={<Login setToken={setToken} />} />
-          <Route
-            path='recommendation'
-            element={<Recommendations token={token} />}
-          />
+          <Route path='recommendation' element={<Recommendations />} />
           <Route path='*' element={<Home token={token} />} />
         </Routes>
       </main>

@@ -4,7 +4,7 @@ import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("phonenumbers-user-token");
+  const token = localStorage.getItem("user-token");
   return {
     headers: {
       ...headers,

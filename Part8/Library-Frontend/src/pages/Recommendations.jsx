@@ -3,16 +3,10 @@
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../queries/userQueries";
 
-function Recommendations({ token }) {
-  const { loading, data, error } = useQuery(GET_USER, {
-    context: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  });
+function Recommendations() {
+  const result = useQuery(GET_USER);
 
-  if (loading) {
+  if (result.loading) {
     return (
       <div className='flex justify-center items-center h-full'>
         <span className='loading'></span>
@@ -20,9 +14,9 @@ function Recommendations({ token }) {
     );
   }
 
-  if (error) return <p>Error fetching books!</p>;
+  if (result.error) return <p>Error fetching books!</p>;
 
-  console.log(data);
+  console.log(result.data);
 }
 
 export default Recommendations;
