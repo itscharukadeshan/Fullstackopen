@@ -1,7 +1,4 @@
 /** @format */
-
-import { useEffect } from "react";
-
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../queries/userQueries";
 import { GET_BOOKS } from "../queries/booksQueries";
@@ -21,7 +18,7 @@ function Recommendations() {
     skip: !genre,
   });
 
-  if (result.loading) {
+  if (booksLoading) {
     return (
       <div className='flex justify-center items-center h-full'>
         <span className='loading'></span>
@@ -29,7 +26,7 @@ function Recommendations() {
     );
   }
 
-  if (result.error) return <p>Error fetching books!</p>;
+  if (booksError) return <p>Error fetching books!</p>;
 
   return (
     <main className='flex flex-col gap-3'>
