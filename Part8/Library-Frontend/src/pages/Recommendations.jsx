@@ -49,9 +49,11 @@ function Recommendations() {
           </tr>
         </thead>
         <tbody>
-          {booksData.allBooks.map((book) => (
-            <Book key={book.id} book={book} />
-          ))}
+          {booksData
+            ? booksData.allBooks.map((book) => (
+                <Book key={book.id} book={book} />
+              ))
+            : null}
         </tbody>
       </table>
     </main>
