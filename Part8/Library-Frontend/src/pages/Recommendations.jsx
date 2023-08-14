@@ -5,9 +5,13 @@ import { GET_BOOKS } from "../queries/booksQueries";
 import Book from "../components/Book";
 
 function Recommendations() {
-  const result = useQuery(GET_USER);
+  const {
+    loading: userLoading,
+    error: userError,
+    data: userData,
+  } = useQuery(GET_USER);
 
-  const genre = result.data?.me.favoriteGenre;
+  const genre = userLoading ? null : userData.me.favoriteGenre || "";
 
   const {
     loading: booksLoading,
@@ -18,7 +22,7 @@ function Recommendations() {
     skip: !genre,
   });
 
-  if (booksLoading) {
+  if (booksLoading || userLoading) {
     return (
       <div className='flex justify-center items-center h-full'>
         <span className='loading'></span>
@@ -34,7 +38,7 @@ function Recommendations() {
       <div className='flex flex-row gap-4 item-center my-4'>
         book in your favorite genre{" "}
         <span className='badge badge-outline font-mono mt-1'>
-          {result.data.me.favoriteGenre}
+          {userData && userData.me.favoriteGenre}
         </span>
       </div>
       <table className='table w-fit'>

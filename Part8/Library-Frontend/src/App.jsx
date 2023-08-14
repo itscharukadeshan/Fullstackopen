@@ -1,6 +1,6 @@
 /** @format */
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Home from "./pages/Home";
 import Authors from "./pages/Authors";
@@ -13,6 +13,13 @@ import Navigation from "./components/Navigation";
 
 const App = () => {
   const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("user-token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
   return (
     <div>
