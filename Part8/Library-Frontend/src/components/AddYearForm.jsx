@@ -41,14 +41,12 @@ function AddYearForm({ authors }) {
           <option value=''>Select an author</option>
 
           {authors.map((author) => (
-            <>
-              <option
-                onClick={handleSelection}
-                key={author.id}
-                value={author.name}>
-                {author.name}
-              </option>
-            </>
+            <option
+              onClick={handleSelection}
+              key={author.id}
+              value={author.name}>
+              {author.name}
+            </option>
           ))}
         </select>
         <input onChange={handleInput} type='number' />
