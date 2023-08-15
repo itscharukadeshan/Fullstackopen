@@ -8,9 +8,7 @@ import Filters from "../components/Filters";
 import { useQuery } from "@apollo/client";
 import { GET_BOOKS } from "../queries/booksQueries";
 
-function Books({ newBook, setNewBook }) {
-  const client = useApolloClient();
-
+function Books({ newBook }) {
   const [genre, setGenre] = useState("");
   const [activeGenre, setActiveGenre] = useState(null);
 
@@ -25,18 +23,7 @@ function Books({ newBook, setNewBook }) {
   }, [newBook]);
 
   const updateCacheWithNewBook = async (newBook) => {
-    const { allBooks } = await client.readQuery({ query: GET_BOOKS });
-
-    const updatedBooks = [newBook, ...allBooks];
-
-    client.writeQuery({
-      query: GET_BOOKS,
-      data: {
-        allBooks: updatedBooks,
-      },
-    });
-
-    setNewBook(null);
+    refetch();
   };
 
   const handleClear = () => {
