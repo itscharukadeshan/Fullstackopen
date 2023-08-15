@@ -19,15 +19,21 @@ const App = () => {
 
   useSubscription(BOOK_ADDED, {
     onData: ({ data }) => {
-      const bookData = data;
-
       console.log("New book added");
 
-      setNewBook(data);
-
-      console.log(newBook);
+      setNewBook(data.data.bookAdded);
     },
   });
+
+  useEffect(() => {
+    if (newBook) {
+      const timeout = setTimeout(() => {
+        window.alert(`New Book ${newBook.title} added`);
+      }, 1000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [newBook]);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("user-token");
