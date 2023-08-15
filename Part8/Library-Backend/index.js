@@ -32,6 +32,8 @@ mongoose
     console.log("error connection to MongoDB:", error.message);
   });
 
+mongoose.set("debug", true);
+
 const start = async () => {
   const app = express();
   const httpServer = http.createServer(app);
@@ -74,8 +76,6 @@ const start = async () => {
             auth.substring(7),
             process.env.JWT_SECRET
           );
-          const currentUser = await User.findById(decodedToken.id).populate("");
-          return { currentUser };
         }
       },
     })
