@@ -1,6 +1,8 @@
 /** @format */
 import { Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useSubscription } from "@apollo/client";
+import { BOOK_ADDED } from "./queries/subscriptionQueries.js";
 
 import Home from "./pages/Home";
 import Authors from "./pages/Authors";
@@ -13,6 +15,13 @@ import Navigation from "./components/Navigation";
 
 const App = () => {
   const [token, setToken] = useState(null);
+
+  useSubscription(BOOK_ADDED, {
+    onData: ({ data }) => {
+      window.alert(`New book was added`);
+      console.log(data);
+    },
+  });
 
   useEffect(() => {
     const storedToken = localStorage.getItem("user-token");
