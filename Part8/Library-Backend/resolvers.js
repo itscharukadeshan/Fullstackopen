@@ -1,6 +1,8 @@
 /** @format */
 
 const { GraphQLError } = require("graphql");
+const { PubSub } = require("graphql-subscriptions");
+const pubsub = new PubSub();
 
 const Author = require("./models/author");
 const Book = require("./models/book");
@@ -13,6 +15,11 @@ const resolvers = {
   Author: {
     bookCount: async (parent) => {
       return await Book.countDocuments({ author: parent.id });
+    },
+  },
+  Subscription: {
+    bookAdded: {
+      subscribe: () => pubsub.asyncIterator("BOOK_ADDED"),
     },
   },
 
@@ -65,6 +72,8 @@ const resolvers = {
         const newBook = new Book({ ...args, author: author._id });
         await newBook.save();
         await newBook.populate("author");
+
+        pubsub.publish("BOOK_ADDED", { bookAdded: newBook });
 
         return newBook;
       } catch (error) {

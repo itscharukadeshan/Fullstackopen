@@ -56,7 +56,7 @@ type Subscription {
     password: String!
   ): Token
 
-
+     
   editAuthor(name: String!, setBornTo: Int!): Author 
 
 }
