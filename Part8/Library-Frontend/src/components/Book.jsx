@@ -1,12 +1,16 @@
 /** @format */
 
-const Book = ({ book }) => {
+const Book = ({ books }) => {
   return (
-    <tr>
-      <td>{book.title}</td>
-      <td>{book.author.name}</td>
-      <td>{book.published}</td>
-    </tr>
+    <>
+      {books.map((book) => (
+        <tr key={book.id}>
+          <td>{book.title}</td>
+          <td>{book.author.name}</td>
+          <td>{book.published}</td>
+        </tr>
+      ))}
+    </>
   );
 };
 

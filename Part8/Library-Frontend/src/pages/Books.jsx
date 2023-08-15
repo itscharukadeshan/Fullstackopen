@@ -1,5 +1,6 @@
 /** @format */
 import { useState, useEffect } from "react";
+import { useApolloClient } from "@apollo/client";
 
 import Book from "../components/Book";
 import Filters from "../components/Filters";
@@ -7,13 +8,36 @@ import Filters from "../components/Filters";
 import { useQuery } from "@apollo/client";
 import { GET_BOOKS } from "../queries/booksQueries";
 
-function Books() {
+function Books({ newBook, setNewBook }) {
+  const client = useApolloClient();
+
   const [genre, setGenre] = useState("");
   const [activeGenre, setActiveGenre] = useState(null);
 
   const { loading, error, data, refetch } = useQuery(GET_BOOKS, {
     variables: { genre },
   });
+
+  useEffect(() => {
+    if (newBook) {
+      updateCacheWithNewBook(newBook);
+    }
+  }, [newBook]);
+
+  const updateCacheWithNewBook = async (newBook) => {
+    const { allBooks } = await client.readQuery({ query: GET_BOOKS });
+
+    const updatedBooks = [newBook, ...allBooks];
+
+    client.writeQuery({
+      query: GET_BOOKS,
+      data: {
+        allBooks: updatedBooks,
+      },
+    });
+
+    setNewBook(null);
+  };
 
   const handleClear = () => {
     setGenre("");
@@ -45,9 +69,7 @@ function Books() {
           </tr>
         </thead>
         <tbody>
-          {data.allBooks.map((book) => (
-            <Book key={book.id} book={book} />
-          ))}
+          <Book books={data.allBooks} />
         </tbody>
       </table>
       <div className='flex flex-col gap-4'>
