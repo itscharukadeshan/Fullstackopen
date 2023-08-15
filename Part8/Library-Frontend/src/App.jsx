@@ -15,11 +15,17 @@ import Navigation from "./components/Navigation";
 
 const App = () => {
   const [token, setToken] = useState(null);
+  const [newBook, setNewBook] = useState(null);
 
   useSubscription(BOOK_ADDED, {
     onData: ({ data }) => {
-      window.alert(`New book was added`);
-      console.log(data);
+      const bookData = data;
+
+      console.log("New book added");
+
+      setNewBook(data);
+
+      console.log(newBook);
     },
   });
 
