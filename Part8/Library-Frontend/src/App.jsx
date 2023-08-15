@@ -19,8 +19,6 @@ const App = () => {
 
   useSubscription(BOOK_ADDED, {
     onData: ({ data }) => {
-      console.log("New book added");
-
       setNewBook(data.data.bookAdded);
     },
   });
@@ -49,10 +47,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home token={token} />} />
           <Route path='authors' element={<Authors />} />
-          <Route
-            path='books'
-            element={<Books newBook={newBook} setNewBook={setNewBook} />}
-          />
+          <Route path='books' element={<Books newBook={newBook} />} />
           <Route path='add-book' element={<AddBook />} />
           <Route path='login' element={<Login setToken={setToken} />} />
           <Route path='recommendation' element={<Recommendations />} />
