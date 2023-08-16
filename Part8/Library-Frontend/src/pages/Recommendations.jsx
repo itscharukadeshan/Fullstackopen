@@ -30,7 +30,7 @@ function Recommendations() {
     );
   }
 
-  if (booksError) return <p>Error fetching books!</p>;
+  if (booksError || userError) return <p>Error fetching books or user!</p>;
 
   return (
     <main className='flex flex-col gap-3'>
@@ -50,11 +50,7 @@ function Recommendations() {
           </tr>
         </thead>
         <tbody>
-          {booksData
-            ? booksData.allBooks.map((book) => (
-                <Book key={book.id} book={book} />
-              ))
-            : null}
+          <Book books={booksData.allBooks || []} />
         </tbody>
       </table>
     </main>
