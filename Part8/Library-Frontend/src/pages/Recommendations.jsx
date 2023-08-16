@@ -11,7 +11,7 @@ function Recommendations() {
     data: userData,
   } = useQuery(GET_USER);
 
-  const genre = userLoading ? null : userData.me.favoriteGenre || "";
+  const genre = userLoading ? "" : userData.me.favoriteGenre || "";
 
   const {
     loading: booksLoading,
