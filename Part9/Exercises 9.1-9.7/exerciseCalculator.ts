@@ -49,3 +49,5 @@ const hours = argv.slice(3).map((num) => Number(num));
 const result = calculateExercises(hours, target);
 
 console.log(result);
+
+export { calculateExercises };
