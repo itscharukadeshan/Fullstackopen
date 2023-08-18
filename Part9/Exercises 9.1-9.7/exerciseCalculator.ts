@@ -1,7 +1,5 @@
 /** @format */
-const hours = [3, 0, 2, 4.5, 0, 3, 1];
-const target = 2;
-
+import { argv } from "process";
 interface Result {
   periodLength: number;
   trainingDays: number;
@@ -45,6 +43,8 @@ function calculateExercises(hours: number[], target: number): Result {
     average,
   };
 }
+const target = Number(argv[2]);
+const hours = argv.slice(3).map((num) => Number(num));
 
 const result = calculateExercises(hours, target);
 
