@@ -1,6 +1,10 @@
 /** @format */
 import { argv } from "process";
-interface Result {
+
+const target = Number(argv[2]);
+const hours = argv.slice(3).map((num) => Number(num));
+
+interface Response {
   periodLength: number;
   trainingDays: number;
   success: boolean;
@@ -10,7 +14,7 @@ interface Result {
   average: number;
 }
 
-function calculateExercises(hours: number[], target: number): Result {
+function calculateExercises(hours: number[], target: number): Response {
   const periodLength = hours.length;
   const trainingDays = hours.filter((hour) => hour > 0).length;
 
@@ -43,11 +47,11 @@ function calculateExercises(hours: number[], target: number): Result {
     average,
   };
 }
-const target = Number(argv[2]);
-const hours = argv.slice(3).map((num) => Number(num));
 
-const result = calculateExercises(hours, target);
+if (argv[2] || argv[3]) {
+  const result = calculateExercises(hours, target);
 
-console.log(result);
+  console.log(result);
+}
 
-export { calculateExercises };
+export { calculateExercises, Response };
