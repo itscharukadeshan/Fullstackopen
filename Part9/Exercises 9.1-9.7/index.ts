@@ -6,6 +6,7 @@ import { calculateExercises } from "./exerciseCalculator";
 import { parseNumberArray } from "./utils";
 
 const app = express();
+app.use(express.json());
 
 app.get("/bmi", (req, res) => {
   if (!req.query.height || !req.query.weight) {
@@ -53,7 +54,7 @@ app.post("/exercises", (req, res) => {
   } catch (error) {
     return res.status(400).json({ error: "something went wrong" });
   }
-  return res.status(400).json({ error: "something went wrong" });
+  return res.status(400).json({ error: "Check the data again" });
 });
 
 const PORT = 3002;
