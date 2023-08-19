@@ -1,6 +1,7 @@
 /** @format */
 
 export type NonSensitivePatientData = Omit<PatientEntry, "ssn">;
+export type NewPatientEntry = Omit<PatientEntry, "id">;
 
 export interface PatientEntry {
   id: string;

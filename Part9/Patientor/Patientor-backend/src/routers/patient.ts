@@ -19,8 +19,18 @@ router.get("/:id", (req, res) => {
   }
 });
 
-router.post("/", (_req, res) => {
-  res.send("Saving a patients!");
+router.post("/", (req, res) => {
+  const { ssn, name, dateOfBirth, gender, occupation } = req.body;
+
+  const addedPatient = patientServices.addPatient({
+    ssn,
+    name,
+    dateOfBirth,
+    gender,
+    occupation,
+  });
+
+  res.json(addedPatient);
 });
 
 export default router;
