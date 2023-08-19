@@ -1,6 +1,6 @@
 /** @format */
 
-import patientData from "../data/patients.json";
+import patientData from "../data/patients";
 import {
   NonSensitivePatientData,
   PatientEntry,
