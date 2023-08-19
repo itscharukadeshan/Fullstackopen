@@ -1,12 +1,12 @@
 /** @format */
 
 import express from "express";
-import patientServices from "../services/patientServices";
+import diagnosesServices from "../services/diagnosesServices";
 
 const router = express.Router();
 
 router.get("/", (_req, res) => {
-  res.send(patientServices.getNonSensitivePatientData());
+  res.send(diagnosesServices.getEntries());
 });
 
 router.post("/", (_req, res) => {
