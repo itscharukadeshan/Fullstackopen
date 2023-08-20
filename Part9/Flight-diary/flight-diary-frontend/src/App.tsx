@@ -5,6 +5,7 @@ import axios from "axios";
 import { Entry } from "./types";
 
 import DiaryEntry from "./components/DiaryEntry";
+import NewDiaryEntry from "./components/NewDiaryEntry";
 
 function App() {
   const [entries, setEntries] = useState<Entry[]>([]);
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <>
+      <NewDiaryEntry />
       <DiaryEntry entries={entries} />
     </>
   );
