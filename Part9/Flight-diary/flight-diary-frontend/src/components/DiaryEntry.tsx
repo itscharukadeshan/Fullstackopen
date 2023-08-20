@@ -1,9 +1,5 @@
 /** @format */
-import { Entry } from "../types";
-
-interface DiaryEntryProps {
-  entries: Entry[];
-}
+import { DiaryEntryProps } from "../types";
 
 function DiaryEntry(props: DiaryEntryProps) {
   const { entries } = props;

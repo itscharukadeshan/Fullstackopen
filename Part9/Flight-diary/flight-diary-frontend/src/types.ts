@@ -13,3 +13,7 @@ export interface Entry {
   visibility: Visibility;
   comment?: string;
 }
+
+export interface DiaryEntryProps {
+  entries: Entry[];
+}
