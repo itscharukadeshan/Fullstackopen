@@ -1,25 +1,35 @@
 /** @format */
 import { useState } from "react";
+import axios from "axios";
 
 function NewDiaryEntry() {
   const [visibility, setVisibility] = useState<string>("");
   const [weather, setWeather] = useState<string>("");
   const [comment, setComment] = useState<string>("");
   const [date, setDate] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const entry = {
       visibility,
       weather,
       comment,
       date,
     };
+    try {
+      await axios.post("http://localhost:3000/api/diaries", entry);
+    } catch (error) {
+      setErrorMsg((error as any).response.data.message);
+    }
   };
 
   return (
     <>
       <h1 className='text-3xl my-4 mx-2 font-bold'>Add new entry</h1>
+      {errorMsg && <p>{errorMsg}</p>}
+
       <form onSubmit={handleSubmit} className='mx-4'>
         <div className='my-2'>
           <label htmlFor='date'>Date : </label>
@@ -39,12 +49,12 @@ function NewDiaryEntry() {
           <div className='my-2'>
             <input
               type='radio'
-              id='grate'
+              id='great'
               name='visibility'
-              value='grate'
+              value='great'
               onChange={(event) => setVisibility(event.target.value)}
             />
-            <label htmlFor='grate'>Grate</label>
+            <label htmlFor='great'>Grate</label>
             <input
               type='radio'
               id='good'
