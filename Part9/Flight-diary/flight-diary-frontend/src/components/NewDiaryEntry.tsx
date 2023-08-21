@@ -67,7 +67,9 @@ function NewDiaryEntry() {
               value='great'
               onChange={(event) => setVisibility(event.target.value)}
             />
-            <label htmlFor='great'>Grate</label>
+            <label className='ml-2 mr-4' htmlFor='great'>
+              Grate
+            </label>
             <input
               type='radio'
               id='good'
@@ -75,7 +77,9 @@ function NewDiaryEntry() {
               value='good'
               onChange={(event) => setVisibility(event.target.value)}
             />
-            <label htmlFor='good'>Good</label>
+            <label className='ml-2 mr-4' htmlFor='good'>
+              Good
+            </label>
             <input
               type='radio'
               id='ok'
@@ -83,7 +87,9 @@ function NewDiaryEntry() {
               value='ok'
               onChange={(event) => setVisibility(event.target.value)}
             />
-            <label htmlFor='ok'>Ok</label>
+            <label className='ml-2 mr-4' htmlFor='ok'>
+              Ok
+            </label>
             <input
               type='radio'
               id='poor'
@@ -91,7 +97,9 @@ function NewDiaryEntry() {
               value='poor'
               onChange={(event) => setVisibility(event.target.value)}
             />
-            <label htmlFor='poor'>poor</label>
+            <label className='ml-2 mr-4' htmlFor='poor'>
+              Poor
+            </label>
           </div>
         </fieldset>
         <fieldset>
@@ -104,7 +112,9 @@ function NewDiaryEntry() {
               value='sunny'
               onChange={(event) => setWeather(event.target.value)}
             />
-            <label htmlFor='sunny'>Sunny</label>
+            <label className='ml-2 mr-4' htmlFor='sunny'>
+              Sunny
+            </label>
 
             <input
               type='radio'
@@ -113,7 +123,9 @@ function NewDiaryEntry() {
               value='rainy'
               onChange={(event) => setWeather(event.target.value)}
             />
-            <label htmlFor='rainy'>Rainy</label>
+            <label className='ml-2 mr-4' htmlFor='rainy'>
+              Rainy
+            </label>
 
             <input
               type='radio'
@@ -122,7 +134,9 @@ function NewDiaryEntry() {
               value='cloudy'
               onChange={(event) => setWeather(event.target.value)}
             />
-            <label htmlFor='cloudy'>Cloudy</label>
+            <label className='ml-2 mr-4' htmlFor='cloudy'>
+              Cloudy
+            </label>
 
             <input
               type='radio'
@@ -131,7 +145,9 @@ function NewDiaryEntry() {
               value='stormy'
               onChange={(event) => setWeather(event.target.value)}
             />
-            <label htmlFor='stormy'>Stormy</label>
+            <label className='ml-2 mr-4' htmlFor='stormy'>
+              Stormy
+            </label>
 
             <input
               type='radio'
@@ -140,12 +156,16 @@ function NewDiaryEntry() {
               value='windy'
               onChange={(event) => setWeather(event.target.value)}
             />
-            <label htmlFor='windy'>Windy</label>
+            <label className='ml-2 mr-4' htmlFor='windy'>
+              Windy
+            </label>
           </div>
         </fieldset>
-        <label htmlFor='comment'>Comment :</label>
+        <label className='my-8' htmlFor='comment'>
+          Comment :
+        </label>
         <input
-          className='rounded-md my-2 mx-2'
+          className='rounded-md my-6 mx-2'
           type='text'
           id='comment'
           onChange={(event) => setComment(event.target.value)}
