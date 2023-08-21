@@ -14,6 +14,13 @@ export interface Entry {
   comment?: string;
 }
 
+export interface NewEntry {
+  date: string;
+  weather: string;
+  visibility: string;
+  comment?: string;
+}
+
 export interface DiaryEntryProps {
   entries: Entry[];
 }

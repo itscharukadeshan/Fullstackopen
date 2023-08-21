@@ -1,6 +1,7 @@
 /** @format */
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { NewEntry } from "../types";
 
 function NewDiaryEntry() {
   const [visibility, setVisibility] = useState<string>("");
@@ -20,7 +21,7 @@ function NewDiaryEntry() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const entry = {
+    const entry: NewEntry = {
       visibility,
       weather,
       comment,
