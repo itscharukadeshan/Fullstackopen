@@ -15,8 +15,6 @@ function NewDiaryEntry() {
       comment,
       date,
     };
-
-    console.log(entry);
   };
 
   return (
@@ -32,43 +30,103 @@ function NewDiaryEntry() {
             id='date'
             name='date'
             value={date}
+            onChange={(event) => setDate(event.target.value)}
           />
         </div>
 
         <fieldset>
           <legend className='my-4'>Visibility</legend>
           <div className='my-2'>
-            <input type='radio' id='grate' name='visibility' value='grate' />
+            <input
+              type='radio'
+              id='grate'
+              name='visibility'
+              value='grate'
+              onChange={(event) => setVisibility(event.target.value)}
+            />
             <label htmlFor='grate'>Grate</label>
-            <input type='radio' id='good' name='visibility' value='good' />
+            <input
+              type='radio'
+              id='good'
+              name='visibility'
+              value='good'
+              onChange={(event) => setVisibility(event.target.value)}
+            />
             <label htmlFor='good'>Good</label>
-            <input type='radio' id='ok' name='visibility' value='ok' />
+            <input
+              type='radio'
+              id='ok'
+              name='visibility'
+              value='ok'
+              onChange={(event) => setVisibility(event.target.value)}
+            />
             <label htmlFor='ok'>Ok</label>
-            <input type='radio' id='poor' name='visibility' value='poor' />
+            <input
+              type='radio'
+              id='poor'
+              name='visibility'
+              value='poor'
+              onChange={(event) => setVisibility(event.target.value)}
+            />
             <label htmlFor='poor'>poor</label>
           </div>
         </fieldset>
         <fieldset>
           <legend className='my-4'>Whether</legend>
           <div className='my-2'>
-            <input type='radio' id='sunny' name='whether' value='sunny' />
+            <input
+              type='radio'
+              id='sunny'
+              name='whether'
+              value='sunny'
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor='sunny'>Sunny</label>
 
-            <input type='radio' id='rainy' name='whether' value='rainy' />
+            <input
+              type='radio'
+              id='rainy'
+              name='whether'
+              value='rainy'
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor='rainy'>Rainy</label>
 
-            <input type='radio' id='cloudy' name='whether' value='cloudy' />
+            <input
+              type='radio'
+              id='cloudy'
+              name='whether'
+              value='cloudy'
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor='cloudy'>Cloudy</label>
 
-            <input type='radio' id='stormy' name='whether' value='stormy' />
+            <input
+              type='radio'
+              id='stormy'
+              name='whether'
+              value='stormy'
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor='stormy'>Stormy</label>
 
-            <input type='radio' id='windy' name='whether' value='windy' />
+            <input
+              type='radio'
+              id='windy'
+              name='whether'
+              value='windy'
+              onChange={(event) => setWeather(event.target.value)}
+            />
             <label htmlFor='windy'>Windy</label>
           </div>
         </fieldset>
         <label htmlFor='comment'>Comment :</label>
-        <input className='rounded-md my-2 mx-2' type='text' id='comment' />
+        <input
+          className='rounded-md my-2 mx-2'
+          type='text'
+          id='comment'
+          onChange={(event) => setComment(event.target.value)}
+        />
 
         <div>
           <button
