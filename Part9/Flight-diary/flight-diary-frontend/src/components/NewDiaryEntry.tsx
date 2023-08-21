@@ -1,5 +1,5 @@
 /** @format */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 function NewDiaryEntry() {
@@ -8,6 +8,14 @@ function NewDiaryEntry() {
   const [comment, setComment] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [errorMsg, setErrorMsg] = useState<string>("");
+
+  useEffect(() => {
+    if (errorMsg) {
+      setTimeout(() => {
+        setErrorMsg("");
+      }, 3000);
+    }
+  }, [errorMsg]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,15 +28,20 @@ function NewDiaryEntry() {
     };
     try {
       await axios.post("http://localhost:3000/api/diaries", entry);
+
+      setComment("");
+      setDate("");
+      setVisibility("");
+      setWeather("");
     } catch (error) {
-      setErrorMsg((error as any).response.data.message);
+      setErrorMsg((error as any).response.data);
     }
   };
 
   return (
     <>
       <h1 className='text-3xl my-4 mx-2 font-bold'>Add new entry</h1>
-      {errorMsg && <p>{errorMsg}</p>}
+      {errorMsg && <p className='text-warning'>{errorMsg}</p>}
 
       <form onSubmit={handleSubmit} className='mx-4'>
         <div className='my-2'>
