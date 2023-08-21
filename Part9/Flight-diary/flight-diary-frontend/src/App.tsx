@@ -26,10 +26,10 @@ function App() {
   }, []);
 
   return (
-    <>
+    <main className='flex flex-col p-8'>
       <NewDiaryEntry />
       <DiaryEntry entries={entries} />
-    </>
+    </main>
   );
 }
 
