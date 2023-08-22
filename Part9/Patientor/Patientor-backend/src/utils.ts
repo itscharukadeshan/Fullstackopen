@@ -54,6 +54,18 @@ const parseGender = (gender: any): Gender => {
   return gender;
 };
 
+const isArray = (entries: any): entries is [] => {
+  return Array.isArray(entries);
+};
+
+const parseEntries = (entries: any): [] => {
+  if (!isArray(entries)) {
+    throw new Error("Incorrect or missing entries");
+  }
+
+  return entries;
+};
+
 const toNewPatientEntry = (object: any): NewPatientEntry => {
   return {
     name: parseName(object.name),
@@ -61,7 +73,7 @@ const toNewPatientEntry = (object: any): NewPatientEntry => {
     ssn: parseSsn(object.ssn),
     gender: parseGender(object.gender),
     occupation: parseOccupation(object.occupation),
+    entries: parseEntries(object.entries),
   };
 };
-
 export default toNewPatientEntry;
