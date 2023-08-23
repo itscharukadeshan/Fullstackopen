@@ -7,6 +7,7 @@ import { Card } from "@mui/material";
 
 import { Patient } from "../../types";
 
+import PatientEntry from "./PatientEntry";
 import GenderIcon from "./GenderIcon";
 
 const PatientPage = () => {
@@ -35,6 +36,11 @@ const PatientPage = () => {
               <div>Ssn: {patient.ssn}</div>
               <div>Occupation : {patient.occupation}</div>
             </div>
+            {patient.entries ? (
+              <PatientEntry entries={patient.entries} />
+            ) : (
+              <></>
+            )}
           </Card>
         </>
       ) : (
