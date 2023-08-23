@@ -28,9 +28,7 @@ function HealthCheckRating({ rating }: Props) {
 
   return (
     <div style={{ color }}>
-      {Array.from({ length: rating }, () => (
-        <FavoriteIcon />
-      ))}
+      <FavoriteIcon />
     </div>
   );
 }
