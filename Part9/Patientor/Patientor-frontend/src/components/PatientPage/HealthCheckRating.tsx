@@ -3,16 +3,13 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 interface Props {
-  rating: number;
+  rating?: number;
 }
 
 function HealthCheckRating({ rating }: Props) {
   let color;
 
   switch (rating) {
-    case 0:
-      color = "green";
-      break;
     case 1:
       color = "yellow";
       break;
@@ -24,6 +21,9 @@ function HealthCheckRating({ rating }: Props) {
       break;
     case 4:
       color = "red";
+      break;
+    case 0:
+      color = "green";
       break;
     default:
       color = "gray";

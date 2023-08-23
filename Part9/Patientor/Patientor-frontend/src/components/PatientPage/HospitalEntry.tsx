@@ -28,9 +28,7 @@ function HospitalEntry({ entry, entryDiagnosis }: Props) {
       ) : (
         <></>
       )}
-      {entry.healthCheckRating && (
-        <HealthCheckRating rating={entry.healthCheckRating} />
-      )}
+      <HealthCheckRating rating={entry.healthCheckRating} />
 
       <p>diagnoses by {entry.specialist}</p>
     </>
