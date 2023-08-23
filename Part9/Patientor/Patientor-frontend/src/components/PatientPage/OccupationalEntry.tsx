@@ -29,10 +29,8 @@ function OccupationalEntry({ entry, entryDiagnosis }: Props) {
         <></>
       )}
 
-      {entry.healthCheckRating ? (
+      {entry.healthCheckRating && (
         <HealthCheckRating rating={entry.healthCheckRating} />
-      ) : (
-        <></>
       )}
 
       <p>diagnoses by {entry.specialist}</p>
