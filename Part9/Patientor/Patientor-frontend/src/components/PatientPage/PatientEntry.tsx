@@ -30,26 +30,29 @@ function PatientEntry({ entry }: Props) {
     void fetchDiagnosisList();
   }, [entry]);
 
-  return (
-    <>
-      <div>
-        <p>{entry.date}</p>
+  let entryComponent = null;
 
-        <p>{entry.description}</p>
-      </div>
-      {diagnosis && entryDiagnosis ? (
-        <ul>
-          {entryDiagnosis.map((diagnosis) => (
-            <li key={diagnosis.code}>
-              {diagnosis.code} - {diagnosis.name}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <></>
-      )}
-    </>
-  );
+  switch (entry.type) {
+    case "Hospital":
+      entryComponent = (
+        <HospitalEntry entry={entry} entryDiagnosis={entryDiagnosis} />
+      );
+      break;
+    case "OccupationalHealthcare":
+      entryComponent = (
+        <OccupationalEntry entry={entry} entryDiagnosis={entryDiagnosis} />
+      );
+      break;
+    case "HealthCheck":
+      entryComponent = (
+        <HealthCheckEntry entry={entry} entryDiagnosis={entryDiagnosis} />
+      );
+      break;
+    default:
+      entryComponent = <p>Unknown entry type</p>;
+  }
+
+  return <>{entryComponent}</>;
 }
 
 export default PatientEntry;
