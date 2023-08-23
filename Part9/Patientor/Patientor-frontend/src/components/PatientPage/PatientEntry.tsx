@@ -15,7 +15,7 @@ function PatientEntry({ entries }: Props) {
     const fetchDiagnosesList = async () => {
       const diagnoses = await diagnoseServices.getAll();
 
-      if (entries) {
+      if (entries && diagnoses) {
         const entryDiagnoses = entries.map((entry) => {
           return entry.diagnosisCodes?.map((code) => {
             return diagnoses.find((diagnosis) => diagnosis.code === code);
