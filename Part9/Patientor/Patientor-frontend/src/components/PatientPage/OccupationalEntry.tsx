@@ -1,6 +1,7 @@
 /** @format */
 import WorkIcon from "@mui/icons-material/Work";
 import { BaseEntry, Diagnosis } from "../../types";
+import HealthCheckRating from "./HealthCheckRating";
 
 interface Props {
   entry: BaseEntry;
@@ -24,6 +25,12 @@ function OccupationalEntry({ entry, entryDiagnosis }: Props) {
             </li>
           ))}
         </ul>
+      ) : (
+        <></>
+      )}
+
+      {entry.healthCheckRating ? (
+        <HealthCheckRating rating={entry.healthCheckRating} />
       ) : (
         <></>
       )}
