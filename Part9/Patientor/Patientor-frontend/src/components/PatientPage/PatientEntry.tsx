@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import { BaseEntry, Diagnosis } from "../../types";
 import diagnoseServices from "../../services/diagnoses";
+import HospitalEntry from "./HospitalEntry";
+import OccupationalEntry from "./OccupationalEntry";
 
 interface Props {
   entry: BaseEntry;
