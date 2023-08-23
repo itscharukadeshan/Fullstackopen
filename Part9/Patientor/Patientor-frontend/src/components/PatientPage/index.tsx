@@ -38,7 +38,12 @@ const PatientPage = () => {
             </div>
             <div style={{ margin: "20px 50px 50px 50px" }}>
               {patient.entries ? (
-                <PatientEntry entries={patient.entries} />
+                <>
+                  <h3>entries</h3>
+                  {patient.entries.map((entry) => (
+                    <PatientEntry entry={entry} />
+                  ))}
+                </>
               ) : (
                 <></>
               )}

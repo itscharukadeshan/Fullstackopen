@@ -4,63 +4,46 @@ import { BaseEntry, Diagnosis } from "../../types";
 import diagnoseServices from "../../services/diagnoses";
 
 interface Props {
-  entries: Array<BaseEntry>;
+  entry: BaseEntry;
 }
 
-function PatientEntry({ entries }: Props) {
-  const [diagnoses, setDiagnoses] = useState<Diagnosis[]>([]);
-  const [entryDiagnoses, setEntryDiagnoses] = useState<any[]>([]);
+function PatientEntry({ entry }: Props) {
+  const [diagnosis, setDiagnosis] = useState<Diagnosis[]>([]);
+  const [entryDiagnosis, setEntryDiagnosis] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchDiagnosesList = async () => {
-      const diagnoses = await diagnoseServices.getAll();
+    const fetchDiagnosisList = async () => {
+      const diagnosis = await diagnoseServices.getAll();
+      setDiagnosis(diagnosis);
 
-      if (entries && diagnoses) {
-        const entryDiagnoses = entries.map((entry) => {
-          return entry.diagnosisCodes?.map((code) => {
-            return diagnoses.find((diagnosis) => diagnosis.code === code);
-          });
-        });
+      if (entry.diagnosisCodes && entry.diagnosisCodes.length && diagnosis) {
+        const entryDiagnoses = entry.diagnosisCodes.map((code) =>
+          diagnosis.find((diagnosis) => diagnosis.code === code)
+        );
 
-        const flattenedDiagnoses = entryDiagnoses.flat();
-
-        setEntryDiagnoses(flattenedDiagnoses);
+        setEntryDiagnosis(entryDiagnoses);
       }
-
-      setDiagnoses(diagnoses);
     };
-
-    void fetchDiagnosesList();
-  }, [entries]);
+    void fetchDiagnosisList();
+  }, [entry]);
 
   return (
     <>
-      <h3>entries</h3>
-
-      {entries ? (
-        <>
-          <p>
-            {entries.map((entry) => (
-              <>
-                <>{`${entry.date} ${entry.description} `}</>
-              </>
-            ))}
-          </p>
-
-          {entryDiagnoses ? (
-            <ul>
-              {entryDiagnoses.map((diagnose) => (
-                <li key={diagnose.code}>
-                  {diagnose.code} {diagnose.name}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <>no diagnose found </>
-          )}
-        </>
+      <p>
+        {entry.date}
+        {"  "}
+        {entry.description}
+      </p>
+      {diagnosis && entryDiagnosis ? (
+        <ul>
+          {entryDiagnosis.map((diagnosis) => (
+            <li key={diagnosis.code}>
+              {diagnosis.code} - {diagnosis.name}
+            </li>
+          ))}
+        </ul>
       ) : (
-        <p>No patient entries</p>
+        <></>
       )}
     </>
   );
