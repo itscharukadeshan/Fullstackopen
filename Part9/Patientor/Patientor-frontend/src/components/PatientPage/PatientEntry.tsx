@@ -4,6 +4,7 @@ import { BaseEntry, Diagnosis } from "../../types";
 import diagnoseServices from "../../services/diagnoses";
 import HospitalEntry from "./HospitalEntry";
 import OccupationalEntry from "./OccupationalEntry";
+import HealthCheckEntry from "./HealthCheckEntry";
 
 interface Props {
   entry: BaseEntry;
