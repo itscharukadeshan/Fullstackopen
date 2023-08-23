@@ -14,16 +14,16 @@ function HealthCheckRating({ rating }: Props) {
       color = "green";
       break;
     case 1:
-      color = "green";
-      break;
-    case 2:
-      color = "green";
-      break;
-    case 3:
       color = "yellow";
       break;
-    case 4:
+    case 2:
       color = "orange";
+      break;
+    case 3:
+      color = "red";
+      break;
+    case 4:
+      color = "red";
       break;
     default:
       color = "gray";
