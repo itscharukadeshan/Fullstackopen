@@ -36,11 +36,13 @@ const PatientPage = () => {
               <div>Ssn: {patient.ssn}</div>
               <div>Occupation : {patient.occupation}</div>
             </div>
-            {patient.entries ? (
-              <PatientEntry entries={patient.entries} />
-            ) : (
-              <></>
-            )}
+            <div style={{ margin: "20px 50px 50px 50px" }}>
+              {patient.entries ? (
+                <PatientEntry entries={patient.entries} />
+              ) : (
+                <></>
+              )}
+            </div>
           </Card>
         </>
       ) : (
