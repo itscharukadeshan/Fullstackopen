@@ -18,6 +18,7 @@ export interface BaseEntry {
   date: string;
   specialist: string;
   type?: string;
+  healthCheckRating?: number;
 
   diagnosisCodes?: Array<Diagnosis["code"]>;
 }

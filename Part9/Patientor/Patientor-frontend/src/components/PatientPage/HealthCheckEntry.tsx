@@ -3,6 +3,7 @@
 /** @format */
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 import { BaseEntry, Diagnosis } from "../../types";
+import HealthCheckRating from "./HealthCheckRating";
 
 interface Props {
   entry: BaseEntry;
@@ -26,6 +27,12 @@ function HealthCheckEntry({ entry, entryDiagnosis }: Props) {
             </li>
           ))}
         </ul>
+      ) : (
+        <></>
+      )}
+
+      {entry.healthCheckRating ? (
+        <HealthCheckRating rating={entry.healthCheckRating} />
       ) : (
         <></>
       )}

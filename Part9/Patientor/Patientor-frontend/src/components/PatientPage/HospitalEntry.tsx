@@ -1,6 +1,7 @@
 /** @format */
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
 import { BaseEntry, Diagnosis } from "../../types";
+import HealthCheckRating from "./HealthCheckRating";
 
 interface Props {
   entry: BaseEntry;
@@ -24,6 +25,11 @@ function HospitalEntry({ entry, entryDiagnosis }: Props) {
             </li>
           ))}
         </ul>
+      ) : (
+        <></>
+      )}
+      {entry.healthCheckRating ? (
+        <HealthCheckRating rating={entry.healthCheckRating} />
       ) : (
         <></>
       )}
