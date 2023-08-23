@@ -1,6 +1,6 @@
 /** @format */
 
-import diagnosesData from "../data/diagnoses.json";
+import diagnosesData from "../data/diagnoses";
 import { diagnosesEntry } from "../types";
 
 const diagnoses: diagnosesEntry[] = diagnosesData;
