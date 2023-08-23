@@ -41,7 +41,7 @@ const PatientPage = () => {
                 <>
                   <h3>entries</h3>
                   {patient.entries.map((entry) => (
-                    <PatientEntry entry={entry} />
+                    <PatientEntry key={entry.id || entry.date} entry={entry} />
                   ))}
                 </>
               ) : (
