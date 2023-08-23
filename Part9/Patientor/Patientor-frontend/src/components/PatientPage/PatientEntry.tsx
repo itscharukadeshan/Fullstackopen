@@ -31,11 +31,11 @@ function PatientEntry({ entry }: Props) {
 
   return (
     <>
-      <p>
-        {entry.date}
-        {"  "}
-        {entry.description}
-      </p>
+      <div>
+        <p>{entry.date}</p>
+
+        <p>{entry.description}</p>
+      </div>
       {diagnosis && entryDiagnosis ? (
         <ul>
           {entryDiagnosis.map((diagnosis) => (
