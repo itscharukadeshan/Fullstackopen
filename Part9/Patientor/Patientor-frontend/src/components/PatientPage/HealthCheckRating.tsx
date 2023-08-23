@@ -10,17 +10,20 @@ function HealthCheckRating({ rating }: Props) {
   let color;
 
   switch (rating) {
+    case 0:
+      color = "green";
+      break;
     case 1:
-      color = "red";
+      color = "green";
       break;
     case 2:
-      color = "orange";
+      color = "green";
       break;
     case 3:
       color = "yellow";
       break;
     case 4:
-      color = "green";
+      color = "orange";
       break;
     default:
       color = "gray";
