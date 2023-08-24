@@ -144,13 +144,12 @@ My completed Repos 😊
 [![My Skills](https://skillicons.dev/icons?i=js,react,d3,nodejs,express,css,html,docker,git,github,jest,postman,tailwind,vite,figma,webflow&perline=14)](https://skillicons.dev)
 
   
+---
+ 
+ <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Green%20Square.png" alt="Green Square" width="80" height="10" /> Very easy  |  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Blue%20Square.png" alt="Blue Square" width="80" height="10" /> Easy | <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Purple%20Square.png" alt="Purple Square" width="80" height="10" /> Moderate | <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Orange%20Square.png" alt="Orange Square" width="80" height="10" />Hard | <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Red%20Square.png" alt="Red Square" width="80" height="10" /> Very hard 
 
-  
 
 ---
-
-
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Green%20Square.png" alt="Green Square" width="25" height="25" />
   
 
 ### Part 01 
@@ -180,10 +179,9 @@ My completed Repos 😊
 
   
 
----
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Green%20Square.png" alt="Green Square" width="2005" height="10" />
 
-  
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Blue%20Square.png" alt="Blue Square" width="25" height="25" />
+  ---
   
 
 ### Part 02
@@ -216,11 +214,9 @@ My completed Repos 😊
 
   
 
----
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Blue%20Square.png" alt="Blue Square" width="2005" height="10" />
 
-  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Blue%20Square.png" alt="Blue Square" width="25" height="25" />
-
-  
+  ---
 
 ### Part 03
 
@@ -252,10 +248,10 @@ My completed Repos 😊
 
   
 
----
+ <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Blue%20Square.png" alt="Blue Square" width="2005" height="10" />
 
   
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Blue%20Square.png" alt="Blue Square" width="25" height="25" />
+---
   
 
 ### Part 04
@@ -288,11 +284,11 @@ My completed Repos 😊
 
   
 
----
-
-  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Orange%20Square.png" alt="Orange Square" width="25" height="25" />
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Blue%20Square.png" alt="Blue Square" width="2005" height="10" />
 
   
+
+  ---
 
 ### Part 05
 
@@ -324,12 +320,11 @@ My completed Repos 😊
 
   
 
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Orange%20Square.png" alt="Orange Square" width="2005" height="10" />
+  
+
+  
 ---
-
-  
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Orange%20Square.png" alt="Orange Square" width="25" height="25" />
-  
-
 ### Part 06
 
   
@@ -358,10 +353,10 @@ My completed Repos 😊
 
   
 
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Orange%20Square.png" alt="Orange Square" width="2005" height="10" />
+
+  
 ---
-
-  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Purple%20Square.png" alt="Purple Square" width="25" height="25" />
-
   
 
 ### Part 07
@@ -394,9 +389,9 @@ My completed Repos 😊
 
   
 
----
-<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Orange%20Square.png" alt="Orange Square" width="25" height="25" />
-  
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Purple%20Square.png" alt="Purple Square" width="2005" height="10" />
+
+  ---
 
 ### Part 08
 
@@ -422,9 +417,9 @@ My completed Repos 😊
 
   
 
----
+<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Orange%20Square.png" alt="Orange Square" width="2005" height="10" />
 
-  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Red%20Square.png" alt="Red Square" width="25" height="25" />
+ ---
 
 ### Part 09
 
@@ -459,11 +454,10 @@ My completed Repos 😊
 
   
 
----
-
+ <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Symbols/Red%20Square.png" alt="Red Square" width="2005" height="10" />
   
 
-  
+---  
 
 <h3  align="center">where can you find me </h3>
 
