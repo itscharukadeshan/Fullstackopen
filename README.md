@@ -17,7 +17,7 @@
 
 - Learn Node.js, Redux, authentication, TypeScript, creating APIs, and handling data.
 
-- To get an understanding about the level of expertise in a university-level course
+- To get an understanding about structure and complexity of university-level course.
 
 - Understand how frontend can interact with the back end.
 
@@ -61,15 +61,12 @@
 
   
 
-- Change of the learning style
-
-- This is the first time I had to understand every step of the development process.
-
-- Understanding different between Node s vs Express
-
-- Node Js is JavaScript framework and express is more abstraction of node to make the Node development to easy.
-
-- In other words, *Node is a JavaScript Farmwork and express is Node _Farmwork_.*
+- Mangine time and coming back to hard problems.
+ - Understanding new tools and technologies.
+ - Braking down problems to smaller parts.
+ - Getting distracted by new and shiny things.
+ - When to take brakes.
+ - Change of learning style.
 
   
   
