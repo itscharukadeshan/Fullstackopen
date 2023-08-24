@@ -291,9 +291,12 @@
 
 - When to use types and interface.
 
--Using typescript with servers and front-end apps.
+- Using typescript with servers and front-end apps.
 
 - Avance data validation in both client and sever side.
+
+
+
 
   
 
